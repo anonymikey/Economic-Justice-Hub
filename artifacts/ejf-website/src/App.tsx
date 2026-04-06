@@ -1,5 +1,6 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollButton from "@/components/FloatingScrollButton";
@@ -10,6 +11,8 @@ import Programs from "@/pages/Programs";
 import Research from "@/pages/Research";
 import Events from "@/pages/Events";
 import Contact from "@/pages/Contact";
+import Login from "@/pages/Login";
+import Profile from "@/pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -51,9 +54,9 @@ function Router() {
       <Route path="/research" component={Research} />
       <Route path="/events" component={Events} />
       <Route path="/contact" component={Contact} />
-      <Route path="/profile">{() => <ComingSoon title="Profile" />}</Route>
+      <Route path="/login" component={Login} />
+      <Route path="/profile" component={Profile} />
       <Route path="/donate">{() => <ComingSoon title="Donate" />}</Route>
-      <Route path="/login">{() => <ComingSoon title="Login" />}</Route>
       <Route path="/join">{() => <ComingSoon title="Join EJF" />}</Route>
       <Route component={NotFound} />
     </Switch>
@@ -63,14 +66,16 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <Navbar />
-        <main>
-          <Router />
-        </main>
-        <Footer />
-        <FloatingScrollButton />
-      </WouterRouter>
+      <AuthProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <Navbar />
+          <main>
+            <Router />
+          </main>
+          <Footer />
+          <FloatingScrollButton />
+        </WouterRouter>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
