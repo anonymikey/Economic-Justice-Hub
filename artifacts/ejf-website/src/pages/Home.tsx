@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import heroImage from "@assets/image_1775505035328.png";
+
+const HERO_BG = "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=80";
 
 function HeroSection() {
   return (
     <section
       className="relative min-h-[520px] flex items-center justify-center overflow-hidden"
       style={{
-        backgroundImage: `url(${heroImage})`,
+        backgroundImage: `url(${HERO_BG})`,
         backgroundSize: "cover",
-        backgroundPosition: "center top",
+        backgroundPosition: "center center",
       }}
     >
       {/* Dark navy overlay */}
