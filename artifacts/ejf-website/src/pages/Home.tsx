@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
+import { useAuth } from "@/context/AuthContext";
 
 const HERO_BG = "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=80";
 
 function HeroSection() {
+  const { user } = useAuth();
   return (
     <section
       className="relative min-h-[520px] flex items-center justify-center overflow-hidden"
@@ -24,19 +26,35 @@ function HeroSection() {
           People's Platform for Economic, Climate, Social &amp; Digital Justice
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
+          <Link
             href="/about"
             className="bg-[#0e1f3d] hover:bg-[#1a2f5e] border border-white/40 text-white font-semibold px-8 py-3 rounded transition-colors"
           >
             Learn More
-          </a>
-          <a
-            href="/join"
-            className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-semibold px-8 py-3 rounded transition-colors"
-          >
-            Join Us
-          </a>
+          </Link>
+          {user ? (
+            <a
+              href="https://ejf-members-registration.mgx.world"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-semibold px-8 py-3 rounded transition-colors inline-flex items-center gap-2"
+            >
+              📋 Register with Us
+            </a>
+          ) : (
+            <Link
+              href="/login"
+              className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-semibold px-8 py-3 rounded transition-colors"
+            >
+              Join Us
+            </Link>
+          )}
         </div>
+        {user && (
+          <p className="text-white/50 text-xs mt-3">
+            Welcome back, <span className="text-[#d4a017] font-semibold">{user.name}</span>! Complete your official EJF registration.
+          </p>
+        )}
       </div>
     </section>
   );

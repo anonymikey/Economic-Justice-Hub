@@ -12,6 +12,7 @@ export interface EJFUser {
 interface AuthContextType {
   user: EJFUser | null;
   login: (email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
+  register: (name: string, email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
   logout: () => void;
   updateProfile: (data: Partial<EJFUser>) => void;
 }
@@ -56,6 +57,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   };
 
+  const register = async (name: string, email: string, password: string): Promise<{ ok: boolean; error?: string }> => {
+    await new Promise((r) => setTimeout(r, 900));
+    if (!name.trim()) return { ok: false, error: "Please enter your full name." };
+    if (!email.includes("@")) return { ok: false, error: "Please enter a valid email address." };
+    if (password.length < 6) return { ok: false, error: "Password must be at least 6 characters." };
+    const newUser: EJFUser = {
+      name: name.trim(),
+      email,
+      phone: "",
+      organization: "",
+      joinedAt: new Date().toISOString(),
+      avatar: getInitials(name.trim()),
+    };
+    setUser(newUser);
+    return { ok: true };
+  };
+
   const logout = () => setUser(null);
 
   const updateProfile = (data: Partial<EJFUser>) => {
@@ -68,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, updateProfile }}>
+    <AuthContext.Provider value={{ user, login, register, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

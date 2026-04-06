@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
-  const { login, user } = useAuth();
+  const { login, register, user } = useAuth();
   const [, navigate] = useLocation();
   const [tab, setTab] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
@@ -26,10 +26,12 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const result = await login(email, password);
+    const result = tab === "login"
+      ? await login(email, password)
+      : await register(name, email, password);
     setLoading(false);
     if (result.ok) navigate("/profile");
-    else setError(result.error ?? "Login failed. Please try again.");
+    else setError(result.error ?? (tab === "login" ? "Sign in failed. Please try again." : "Registration failed. Please try again."));
   };
 
   return (
