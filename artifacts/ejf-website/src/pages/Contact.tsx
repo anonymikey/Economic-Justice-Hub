@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { socialLinks } from "@/data/socialLinks";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -414,32 +415,42 @@ function LocationSection() {
 ───────────────────────────────────────────── */
 function ConnectChannels() {
   const { ref, inView } = useInView();
-  const channels = [
-    { icon: "📘", label: "Facebook", handle: "@EconomicJusticeForum", color: "bg-blue-600" },
-    { icon: "🐦", label: "Twitter / X", handle: "@EJFKenya", color: "bg-sky-500" },
-    { icon: "📸", label: "Instagram", handle: "@ejf_kenya", color: "bg-pink-600" },
-    { icon: "💼", label: "LinkedIn", handle: "Economic Justice Forum", color: "bg-blue-800" },
-    { icon: "▶️", label: "YouTube", handle: "EJF Kenya", color: "bg-red-600" },
-  ];
   return (
     <section className="bg-white py-14 px-4">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-2xl font-bold text-[#0e1f3d] mb-2">Stay Connected</h2>
-        <p className="text-gray-500 text-sm mb-8 max-w-md mx-auto">Follow us on social media for updates, stories, and opportunities to engage with our work.</p>
-        <div ref={ref} className="flex flex-wrap justify-center gap-3">
-          {channels.map((c, i) => (
-            <button
-              key={c.label}
-              onClick={() => alert("To be updated Soon")}
-              className={`flex items-center gap-2.5 ${c.color} hover:opacity-90 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all hover:scale-105 shadow-md ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+        <p className="text-gray-500 text-sm mb-10 max-w-md mx-auto">
+          Follow us on social media for updates, stories, and opportunities to engage with our work.
+        </p>
+        <div ref={ref} className="flex flex-wrap justify-center gap-4">
+          {socialLinks.map((s, i) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative flex items-center gap-3 bg-gray-50 hover:text-white border border-gray-200 hover:border-transparent text-gray-800 font-semibold text-sm px-5 py-3.5 rounded-2xl shadow-sm transition-all duration-300 hover:scale-105 overflow-hidden ${s.hoverShadow} ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <span>{c.icon}</span>
-              <div className="text-left">
-                <p className="text-xs leading-none opacity-80">{c.label}</p>
-                <p className="text-xs leading-none font-normal opacity-70">{c.handle}</p>
-              </div>
-            </button>
+              {/* Animated background fill on hover */}
+              <span className={`absolute inset-0 ${s.iconBg} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
+
+              {/* Icon circle */}
+              <span className={`relative w-9 h-9 rounded-full ${s.iconBg} flex items-center justify-center text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-md`}>
+                {s.icon}
+              </span>
+
+              {/* Text */}
+              <span className="relative text-left">
+                <span className="block text-sm font-bold leading-tight">{s.label}</span>
+                <span className="block text-xs font-normal opacity-60 group-hover:opacity-80 leading-tight">{s.handle}</span>
+              </span>
+
+              {/* Arrow */}
+              <span className="relative ml-1 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-1 text-white text-sm">
+                ↗
+              </span>
+            </a>
           ))}
         </div>
       </div>
