@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FloatingScrollButton from "@/components/FloatingScrollButton";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
+import Pillars from "@/pages/Pillars";
 
 const queryClient = new QueryClient();
 
@@ -41,7 +42,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/pillars">{() => <ComingSoon title="Our Strategic Pillars" />}</Route>
+      <Route path="/pillars" component={Pillars} />
       <Route path="/programs">{() => <ComingSoon title="Programs" />}</Route>
       <Route path="/research">{() => <ComingSoon title="Research" />}</Route>
       <Route path="/events">{() => <ComingSoon title="Events" />}</Route>
