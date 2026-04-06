@@ -9,6 +9,7 @@ import Pillars from "@/pages/Pillars";
 import Programs from "@/pages/Programs";
 import Research from "@/pages/Research";
 import Events from "@/pages/Events";
+import Contact from "@/pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,7 @@ function Router() {
       <Route path="/programs" component={Programs} />
       <Route path="/research" component={Research} />
       <Route path="/events" component={Events} />
-      <Route path="/contact">{() => <ComingSoon title="Contact Us" />}</Route>
+      <Route path="/contact" component={Contact} />
       <Route path="/profile">{() => <ComingSoon title="Profile" />}</Route>
       <Route path="/donate">{() => <ComingSoon title="Donate" />}</Route>
       <Route path="/login">{() => <ComingSoon title="Login" />}</Route>
