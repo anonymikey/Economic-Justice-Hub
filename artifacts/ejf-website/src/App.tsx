@@ -1,6 +1,7 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
+import { isSupabaseConfigured } from "@/lib/supabase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollButton from "@/components/FloatingScrollButton";
@@ -74,6 +75,11 @@ function App() {
       <AuthProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <ScrollToTop />
+          {!isSupabaseConfigured && (
+            <div style={{ background: "#fef3c7", borderBottom: "1px solid #f59e0b", padding: "10px 20px", textAlign: "center", fontSize: 13, color: "#92400e" }}>
+              ⚠️ Supabase is not configured — add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables and redeploy.
+            </div>
+          )}
           <Navbar />
           <main>
             <Router />
