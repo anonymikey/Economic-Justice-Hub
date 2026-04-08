@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { adminQueries, DBEvent } from "@/lib/adminQueries";
 
 /* ─────────────────────────────────────────────
    HELPERS
@@ -306,21 +307,66 @@ function EventCard({ evt, idx }: { evt: Event; idx: number }) {
 /* ─────────────────────────────────────────────
    UPCOMING EVENTS
 ───────────────────────────────────────────── */
+function dbEventToEvent(e: DBEvent): Event {
+  const categoryMap: Record<string, string> = {
+    Environmental: "from-emerald-900 to-emerald-700",
+    Digital: "from-violet-900 to-violet-700",
+    Economic: "from-blue-900 to-blue-700",
+    Community: "from-orange-900 to-orange-700",
+  };
+  const emojiMap: Record<string, string> = { Environmental: "🌿", Digital: "💻", Economic: "⚖️", Community: "👥" };
+  const cat = (e.category as Category) || "Community";
+  return {
+    date: e.date,
+    dateISO: e.date_iso,
+    title: e.title,
+    location: e.location || "",
+    time: e.time || "",
+    desc: e.description || "",
+    category: cat,
+    color: categoryMap[cat] ?? "from-slate-900 to-slate-700",
+    emoji: emojiMap[cat] ?? "📅",
+    featured: e.featured,
+  };
+}
+
 function UpcomingEvents() {
   const [filter, setFilter] = useState<Category>("All");
   const { ref, inView } = useInView();
-  const shown = filter === "All" ? upcomingEvents : upcomingEvents.filter((e) => e.category === filter);
+  const [liveEvents, setLiveEvents] = useState<Event[]>([]);
+  const [loadingLive, setLoadingLive] = useState(true);
+
+  const fetchLive = useCallback(async () => {
+    setLoadingLive(true);
+    const { data } = await adminQueries.events.listPublished();
+    if (data && data.length > 0) {
+      setLiveEvents(data.map(dbEventToEvent));
+    } else {
+      setLiveEvents([]);
+    }
+    setLoadingLive(false);
+  }, []);
+
+  useEffect(() => { fetchLive(); }, [fetchLive]);
+
+  const source = liveEvents.length > 0 ? liveEvents : upcomingEvents;
+  const shown = filter === "All" ? source : source.filter((e) => e.category === filter);
 
   return (
     <section id="upcoming" className="bg-gray-50 py-14 px-4">
       <div className="max-w-5xl mx-auto">
         <div ref={ref} className={`mb-8 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0e1f3d] mb-1">Upcoming Events</h2>
+          {liveEvents.length > 0 && (
+            <p className="text-xs text-[#d4a017] font-semibold mb-1">● Live — updated by EJF team</p>
+          )}
           <div className="w-12 h-0.5 bg-[#d4a017] mt-2 mb-6" />
           <FilterBar active={filter} setActive={setFilter} />
         </div>
 
-        {shown.length > 0 ? (
+        {loadingLive ? (
+          <div className="flex justify-center py-12"><div className="w-8 h-8 border-4 border-[#0e1f3d]/20 border-t-[#0e1f3d] rounded-full animate-spin" /></div>
+        ) : shown.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {shown.map((evt, i) => <EventCard key={evt.title} evt={evt} idx={i} />)}
           </div>

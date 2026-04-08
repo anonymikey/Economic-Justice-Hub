@@ -10,6 +10,7 @@ export interface EJFUser {
   organization: string;
   joinedAt: string;
   avatar: string;
+  isAdmin: boolean;
 }
 
 interface AuthContextType {
@@ -28,9 +29,19 @@ function getInitials(name: string) {
   return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
 }
 
-function supabaseUserToEJF(supabaseUser: User): EJFUser {
+async function fetchIsAdmin(email: string): Promise<boolean> {
+  try {
+    const { data } = await supabase.from("users").select("is_admin").eq("email", email).single();
+    return data?.is_admin === true;
+  } catch {
+    return false;
+  }
+}
+
+async function supabaseUserToEJF(supabaseUser: User): Promise<EJFUser> {
   const meta = supabaseUser.user_metadata ?? {};
   const name = meta.full_name ?? meta.name ?? supabaseUser.email?.split("@")[0] ?? "Member";
+  const isAdmin = await fetchIsAdmin(supabaseUser.email ?? "");
   return {
     id: supabaseUser.id,
     name,
@@ -39,6 +50,7 @@ function supabaseUserToEJF(supabaseUser: User): EJFUser {
     organization: meta.organization ?? "",
     joinedAt: supabaseUser.created_at,
     avatar: getInitials(name),
+    isAdmin,
   };
 }
 
@@ -48,15 +60,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
-      setUser(session?.user ? supabaseUserToEJF(session.user) : null);
+      setUser(session?.user ? await supabaseUserToEJF(session.user) : null);
       setLoading(false);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
-      setUser(session?.user ? supabaseUserToEJF(session.user) : null);
+      setUser(session?.user ? await supabaseUserToEJF(session.user) : null);
       setLoading(false);
     });
 

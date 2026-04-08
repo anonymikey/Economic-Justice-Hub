@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -20,6 +20,7 @@ import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Profile from "@/pages/Profile";
 import Donate from "@/pages/Donate";
+import Admin from "@/pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -68,10 +69,42 @@ function Router() {
       <Route path="/donate">
         {() => <ProtectedRoute><Donate /></ProtectedRoute>}
       </Route>
+      <Route path="/admin" component={Admin} />
       <Route path="/cookies" component={CookiePolicy} />
       <Route path="/join">{() => <ComingSoon title="Join EJF" />}</Route>
       <Route component={NotFound} />
     </Switch>
+  );
+}
+
+function AppShell() {
+  const [location] = useLocation();
+  const isAdmin = location.startsWith("/admin");
+
+  if (isAdmin) {
+    return (
+      <>
+        <ScrollToTop />
+        <main><Router /></main>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <WelcomeAnimation />
+      <ScrollToTop />
+      {!isSupabaseConfigured && (
+        <div style={{ background: "#fef3c7", borderBottom: "1px solid #f59e0b", padding: "10px 20px", textAlign: "center", fontSize: 13, color: "#92400e" }}>
+          ⚠️ Supabase is not configured — add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables and redeploy.
+        </div>
+      )}
+      <Navbar />
+      <main><Router /></main>
+      <Footer />
+      <FloatingScrollButton />
+      <CookieBanner />
+    </>
   );
 }
 
@@ -80,20 +113,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <WelcomeAnimation />
-          <ScrollToTop />
-          {!isSupabaseConfigured && (
-            <div style={{ background: "#fef3c7", borderBottom: "1px solid #f59e0b", padding: "10px 20px", textAlign: "center", fontSize: 13, color: "#92400e" }}>
-              ⚠️ Supabase is not configured — add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables and redeploy.
-            </div>
-          )}
-          <Navbar />
-          <main>
-            <Router />
-          </main>
-          <Footer />
-          <FloatingScrollButton />
-          <CookieBanner />
+          <AppShell />
         </WouterRouter>
       </AuthProvider>
     </QueryClientProvider>

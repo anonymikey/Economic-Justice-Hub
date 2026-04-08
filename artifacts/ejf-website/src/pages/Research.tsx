@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { adminQueries, DBPublication } from "@/lib/adminQueries";
 
 /* ─────────────────────────────────────────────
    TYPES & HELPERS
@@ -641,12 +642,83 @@ function HelpfulResources() {
 }
 
 /* ─────────────────────────────────────────────
+   LIVE PUBLICATIONS (from Admin Panel)
+───────────────────────────────────────────── */
+function LivePublications() {
+  const [pubs, setPubs] = useState<DBPublication[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchPubs = useCallback(async () => {
+    setLoading(true);
+    const { data } = await adminQueries.publications.listPublished();
+    setPubs(data ?? []);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchPubs(); }, [fetchPubs]);
+
+  if (loading || pubs.length === 0) return null;
+
+  return (
+    <section className="bg-white py-12 px-4 border-b border-gray-100">
+      <div className="max-w-5xl mx-auto">
+        <div className="flex items-center gap-3 mb-6">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-[#0e1f3d]">Latest Publications</h2>
+              <span className="text-xs text-[#d4a017] font-bold bg-[#d4a017]/10 px-2 py-0.5 rounded-full">● Live</span>
+            </div>
+            <div className="w-10 h-0.5 bg-[#d4a017] mt-2" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {pubs.map((pub) => (
+            <div
+              key={pub.id}
+              className="group bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+            >
+              {pub.image_url && (
+                <div className="h-36 overflow-hidden bg-[#0e1f3d]/5">
+                  <img src={pub.image_url} alt={pub.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+              )}
+              {!pub.image_url && (
+                <div className="h-20 bg-gradient-to-br from-[#0e1f3d] to-[#1a3a6e] flex items-center justify-center">
+                  <span className="text-3xl">{pub.type === "pdf" ? "📄" : pub.type === "docx" ? "📝" : "🔗"}</span>
+                </div>
+              )}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs bg-[#d4a017]/10 text-[#d4a017] font-bold px-2 py-0.5 rounded-full uppercase">{pub.type}</span>
+                  <span className="text-xs text-gray-400">{pub.category}</span>
+                </div>
+                <h3 className="font-bold text-[#0e1f3d] text-sm mb-1 leading-snug group-hover:text-[#d4a017] transition-colors">{pub.title}</h3>
+                {pub.subtitle && <p className="text-gray-400 text-xs mb-3">{pub.subtitle}</p>}
+                {pub.description && <p className="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-2">{pub.description}</p>}
+                {pub.file_url ? (
+                  <a href={pub.file_url} target="_blank" rel="noopener noreferrer" className="inline-block bg-[#0e1f3d] hover:bg-[#1a3a6e] text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors">
+                    {pub.type === "link" ? "View →" : "Download →"}
+                  </a>
+                ) : (
+                  <span className="inline-block text-gray-400 text-xs italic">File coming soon</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
    MAIN EXPORT
 ───────────────────────────────────────────── */
 export default function Research() {
   return (
     <>
       <ResearchHero />
+      <LivePublications />
       <FeaturedPublications />
       <DetailedPublications />
       <PolicyBriefs />
