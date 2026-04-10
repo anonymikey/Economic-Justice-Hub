@@ -103,6 +103,7 @@ export const adminQueries = {
   },
   contacts: {
     list: () => supabase.from("contact_submissions").select("*").order("submitted_at", { ascending: false }),
+    listFallback: () => supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
     delete: (id: string) => supabase.from("contact_submissions").delete().eq("id", id),
   },
   donations: {
@@ -110,8 +111,14 @@ export const adminQueries = {
   },
   newsletter: {
     list: () => supabase.from("newsletter_subscriptions").select("*").order("subscribed_at", { ascending: false }),
+    listEmails: () => supabase.from("newsletter_subscriptions").select("email"),
     toggleActive: (id: string, active: boolean) => supabase.from("newsletter_subscriptions").update({ active }).eq("id", id),
     delete: (id: string) => supabase.from("newsletter_subscriptions").delete().eq("id", id),
+    subscribe: (email: string, name: string) =>
+      supabase.from("newsletter_subscriptions").upsert(
+        { email: email.toLowerCase().trim(), name, active: true },
+        { onConflict: "email", ignoreDuplicates: false }
+      ).select().single(),
   },
   users: {
     list: () => supabase.from("users").select("id, email, full_name, phone, organization, is_admin, created_at").order("created_at", { ascending: false }),

@@ -453,8 +453,23 @@ function ContactsTab() {
   const [rows, setRows] = useState<DBContact[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [rlsError, setRlsError] = useState(false);
 
-  const load = async () => { setLoading(true); const { data } = await adminQueries.contacts.list(); setRows(data ?? []); setLoading(false); };
+  const load = async () => {
+    setLoading(true);
+    setRlsError(false);
+    let { data, error } = await adminQueries.contacts.list();
+    if (error) {
+      const fb = await adminQueries.contacts.listFallback();
+      data = fb.data;
+      error = fb.error;
+    }
+    if (error && (error.code === "42501" || error.message?.toLowerCase().includes("policy") || error.message?.toLowerCase().includes("permission"))) {
+      setRlsError(true);
+    }
+    setRows(data ?? []);
+    setLoading(false);
+  };
   useEffect(() => { load(); }, []);
 
   const del = async (id: string) => { if (!confirm("Delete this submission?")) return; await adminQueries.contacts.delete(id); load(); };
@@ -462,20 +477,47 @@ function ContactsTab() {
   return (
     <div>
       <p className="text-sm text-gray-500 mb-4">Messages submitted through the Contact page.</p>
-      {loading ? <Spinner /> : rows.length === 0 ? <EmptyState msg="No contact submissions yet." /> : (
+
+      {rlsError && (
+        <div className="mb-4 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+          <p className="font-bold text-amber-800 text-sm mb-2">Permission issue — run this SQL in Supabase to fix it:</p>
+          <pre className="bg-white border border-amber-100 rounded-xl p-3 text-xs text-gray-700 overflow-x-auto whitespace-pre-wrap">{`CREATE POLICY "Admin reads contact_submissions"
+  ON public.contact_submissions FOR SELECT
+  TO authenticated USING (true);
+
+CREATE POLICY "Admin deletes contact_submissions"
+  ON public.contact_submissions FOR DELETE
+  TO authenticated USING (true);`}</pre>
+        </div>
+      )}
+
+      {!rlsError && rows.length === 0 && !loading && (
+        <div className="mb-4 bg-blue-50 border border-blue-100 rounded-2xl p-5">
+          <p className="font-bold text-blue-800 text-sm mb-2">No messages yet — or RLS may be blocking access. Run this SQL in Supabase to ensure admins can read all messages:</p>
+          <pre className="bg-white border border-blue-100 rounded-xl p-3 text-xs text-gray-700 overflow-x-auto whitespace-pre-wrap">{`CREATE POLICY "Admin reads contact_submissions"
+  ON public.contact_submissions FOR SELECT
+  TO authenticated USING (true);
+
+CREATE POLICY "Admin deletes contact_submissions"
+  ON public.contact_submissions FOR DELETE
+  TO authenticated USING (true);`}</pre>
+        </div>
+      )}
+
+      {loading ? <Spinner /> : rows.length === 0 ? null : (
         <div className="space-y-2">
           {rows.map(r => (
             <div key={r.id} className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm">
               <button onClick={() => setExpanded(expanded === r.id ? null : r.id)} className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-[#0e1f3d]/10 flex items-center justify-center text-[#0e1f3d] font-bold text-xs flex-shrink-0">{r.name?.[0]?.toUpperCase() ?? "?"}</div>
+                  <div className="w-8 h-8 rounded-full bg-[#0e1f3d]/10 flex items-center justify-center text-[#0e1f3d] font-bold text-xs flex-shrink-0">{(r.name || r.email)?.[0]?.toUpperCase() ?? "?"}</div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-[#0e1f3d] text-sm truncate">{r.name} <span className="text-gray-400 font-normal">— {r.email}</span></p>
+                    <p className="font-semibold text-[#0e1f3d] text-sm truncate">{r.name || "(no name)"} <span className="text-gray-400 font-normal text-xs">— {r.email}</span></p>
                     <p className="text-xs text-gray-400 truncate">{r.subject}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0 ml-3">
-                  <span className="text-xs text-gray-400">{fmt(r.submitted_at)}</span>
+                  <span className="text-xs text-gray-400">{fmt(r.submitted_at || (r as Record<string, string>).created_at)}</span>
                   <svg className={`w-4 h-4 text-gray-400 transition-transform ${expanded === r.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </div>
               </button>
@@ -483,7 +525,7 @@ function ContactsTab() {
                 <div className="px-4 pb-4 border-t border-gray-50">
                   <p className="text-gray-700 text-sm leading-relaxed mt-3 whitespace-pre-wrap">{r.message}</p>
                   <div className="flex items-center justify-between mt-3">
-                    <a href={`mailto:${r.email}?subject=Re: ${encodeURIComponent(r.subject)}`} className="text-[#0e1f3d] hover:underline text-xs font-bold">Reply via Email →</a>
+                    <a href={`mailto:${r.email}?subject=Re: ${encodeURIComponent(r.subject || "")}`} className="text-[#0e1f3d] hover:underline text-xs font-bold">Reply via Email →</a>
                     <button onClick={() => del(r.id)} className="text-red-400 hover:underline text-xs">Delete</button>
                   </div>
                 </div>
@@ -597,35 +639,119 @@ function NewsletterTab() {
 function UsersTab() {
   const [rows, setRows] = useState<DBUser[]>([]);
   const [loading, setLoading] = useState(true);
+  const [subscribedEmails, setSubscribedEmails] = useState<Set<string>>(new Set());
+  const [subscribing, setSubscribing] = useState<string | null>(null);
+  const [toast, setToast] = useState("");
   const { user: currentUser } = useAuth();
 
-  const load = async () => { setLoading(true); const { data } = await adminQueries.users.list(); setRows((data as DBUser[]) ?? []); setLoading(false); };
+  const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
+
+  const load = async () => {
+    setLoading(true);
+    const [usersRes, nlRes] = await Promise.all([
+      adminQueries.users.list(),
+      adminQueries.newsletter.listEmails(),
+    ]);
+    setRows((usersRes.data as DBUser[]) ?? []);
+    const emails = new Set<string>((nlRes.data ?? []).map((r: { email: string }) => r.email.toLowerCase()));
+    setSubscribedEmails(emails);
+    setLoading(false);
+  };
   useEffect(() => { load(); }, []);
 
-  const toggle = async (r: DBUser) => {
+  const toggleAdmin = async (r: DBUser) => {
     if (r.email === currentUser?.email) { alert("You cannot remove your own admin access."); return; }
-    await adminQueries.users.toggleAdmin(r.id, !r.is_admin); load();
+    await adminQueries.users.toggleAdmin(r.id, !r.is_admin);
+    showToast(r.is_admin ? `${r.email} removed from admin.` : `${r.email} is now an admin.`);
+    load();
+  };
+
+  const subscribeToNewsletter = async (r: DBUser) => {
+    setSubscribing(r.email);
+    const { error } = await adminQueries.newsletter.subscribe(r.email, r.full_name || "");
+    if (error) {
+      showToast(`Error: ${error.message}`);
+    } else {
+      showToast(`${r.email} subscribed to newsletter.`);
+      setSubscribedEmails(prev => new Set([...prev, r.email.toLowerCase()]));
+    }
+    setSubscribing(null);
   };
 
   return (
-    <div>
-      <p className="text-sm text-gray-500 mb-4">All registered users. Toggle admin access to grant or revoke admin panel access.</p>
+    <div className="relative">
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0e1f3d] text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-2xl animate-fade-up">
+          {toast}
+        </div>
+      )}
+
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-sm text-gray-500">All registered users. Manage admin access or add to newsletter.</p>
+        <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">{rows.length} users</span>
+      </div>
+
       {loading ? <Spinner /> : rows.length === 0 ? <EmptyState msg="No users registered yet." /> : (
-        <div className="overflow-x-auto rounded-xl border border-gray-100">
+        <div className="overflow-x-auto rounded-xl border border-gray-100 bg-white shadow-sm">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-[#0e1f3d] text-xs uppercase tracking-wide">
-              <tr><th className="text-left px-4 py-3">User</th><th className="text-left px-4 py-3">Organization</th><th className="text-left px-4 py-3">Joined</th><th className="text-left px-4 py-3">Role</th><th className="px-4 py-3" /></tr>
+            <thead style={{ background: "#f8f9fc" }}>
+              <tr className="text-xs uppercase tracking-widest text-gray-400 border-b border-gray-100">
+                <th className="text-left px-4 py-3">User</th>
+                <th className="text-left px-4 py-3">Joined</th>
+                <th className="text-left px-4 py-3">Role</th>
+                <th className="text-left px-4 py-3">Newsletter</th>
+                <th className="px-4 py-3" />
+              </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {rows.map(r => (
-                <tr key={r.id} className="hover:bg-gray-50/50">
-                  <td className="px-4 py-3"><p className="font-medium text-[#0e1f3d]">{r.full_name || "—"}</p><p className="text-xs text-gray-400">{r.email}</p></td>
-                  <td className="px-4 py-3 text-gray-500 text-xs">{r.organization || "—"}</td>
-                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.created_at)}</td>
-                  <td className="px-4 py-3">{r.is_admin ? <Badge label="Admin" color="bg-[#d4a017]/10 text-[#d4a017]" /> : <Badge label="Member" color="bg-gray-100 text-gray-600" />}</td>
-                  <td className="px-4 py-3 text-right"><button onClick={() => toggle(r)} className="text-[#0e1f3d] hover:underline text-xs font-bold">{r.is_admin ? "Remove Admin" : "Make Admin"}</button></td>
-                </tr>
-              ))}
+              {rows.map(r => {
+                const isSubscribed = subscribedEmails.has(r.email.toLowerCase());
+                return (
+                  <tr key={r.id} className="hover:bg-gray-50/60 transition-colors">
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0e1f3d] to-[#1a3a6e] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                          {(r.full_name || r.email)?.[0]?.toUpperCase()}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-semibold text-[#0e1f3d] text-sm truncate">{r.full_name || <span className="text-gray-400 font-normal italic">No name</span>}</p>
+                          <p className="text-xs text-gray-400 truncate">{r.email}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-gray-400 text-xs whitespace-nowrap">{fmt(r.created_at)}</td>
+                    <td className="px-4 py-3">
+                      {r.is_admin
+                        ? <Badge label="Admin" color="bg-[#d4a017]/10 text-[#d4a017]" />
+                        : <Badge label="Member" color="bg-gray-100 text-gray-500" />}
+                    </td>
+                    <td className="px-4 py-3">
+                      {isSubscribed
+                        ? <Badge label="Subscribed" color="bg-emerald-50 text-emerald-600" />
+                        : <button
+                            onClick={() => subscribeToNewsletter(r)}
+                            disabled={subscribing === r.email}
+                            className="text-xs font-semibold text-[#0e1f3d] border border-[#0e1f3d]/20 hover:border-[#0e1f3d] hover:bg-[#0e1f3d] hover:text-white px-3 py-1 rounded-lg transition-all disabled:opacity-40"
+                          >
+                            {subscribing === r.email ? "Adding…" : "+ Subscribe"}
+                          </button>
+                      }
+                    </td>
+                    <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <button
+                        onClick={() => toggleAdmin(r)}
+                        className={`text-xs font-semibold px-3 py-1 rounded-lg transition-all ${
+                          r.is_admin
+                            ? "text-red-500 border border-red-200 hover:bg-red-50"
+                            : "text-[#0e1f3d] border border-[#0e1f3d]/20 hover:bg-[#0e1f3d] hover:text-white"
+                        }`}
+                      >
+                        {r.is_admin ? "Revoke Admin" : "Make Admin"}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
