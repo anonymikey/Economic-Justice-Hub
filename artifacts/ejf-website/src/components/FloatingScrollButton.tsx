@@ -22,10 +22,6 @@ export default function FloatingScrollButton() {
         </button>
       )}
 
-      {/* Floating logo button */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <img src="/logo.jpeg" alt="EJF" className="w-12 h-12 rounded-full object-cover shadow-lg border-2 border-[#d4a017]" />
-      </div>
     </>
   );
 }
