@@ -955,9 +955,361 @@ CREATE POLICY "Allow all for authenticated users"
 }
 
 /* ═══════════════════════════════════════════
+   EMAIL TEMPLATES TAB
+══════════════════════════════════════════ */
+
+function makeEmailTemplate({
+  subject,
+  preheader,
+  heading,
+  subheading,
+  body,
+  ctaLabel,
+  ctaUrl,
+  footerNote,
+}: {
+  subject: string;
+  preheader: string;
+  heading: string;
+  subheading: string;
+  body: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  footerNote?: string;
+}) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="x-apple-disable-message-reformatting" />
+<title>${subject}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212,160,23,0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(212,160,23,0); }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', Arial, sans-serif; background: #f0f2f7; -webkit-font-smoothing: antialiased; }
+  .email-wrap { max-width: 600px; margin: 0 auto; padding: 32px 16px; }
+  .card { background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 40px rgba(14,31,61,0.10); }
+  .header { background: linear-gradient(135deg, #0a1628 0%, #0e1f3d 50%, #1a3a6e 100%); padding: 40px 40px 36px; position: relative; overflow: hidden; animation: fadeDown 0.6s ease-out; }
+  .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(212,160,23,0.18) 0%, transparent 70%); }
+  .header::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(74,144,217,0.12) 0%, transparent 70%); }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; position: relative; z-index: 1; }
+  .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #d4a017, #b8880f); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; animation: pulse-ring 3s ease-in-out infinite; }
+  .logo-text { color: #ffffff; font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .logo-sub { color: #d4a017; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .header-badge { display: inline-block; background: rgba(212,160,23,0.18); border: 1px solid rgba(212,160,23,0.35); color: #f0c040; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; position: relative; z-index: 1; }
+  .header h1 { color: #ffffff; font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 10px; position: relative; z-index: 1; }
+  .header p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.6; position: relative; z-index: 1; }
+  .divider-gold { height: 4px; background: linear-gradient(90deg, #d4a017, #f5c842, #d4a017); background-size: 200% auto; animation: shimmer 3s linear infinite; }
+  .body { padding: 36px 40px 28px; }
+  .greeting { font-size: 15px; color: #374151; line-height: 1.7; margin-bottom: 20px; }
+  .message-box { background: linear-gradient(135deg, #f8f9fc, #eef1f8); border-left: 4px solid #d4a017; border-radius: 12px; padding: 20px 24px; margin-bottom: 28px; }
+  .message-box p { font-size: 14px; color: #4b5563; line-height: 1.75; }
+  .cta-wrap { text-align: center; margin: 32px 0; }
+  .cta-btn { display: inline-block; background: linear-gradient(135deg, #d4a017, #b8880f); color: #ffffff !important; font-size: 15px; font-weight: 700; letter-spacing: 0.4px; text-decoration: none; padding: 16px 40px; border-radius: 14px; box-shadow: 0 8px 24px rgba(212,160,23,0.38), 0 2px 8px rgba(0,0,0,0.1); animation: pulse-ring 3s ease-in-out infinite; }
+  .url-fallback { background: #f8f9fc; border: 1px dashed #d1d5db; border-radius: 10px; padding: 14px 18px; margin-top: 20px; word-break: break-all; }
+  .url-fallback p { font-size: 11px; color: #9ca3af; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .url-fallback a { font-size: 12px; color: #0e1f3d; text-decoration: underline; }
+  .divider { height: 1px; background: #e5e7eb; margin: 24px 0; }
+  .features { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .feature { flex: 1; min-width: 140px; background: #f8f9fc; border-radius: 12px; padding: 14px 16px; }
+  .feature-icon { font-size: 20px; margin-bottom: 8px; }
+  .feature-title { font-size: 12px; font-weight: 700; color: #0e1f3d; margin-bottom: 4px; }
+  .feature-desc { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+  .footer { background: #0a1628; padding: 24px 40px; text-align: center; }
+  .footer p { color: rgba(255,255,255,0.3); font-size: 11px; line-height: 1.7; }
+  .footer a { color: #d4a017; text-decoration: none; }
+  .footer .social { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+  .footer .social a { display: inline-block; width: 32px; height: 32px; background: rgba(255,255,255,0.06); border-radius: 50%; line-height: 32px; font-size: 14px; transition: background 0.2s; }
+  .security-notice { background: #fefce8; border: 1px solid #fde68a; border-radius: 10px; padding: 12px 16px; margin-top: 20px; }
+  .security-notice p { font-size: 12px; color: #92400e; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="email-wrap">
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-icon">⚖️</div>
+      <div>
+        <div class="logo-text">Economic Justice Forum</div>
+        <div class="logo-sub">EJF · economicjusticeforum.org</div>
+      </div>
+    </div>
+    <div class="header-badge">Official Communication</div>
+    <h1>${heading}</h1>
+    <p>${subheading}</p>
+  </div>
+
+  <!-- GOLD SHIMMER DIVIDER -->
+  <div class="divider-gold"></div>
+
+  <!-- BODY -->
+  <div class="body">
+    <p class="greeting">${body}</p>
+
+    <div class="cta-wrap">
+      <a href="${ctaUrl}" class="cta-btn">${ctaLabel} &rarr;</a>
+    </div>
+
+    <div class="url-fallback">
+      <p>Or copy this link into your browser:</p>
+      <a href="${ctaUrl}">${ctaUrl}</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="security-notice">
+      <p>🔒 <strong>Security tip:</strong> This link expires in 24 hours. EJF will never ask for your password via email. If you didn't request this, you can safely ignore it.</p>
+    </div>
+
+    ${footerNote ? `<div class="divider"></div><p style="font-size:13px;color:#6b7280;line-height:1.6">${footerNote}</p>` : ""}
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="social">
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#">f</a>
+    </div>
+    <p>
+      &copy; ${new Date().getFullYear()} Economic Justice Forum &middot; Nairobi, Kenya<br />
+      <a href="{{ .SiteURL }}">economicjusticeforum.org</a> &middot;
+      <a href="mailto:info@economicjusticeforum.org">info@economicjusticeforum.org</a>
+    </p>
+  </div>
+
+</div>
+</div>
+</body>
+</html>`;
+}
+
+const EMAIL_TEMPLATES = [
+  {
+    key: "confirm",
+    label: "Confirm Sign Up",
+    icon: "✉️",
+    color: "bg-emerald-50 text-emerald-700",
+    supabaseNote: "Authentication → Email Templates → Confirm signup",
+    template: makeEmailTemplate({
+      subject: "Confirm your EJF account",
+      preheader: "You're one step away from joining the Economic Justice Forum.",
+      heading: "Confirm Your Account",
+      subheading: "You're one step away from joining the Economic Justice Forum community.",
+      body: `Hello,<br/><br/>Thank you for creating an account with the <strong>Economic Justice Forum (EJF)</strong>. To complete your registration and access your account, please confirm your email address by clicking the button below.`,
+      ctaLabel: "Confirm My Email",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "This confirmation link will expire in 24 hours. If you did not create an account with EJF, please disregard this email.",
+    }),
+  },
+  {
+    key: "invite",
+    label: "Invite User",
+    icon: "🤝",
+    color: "bg-blue-50 text-blue-700",
+    supabaseNote: "Authentication → Email Templates → Invite user",
+    template: makeEmailTemplate({
+      subject: "You're invited to join the Economic Justice Forum",
+      preheader: "You have been invited to join EJF's platform.",
+      heading: "You've Been Invited!",
+      subheading: "An administrator has personally invited you to join the Economic Justice Forum platform.",
+      body: `Hello,<br/><br/>You have been invited to join the <strong>Economic Justice Forum (EJF)</strong> — Kenya's people's platform for Economic, Climate, Social, and Digital Justice.<br/><br/>Click the button below to accept your invitation, create your account, and start making an impact.`,
+      ctaLabel: "Accept Invitation",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "This invitation was sent by an EJF administrator. If you believe this was sent in error, you can safely ignore this email.",
+    }),
+  },
+  {
+    key: "magic",
+    label: "Magic Link",
+    icon: "✨",
+    color: "bg-purple-50 text-purple-700",
+    supabaseNote: "Authentication → Email Templates → Magic Link",
+    template: makeEmailTemplate({
+      subject: "Your EJF sign-in link",
+      preheader: "Use this link to sign in instantly — no password needed.",
+      heading: "Your Magic Sign-In Link",
+      subheading: "Click the button below to sign in instantly — no password required.",
+      body: `Hello,<br/><br/>You requested a passwordless sign-in link for your <strong>Economic Justice Forum</strong> account.<br/><br/>Click the button below to sign in. This link is single-use and expires in 1 hour.`,
+      ctaLabel: "Sign In to EJF",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "If you didn't request this link, you can safely ignore this email. Your account remains secure.",
+    }),
+  },
+  {
+    key: "change-email",
+    label: "Change Email",
+    icon: "🔄",
+    color: "bg-amber-50 text-amber-700",
+    supabaseNote: "Authentication → Email Templates → Change Email Address",
+    template: makeEmailTemplate({
+      subject: "Verify your new email address — EJF",
+      preheader: "Please confirm your new email address for your EJF account.",
+      heading: "Verify Your New Email",
+      subheading: "Please confirm this new email address to complete the update on your EJF account.",
+      body: `Hello,<br/><br/>We received a request to change the email address associated with your <strong>Economic Justice Forum</strong> account.<br/><br/>Click the button below to confirm your new email address. If you did not make this change, please contact us immediately at <a href="mailto:info@economicjusticeforum.org" style="color:#d4a017">info@economicjusticeforum.org</a>.`,
+      ctaLabel: "Confirm New Email",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "If you did not request an email change, please contact our support team immediately.",
+    }),
+  },
+  {
+    key: "reset",
+    label: "Reset Password",
+    icon: "🔑",
+    color: "bg-red-50 text-red-700",
+    supabaseNote: "Authentication → Email Templates → Reset Password",
+    template: makeEmailTemplate({
+      subject: "Reset your EJF password",
+      preheader: "Click the link inside to reset your password.",
+      heading: "Password Reset Request",
+      subheading: "We received a request to reset the password for your Economic Justice Forum account.",
+      body: `Hello,<br/><br/>Someone (hopefully you) requested a password reset for your <strong>Economic Justice Forum</strong> account.<br/><br/>Click the button below to set a new password. This link expires in <strong>1 hour</strong> for your security.`,
+      ctaLabel: "Reset My Password",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "If you didn't request a password reset, you can safely ignore this email. Your current password will remain unchanged.",
+    }),
+  },
+  {
+    key: "reauth",
+    label: "Reauthentication",
+    icon: "🛡️",
+    color: "bg-gray-100 text-gray-700",
+    supabaseNote: "Authentication → Email Templates → Reauthentication",
+    template: makeEmailTemplate({
+      subject: "EJF security verification required",
+      preheader: "Confirm your identity to continue.",
+      heading: "Security Verification",
+      subheading: "We need to verify your identity before you can continue with this sensitive action.",
+      body: `Hello,<br/><br/>To protect your <strong>Economic Justice Forum</strong> account, we require identity verification before proceeding with this sensitive action.<br/><br/>Click the button below to confirm it's you. This link is valid for <strong>10 minutes</strong>.`,
+      ctaLabel: "Verify My Identity",
+      ctaUrl: "{{ .ConfirmationURL }}",
+      footerNote: "If you did not initiate this action, please change your password immediately and contact us at info@economicjusticeforum.org.",
+    }),
+  },
+];
+
+function EmailTemplatesTab() {
+  const [active, setActive] = useState(EMAIL_TEMPLATES[0].key);
+  const [copied, setCopied] = useState("");
+  const [previewMode, setPreviewMode] = useState<"code" | "preview">("preview");
+
+  const current = EMAIL_TEMPLATES.find(t => t.key === active) ?? EMAIL_TEMPLATES[0];
+
+  const copy = () => {
+    navigator.clipboard.writeText(current.template).then(() => {
+      setCopied(current.key);
+      setTimeout(() => setCopied(""), 2500);
+    });
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="bg-gradient-to-br from-[#0e1f3d] to-[#1a3a6e] rounded-2xl p-5 text-white">
+        <h3 className="font-bold text-base mb-1">Supabase Email Templates</h3>
+        <p className="text-white/50 text-sm">Copy each template and paste it into Supabase → Authentication → Email Templates. All templates use your EJF branding with animated gold accents.</p>
+      </div>
+
+      <div className="flex gap-2 flex-wrap">
+        {EMAIL_TEMPLATES.map(t => (
+          <button key={t.key} onClick={() => setActive(t.key)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
+              active === t.key
+                ? "bg-[#0e1f3d] text-white border-[#0e1f3d] shadow-md"
+                : "bg-white text-gray-600 border-gray-200 hover:border-[#0e1f3d]/30"
+            }`}>
+            <span>{t.icon}</span>
+            <span className="hidden sm:inline">{t.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 gap-3 flex-wrap">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">{current.icon}</span>
+            <div>
+              <p className="font-bold text-[#0e1f3d] text-sm">{current.label}</p>
+              <p className="text-xs text-gray-400">📍 {current.supabaseNote}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex bg-gray-100 rounded-xl p-0.5">
+              <button onClick={() => setPreviewMode("preview")} className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${previewMode === "preview" ? "bg-white shadow text-[#0e1f3d]" : "text-gray-400"}`}>Preview</button>
+              <button onClick={() => setPreviewMode("code")} className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${previewMode === "code" ? "bg-white shadow text-[#0e1f3d]" : "text-gray-400"}`}>HTML</button>
+            </div>
+            <button onClick={copy}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                copied === current.key
+                  ? "bg-emerald-500 text-white"
+                  : "bg-[#d4a017] hover:bg-[#b8880f] text-white"
+              }`}>
+              {copied === current.key ? "✓ Copied!" : "Copy HTML"}
+            </button>
+          </div>
+        </div>
+
+        <div className="p-4">
+          {previewMode === "preview" ? (
+            <div className="rounded-xl overflow-hidden border border-gray-100" style={{ height: 540 }}>
+              <iframe
+                srcDoc={current.template}
+                title={current.label}
+                className="w-full h-full"
+                style={{ border: "none" }}
+                sandbox="allow-same-origin"
+              />
+            </div>
+          ) : (
+            <div className="relative">
+              <pre className="bg-[#0d1117] text-[#c9d1d9] text-xs rounded-xl p-4 overflow-auto" style={{ maxHeight: 540, fontFamily: "monospace", lineHeight: 1.6 }}>
+                {current.template}
+              </pre>
+              <button onClick={copy}
+                className="absolute top-3 right-3 bg-[#d4a017] hover:bg-[#b8880f] text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
+                {copied === current.key ? "✓ Copied!" : "Copy"}
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="px-5 pb-5">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+            <p className="text-blue-800 text-xs font-bold mb-1">How to apply this template in Supabase:</p>
+            <ol className="text-blue-700 text-xs space-y-1 list-decimal list-inside leading-relaxed">
+              <li>Click <strong>Copy HTML</strong> above</li>
+              <li>Go to <strong>Supabase Dashboard → Authentication → Email Templates</strong></li>
+              <li>Select <strong>{current.label}</strong> from the list</li>
+              <li>Paste the HTML into the <strong>Message body</strong> field</li>
+              <li>Click <strong>Save</strong></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
    MAIN ADMIN PAGE
 ══════════════════════════════════════════ */
-type Tab = "events" | "programs" | "publications" | "contacts" | "donations" | "newsletter" | "users" | "admin-access";
+type Tab = "events" | "programs" | "publications" | "contacts" | "donations" | "newsletter" | "users" | "admin-access" | "email-templates";
 
 const TABS: { key: Tab; label: string; emoji: string }[] = [
   { key: "events", label: "Events", emoji: "📅" },
@@ -967,6 +1319,7 @@ const TABS: { key: Tab; label: string; emoji: string }[] = [
   { key: "donations", label: "Donations", emoji: "💰" },
   { key: "newsletter", label: "Newsletter", emoji: "📧" },
   { key: "users", label: "Users", emoji: "👥" },
+  { key: "email-templates", label: "Email Templates", emoji: "💌" },
   { key: "admin-access", label: "Admin Access", emoji: "🔑" },
 ];
 
@@ -1111,6 +1464,7 @@ export default function Admin() {
             {tab === "donations" && <DonationsTab />}
             {tab === "newsletter" && <NewsletterTab />}
             {tab === "users" && <UsersTab />}
+            {tab === "email-templates" && <EmailTemplatesTab />}
             {tab === "admin-access" && <AdminAccessTab />}
           </div>
         </main>
