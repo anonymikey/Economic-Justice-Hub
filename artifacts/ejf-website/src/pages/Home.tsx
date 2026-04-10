@@ -1,61 +1,234 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 
-const HERO_BG = "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=80";
+import img1 from "@assets/tm_1775860211028.jpeg";
+import img2 from "@assets/youth_ev_1775860211030.jpeg";
+import img3 from "@assets/com_event_1775860211043.jpeg";
+import img4 from "@assets/comm_dia_1775860211044.jpeg";
+import img5 from "@assets/eme_1775860211046.jpeg";
+import img6 from "@assets/food_ev_1775860211047.jpeg";
+import img7 from "@assets/hero_1775860211048.jpeg";
+
+const HERO_SLIDES = [
+  { src: img7, caption: "Empowering Communities", sub: "Students celebrating access to learning resources" },
+  { src: img3, caption: "Community Dialogue", sub: "Grassroots conversations driving real change" },
+  { src: img5, caption: "Education & Equity", sub: "Delivering essential support to schools in need" },
+  { src: img6, caption: "Food Security", sub: "Ensuring no family goes hungry in our communities" },
+  { src: img1, caption: "Amplifying Voices", sub: "EJF advocates speaking truth to power" },
+  { src: img4, caption: "People-Centred Governance", sub: "Community dialogues shaping inclusive policy" },
+  { src: img2, caption: "Youth Engagement", sub: "Mobilising the next generation of justice champions" },
+];
+
+const SLIDE_DURATION = 5500;
 
 function HeroSection() {
   const { user } = useAuth();
-  return (
-    <section
-      className="relative min-h-[520px] flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `url(${HERO_BG})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-      }}
-    >
-      {/* Dark navy overlay */}
-      <div className="absolute inset-0 bg-[#0e1f3d]/75" />
+  const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-      <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-          Equity. Justice. Prosperity.
+  const goTo = useCallback((index: number) => {
+    if (transitioning) return;
+    setPrev(current);
+    setTransitioning(true);
+    setCurrent(index);
+    setTimeout(() => {
+      setPrev(null);
+      setTransitioning(false);
+    }, 900);
+  }, [current, transitioning]);
+
+  const next = useCallback(() => {
+    goTo((current + 1) % HERO_SLIDES.length);
+  }, [current, goTo]);
+
+  useEffect(() => {
+    timerRef.current = setTimeout(next, SLIDE_DURATION);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [next]);
+
+  const slide = HERO_SLIDES[current];
+
+  return (
+    <section className="relative w-full overflow-hidden" style={{ height: "clamp(540px, 85vh, 780px)" }}>
+
+      {/* ── SLIDE IMAGES ── */}
+      {HERO_SLIDES.map((s, i) => {
+        const isActive = i === current;
+        const isPrev = i === prev;
+        if (!isActive && !isPrev) return null;
+        return (
+          <div
+            key={s.src}
+            className="absolute inset-0"
+            style={{
+              zIndex: isPrev ? 1 : 2,
+              animation: isActive
+                ? "heroFadeIn 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
+                : "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url(${s.src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                animation: isActive ? "heroKenBurns 7s ease-out forwards" : "none",
+                willChange: "transform",
+              }}
+            />
+          </div>
+        );
+      })}
+
+      {/* ── LAYERED OVERLAYS ── */}
+      <div className="absolute inset-0 z-10" style={{
+        background: "linear-gradient(to top, rgba(8,16,32,0.92) 0%, rgba(10,22,40,0.60) 45%, rgba(8,16,32,0.30) 100%)",
+      }} />
+      <div className="absolute inset-0 z-10" style={{
+        background: "linear-gradient(to right, rgba(8,16,32,0.5) 0%, transparent 60%)",
+      }} />
+
+      {/* ── CONTENT ── */}
+      <div className="absolute inset-0 z-20 flex flex-col justify-end pb-20 md:pb-24 px-6 md:px-16 max-w-5xl">
+
+        {/* Caption badge */}
+        <div
+          key={`badge-${current}`}
+          className="mb-3"
+          style={{ animation: "heroSlideUp 0.7s 0.2s cubic-bezier(0.4,0,0.2,1) both" }}
+        >
+          <span className="inline-flex items-center gap-2 bg-[#d4a017]/20 border border-[#d4a017]/40 backdrop-blur-sm text-[#f0c040] text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#d4a017] animate-pulse" />
+            {slide.caption}
+          </span>
+        </div>
+
+        <h1
+          key={`h1-${current}`}
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-3"
+          style={{ animation: "heroSlideUp 0.7s 0.35s cubic-bezier(0.4,0,0.2,1) both", textShadow: "0 2px 24px rgba(0,0,0,0.5)" }}
+        >
+          Equity.<br className="sm:hidden" /> Justice.<br className="sm:hidden" /> Prosperity.
         </h1>
-        <p className="text-lg md:text-xl text-white/90 mb-8">
+
+        <p
+          key={`sub-${current}`}
+          className="text-sm md:text-base text-white/70 mb-2 max-w-lg leading-relaxed"
+          style={{ animation: "heroSlideUp 0.7s 0.45s cubic-bezier(0.4,0,0.2,1) both" }}
+        >
+          {slide.sub}
+        </p>
+
+        <p
+          className="text-white/50 text-xs md:text-sm mb-7 max-w-lg"
+          style={{ animation: "heroSlideUp 0.7s 0.5s cubic-bezier(0.4,0,0.2,1) both" }}
+        >
           People's Platform for Economic, Climate, Social &amp; Digital Justice
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/about"
-            className="bg-[#0e1f3d] hover:bg-[#1a2f5e] border border-white/40 text-white font-semibold px-8 py-3 rounded transition-colors"
-          >
+
+        <div
+          className="flex flex-col sm:flex-row gap-3"
+          style={{ animation: "heroSlideUp 0.7s 0.6s cubic-bezier(0.4,0,0.2,1) both" }}
+        >
+          <Link href="/about"
+            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white font-bold px-7 py-3.5 rounded-xl transition-all text-sm">
             Learn More
           </Link>
           {user ? (
-            <a
-              href="https://ejf-members-registration.mgx.world"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-semibold px-8 py-3 rounded transition-colors inline-flex items-center gap-2"
-            >
+            <a href="https://ejf-members-registration.mgx.world" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-[#d4a017] hover:bg-[#b8880f] text-white font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-lg shadow-[#d4a017]/30">
               📋 Register with Us
             </a>
           ) : (
-            <Link
-              href="/login"
-              className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-semibold px-8 py-3 rounded transition-colors"
-            >
-              Join Us
+            <Link href="/login"
+              className="inline-flex items-center justify-center gap-2 bg-[#d4a017] hover:bg-[#b8880f] text-white font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-lg shadow-[#d4a017]/30">
+              Join the Movement →
             </Link>
           )}
         </div>
+
         {user && (
-          <p className="text-white/50 text-xs mt-3">
+          <p className="text-white/40 text-xs mt-3">
             Welcome back, <span className="text-[#d4a017] font-semibold">{user.name}</span>! Complete your official EJF registration.
           </p>
         )}
       </div>
+
+      {/* ── SLIDE DOTS ── */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+        {HERO_SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            className="transition-all duration-500"
+            style={{
+              height: 6,
+              borderRadius: 3,
+              background: i === current ? "#d4a017" : "rgba(255,255,255,0.35)",
+              width: i === current ? 28 : 8,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ── ARROW CONTROLS ── */}
+      <button
+        onClick={() => goTo((current - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/30 hover:bg-black/60 border border-white/20 backdrop-blur-sm text-white flex items-center justify-center transition-all"
+        aria-label="Previous slide"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      <button
+        onClick={() => goTo((current + 1) % HERO_SLIDES.length)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/30 hover:bg-black/60 border border-white/20 backdrop-blur-sm text-white flex items-center justify-center transition-all"
+        aria-label="Next slide"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+      </button>
+
+      {/* ── SLIDE COUNTER ── */}
+      <div className="absolute top-5 right-5 z-30 bg-black/30 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1 text-white text-xs font-bold tabular-nums">
+        {String(current + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
+      </div>
+
+      {/* ── PROGRESS BAR ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 h-0.5 bg-white/10">
+        <div
+          key={`progress-${current}`}
+          className="h-full bg-[#d4a017]"
+          style={{ animation: `heroProgress ${SLIDE_DURATION}ms linear forwards` }}
+        />
+      </div>
+
+      {/* ── KEYFRAME STYLES ── */}
+      <style>{`
+        @keyframes heroFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes heroFadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+        @keyframes heroKenBurns {
+          from { transform: scale(1.06) translateX(0px); }
+          to { transform: scale(1.0) translateX(-8px); }
+        }
+        @keyframes heroSlideUp {
+          from { opacity: 0; transform: translateY(22px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroProgress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </section>
   );
 }
