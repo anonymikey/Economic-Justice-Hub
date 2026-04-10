@@ -118,8 +118,9 @@ export const adminQueries = {
     toggleAdmin: (id: string, is_admin: boolean) => supabase.from("users").update({ is_admin }).eq("id", id),
     getByEmail: (email: string) => supabase.from("users").select("is_admin").eq("email", email).single(),
   },
-  admin: {
-    verifySecret: (userEmail: string, providedSecret: string) =>
-      supabase.rpc("verify_admin_secret", { user_email: userEmail, provided_secret: providedSecret }),
+  preApprovedAdmins: {
+    list: () => supabase.from("pre_approved_admins").select("*").order("added_at", { ascending: false }),
+    add: (email: string) => supabase.from("pre_approved_admins").insert({ email: email.toLowerCase().trim() }).select().single(),
+    remove: (email: string) => supabase.from("pre_approved_admins").delete().eq("email", email),
   },
 };

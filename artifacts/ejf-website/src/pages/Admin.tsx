@@ -520,9 +520,142 @@ function UsersTab() {
 }
 
 /* ═══════════════════════════════════════════
+   ADMIN ACCESS TAB
+══════════════════════════════════════════ */
+interface PreApprovedAdmin { id: string; email: string; added_at: string; }
+
+function AdminAccessTab() {
+  const [rows, setRows] = useState<PreApprovedAdmin[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newEmail, setNewEmail] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const load = async () => {
+    setLoading(true);
+    const { data, error: err } = await adminQueries.preApprovedAdmins.list();
+    if (err) {
+      if (err.message.includes("does not exist") || err.code === "42P01") {
+        setError("setup-needed");
+      }
+    } else {
+      setRows((data as PreApprovedAdmin[]) ?? []);
+    }
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+
+  const add = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const email = newEmail.trim().toLowerCase();
+    if (!email || !email.includes("@")) { setError("Enter a valid email address."); return; }
+    setSaving(true); setError(""); setSuccess("");
+    const { error: err } = await adminQueries.preApprovedAdmins.add(email);
+    if (err) {
+      setError(err.message.includes("duplicate") ? "This email is already in the admin list." : err.message);
+    } else {
+      setNewEmail("");
+      setSuccess(`${email} has been added as admin.`);
+      load();
+    }
+    setSaving(false);
+  };
+
+  const remove = async (email: string) => {
+    if (!confirm(`Remove admin access for ${email}?`)) return;
+    await adminQueries.preApprovedAdmins.remove(email);
+    setSuccess(`${email} removed from admin list.`);
+    load();
+  };
+
+  if (error === "setup-needed") {
+    return (
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+        <h3 className="font-bold text-amber-800 mb-2">One-time setup required</h3>
+        <p className="text-amber-700 text-sm mb-4">Run the following SQL in your Supabase SQL editor to enable admin email management:</p>
+        <pre className="bg-white border border-amber-200 rounded-xl p-4 text-xs text-gray-800 overflow-x-auto whitespace-pre-wrap">{`CREATE TABLE IF NOT EXISTS public.pre_approved_admins (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  email text UNIQUE NOT NULL,
+  added_at timestamptz DEFAULT now()
+);
+ALTER TABLE public.pre_approved_admins ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all for authenticated users"
+  ON public.pre_approved_admins FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);`}</pre>
+        <button onClick={load} className="mt-4 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors">Check again after running SQL</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm text-gray-500 mb-4">
+          Add email addresses here to grant admin panel access. When someone with a pre-approved email signs in, they will automatically have admin privileges.
+        </p>
+
+        <form onSubmit={add} className="flex gap-2 mb-4">
+          <input
+            type="email"
+            value={newEmail}
+            onChange={e => { setNewEmail(e.target.value); setError(""); setSuccess(""); }}
+            placeholder="Enter email address to grant admin access"
+            className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0e1f3d]/20 focus:border-[#0e1f3d]"
+          />
+          <button
+            type="submit"
+            disabled={saving || !newEmail.trim()}
+            className="bg-[#0e1f3d] hover:bg-[#1a3a6e] disabled:bg-gray-200 disabled:text-gray-400 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap"
+          >
+            {saving ? "Adding…" : "+ Add Admin"}
+          </button>
+        </form>
+
+        {typeof error === "string" && error && error !== "setup-needed" && (
+          <p className="text-red-600 text-xs bg-red-50 border border-red-100 px-3 py-2 rounded-xl mb-3">{error}</p>
+        )}
+        {success && (
+          <p className="text-green-700 text-xs bg-green-50 border border-green-100 px-3 py-2 rounded-xl mb-3">{success}</p>
+        )}
+      </div>
+
+      {loading ? <Spinner /> : rows.length === 0 ? (
+        <EmptyState msg="No pre-approved admin emails yet. Add one above." />
+      ) : (
+        <div className="overflow-x-auto rounded-xl border border-gray-100">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50 text-[#0e1f3d] text-xs uppercase tracking-wide">
+              <tr>
+                <th className="text-left px-4 py-3">Email</th>
+                <th className="text-left px-4 py-3">Added</th>
+                <th className="px-4 py-3" />
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {rows.map(r => (
+                <tr key={r.id} className="hover:bg-gray-50/50">
+                  <td className="px-4 py-3 font-medium text-[#0e1f3d]">{r.email}</td>
+                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.added_at)}</td>
+                  <td className="px-4 py-3 text-right">
+                    <button onClick={() => remove(r.email)} className="text-red-500 hover:underline text-xs font-bold">Remove</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
    MAIN ADMIN PAGE
 ══════════════════════════════════════════ */
-type Tab = "events" | "programs" | "publications" | "contacts" | "donations" | "newsletter" | "users";
+type Tab = "events" | "programs" | "publications" | "contacts" | "donations" | "newsletter" | "users" | "admin-access";
 
 const TABS: { key: Tab; label: string; emoji: string }[] = [
   { key: "events", label: "Events", emoji: "📅" },
@@ -532,6 +665,7 @@ const TABS: { key: Tab; label: string; emoji: string }[] = [
   { key: "donations", label: "Donations", emoji: "💰" },
   { key: "newsletter", label: "Newsletter", emoji: "📧" },
   { key: "users", label: "Users", emoji: "👥" },
+  { key: "admin-access", label: "Admin Access", emoji: "🔑" },
 ];
 
 /* ═══════════════════════════════════════════
@@ -766,6 +900,7 @@ export default function Admin() {
             {tab === "donations" && <DonationsTab />}
             {tab === "newsletter" && <NewsletterTab />}
             {tab === "users" && <UsersTab />}
+            {tab === "admin-access" && <AdminAccessTab />}
           </div>
         </main>
       </div>

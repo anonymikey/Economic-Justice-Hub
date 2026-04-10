@@ -39,9 +39,12 @@ async function fetchIsAdmin(email: string): Promise<boolean> {
   if (DESIGNATED_ADMINS.includes(normalizedEmail)) return true;
   try {
     const timeout = new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 6000));
-    const query = Promise.resolve(
-      supabase.from("users").select("is_admin").eq("email", email).maybeSingle()
-    ).then(({ data }) => data?.is_admin === true).catch(() => false);
+    const query = Promise.all([
+      supabase.from("users").select("is_admin").eq("email", email).maybeSingle(),
+      supabase.from("pre_approved_admins").select("email").eq("email", normalizedEmail).maybeSingle(),
+    ]).then(([usersRes, preApprovedRes]) =>
+      usersRes.data?.is_admin === true || preApprovedRes.data !== null
+    ).catch(() => false);
     return await Promise.race([query, timeout]);
   } catch {
     return false;
