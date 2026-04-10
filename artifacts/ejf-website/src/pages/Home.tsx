@@ -551,111 +551,232 @@ function GeographicFocusSection() {
   );
 }
 
+const EJF_AI_RESPONSES: { patterns: RegExp; answer: string }[] = [
+  {
+    patterns: /\b(hi|hello|hey|good morning|good afternoon|good evening|howdy)\b/i,
+    answer: "Hello and welcome to the Economic Justice Forum! 👋 I'm your EJF AI Assistant. I can help you learn about our mission, programmes, membership, events, research, donations, volunteer opportunities, and more. What would you like to know?",
+  },
+  {
+    patterns: /\b(what is ejf|about ejf|tell me about ejf|who is ejf|what does ejf do|ejf overview)\b/i,
+    answer: "The Economic Justice Forum (EJF) is Kenya's people-centred platform for Economic, Climate, Social, and Digital Justice. Founded to bridge grassroots realities and international advocacy, EJF empowers citizens — especially marginalised communities in Taita Taveta and across Kenya — to claim their rights, participate in governance, and shape equitable policy.\n\nOur four pillars are:\n• 💰 Economic Justice — fair wages, land rights, and poverty reduction\n• 🌍 Climate Justice — environmental rights and climate adaptation\n• ⚖️ Social Justice — gender equity, youth inclusion, and human dignity\n• 💻 Digital Justice — internet access, data rights, and digital literacy\n\nWe run community dialogues, research programmes, policy advocacy, and emergency relief initiatives across Kenya.",
+  },
+  {
+    patterns: /\b(member|register|join|sign up|registration|become a member|how to join)\b/i,
+    answer: "Joining EJF is open to individuals, community groups, organisations, and institutions who share our commitment to justice and equity. Here's how:\n\n1. 📋 Click the 'Register with Us' button on this page (or visit our registration portal)\n2. 📝 Fill in your personal details and select your membership type (Individual / Organisation / Partner)\n3. ✅ Submit — our team will review and confirm your registration within 48 hours\n4. 🤝 You'll receive a welcome pack, access to our resource library, and invitations to events\n\nMembership is free for community members. Institutional memberships may have a small solidarity contribution. Need help? Email membership@economicjusticeforum.org",
+  },
+  {
+    patterns: /\b(benefit|benefits|why join|advantage|perks|what do i get)\b/i,
+    answer: "EJF membership comes with a rich set of benefits:\n\n🏛️ Governance & Voice\n• Participate in policy forums and community dialogues\n• Vote and be voted into EJF leadership positions\n• Influence EJF's advocacy agenda at county and national level\n\n📚 Knowledge & Resources\n• Free access to all EJF research publications and policy briefs\n• Invitations to workshops, trainings, and capacity-building events\n• Access to our legal aid and rights-education programmes\n\n🌐 Network & Solidarity\n• Connect with justice champions across Kenya and Africa\n• Collaborate with NGOs, academics, and government partners\n• Be part of a growing movement of 10,000+ advocates\n\n🆘 Support\n• Priority access to EJF's emergency relief and food security initiatives\n• Mental health and social support referrals",
+  },
+  {
+    patterns: /\b(volunteer|volunteering|contribute|help out|how to help|give my time)\b/i,
+    answer: "EJF thrives on the energy and skills of our volunteers! Here's how you can contribute:\n\n🔬 Research & Documentation — Help conduct community surveys, write reports, and document impact stories\n📣 Community Organising — Lead dialogues, mobilise communities, and facilitate grassroots meetings\n💻 Digital & Communications — Manage social media, create content, or build digital literacy in communities\n⚖️ Legal & Policy — Support legal aid clinics or contribute to policy analysis\n🚑 Emergency Relief — Join our food distribution and humanitarian response teams\n🎓 Education & Training — Facilitate workshops on economic rights, digital skills, and civic literacy\n\nTo apply as a volunteer, email volunteers@economicjusticeforum.org with your name, skills, and availability.",
+  },
+  {
+    patterns: /\b(donate|donation|contribute money|fund|support ejf|financially|contribution)\b/i,
+    answer: "Your financial support helps EJF run life-changing programmes for thousands of Kenyans. Donations go directly towards:\n\n🍱 Food Security — emergency food packages for vulnerable families\n📚 Education — school supplies and scholarship support\n🌱 Climate Justice — tree planting, clean energy, and climate adaptation\n🏛️ Advocacy — policy research, legal support, and government engagement\n\nHow to donate:\n• 📱 M-Pesa: Use our paybill or send via the Donate button on this site\n• 🌐 Online: Secure card donations on our website\n• 🏦 Bank transfer: Contact us for our official account details\n\nAll donations are acknowledged and you receive an impact report. Email donate@economicjusticeforum.org to learn more.",
+  },
+  {
+    patterns: /\b(programme|programs|initiatives|activities|projects|what do you do)\b/i,
+    answer: "EJF runs a wide range of impactful programmes:\n\n🌾 Food Security & Emergency Relief\nDistributing food packages and essentials to drought-affected families, especially in Taita Taveta.\n\n🏫 Education Equity\nProviding school supplies, sanitary products, and bursary support to learners from low-income families.\n\n🌍 Climate & Environmental Justice\nTree planting campaigns, clean energy advocacy, and community climate adaptation training.\n\n📱 Digital Justice\nFree digital literacy workshops, affordable internet access advocacy, and combating digital exclusion.\n\n⚖️ Legal Aid & Rights Education\nPro-bono legal support for marginalised individuals and civic education on economic rights.\n\n🤝 Community Dialogues\nFacilitating direct conversations between communities and government institutions on economic policy.",
+  },
+  {
+    patterns: /\b(climate|environment|green|environmental justice|carbon)\b/i,
+    answer: "Climate Justice is one of EJF's four core pillars. We believe that the communities who contribute least to climate change are often hit hardest by its effects.\n\nOur Climate Justice work includes:\n🌳 Tree planting and reforestation drives across Taita Taveta\n☀️ Advocacy for affordable clean energy and solar access in rural areas\n🚜 Supporting smallholder farmers adapting to drought and erratic rainfall\n📢 Amplifying community voices in national and international climate negotiations\n🔬 Conducting climate vulnerability assessments in marginalised counties\n\nWe partner with national and international environmental organisations to drive policy change. Join our climate action network by emailing climate@economicjusticeforum.org",
+  },
+  {
+    patterns: /\b(digital|technology|internet|tech|digital justice|online rights|data)\b/i,
+    answer: "Digital Justice is the right of every person to access, use, and shape digital technology. EJF fights to ensure no one is left offline.\n\nOur Digital Justice programmes:\n💻 Free digital literacy training for youth, women, and elderly citizens\n📶 Advocacy for affordable broadband in rural and underserved areas\n🔒 Educating communities on data privacy and online safety\n📱 Training on mobile money, e-government services, and online business\n🏛️ Engaging policymakers to close Kenya's digital divide\n\nWe've trained over 2,000 community members in digital skills across Taita Taveta. To participate or partner, contact digital@economicjusticeforum.org",
+  },
+  {
+    patterns: /\b(social justice|gender|women|youth|equality|discrimination|human rights)\b/i,
+    answer: "Social Justice sits at the heart of EJF's work. We champion the dignity, rights, and full participation of every person — regardless of gender, age, ethnicity, or economic status.\n\nOur Social Justice focus areas:\n👩 Gender Equity — combating gender-based violence, championing women's economic rights, and supporting women in leadership\n🧑 Youth Empowerment — mentorship, skills training, and civic engagement for young people aged 15–35\n🧓 Elderly Rights — ensuring older citizens are not left behind in economic and social development\n🏳️ Anti-Discrimination — fighting ethnic marginalisation and promoting inclusive development\n♿ Disability Inclusion — advocating for accessible services and equal opportunities for PWDs\n\nContact us at social@economicjusticeforum.org to get involved.",
+  },
+  {
+    patterns: /\b(location|where|address|office|based|headquarter|kenya|taita|nairobi)\b/i,
+    answer: "EJF is headquartered in Kenya and operates primarily in:\n\n📍 Taita Taveta County — our founding and primary base of operations\n📍 Nairobi — for national advocacy, government engagement, and partnerships\n📍 Mombasa & Coast Region — community outreach and coastal justice programmes\n\nWe also have affiliate networks and partners across East Africa and internationally.\n\n🏢 Physical Office: Wundanyi, Taita Taveta County, Kenya\n📧 Email: info@economicjusticeforum.org\n📞 Phone: +254 741 357 830\n🌐 Website: economicjusticeforum.org",
+  },
+  {
+    patterns: /\b(contact|reach|email|phone|call|get in touch|speak to)\b/i,
+    answer: "You can reach EJF through multiple channels:\n\n📧 General Enquiries: info@economicjusticeforum.org\n📧 Membership: membership@economicjusticeforum.org\n📧 Donations: donate@economicjusticeforum.org\n📧 Partnerships: partners@economicjusticeforum.org\n📧 Media: media@economicjusticeforum.org\n\n📞 Phone / WhatsApp: +254 741 357 830\n\n🌐 Website: economicjusticeforum.org\n📍 Office: Wundanyi, Taita Taveta County, Kenya\n\nOur team typically responds within 24–48 business hours. For urgent matters, WhatsApp is the fastest way to reach us.",
+  },
+  {
+    patterns: /\b(partner|partnership|organisation|ngo|collaborate|mou|work together)\b/i,
+    answer: "EJF actively partners with civil society organisations, government bodies, academic institutions, media houses, and international development organisations.\n\nTypes of partnerships we offer:\n🤝 Programme Partnerships — co-implement community programmes and research\n📣 Advocacy Alliances — join joint campaigns on economic and climate justice\n💰 Funding Partnerships — co-apply for grants or sponsor specific initiatives\n📚 Knowledge Exchange — share research, data, and best practices\n🏛️ Government Engagement — collaborate on policy development and public consultations\n\nTo explore a partnership, send us a brief introduction and your proposed area of collaboration:\n📧 partners@economicjusticeforum.org\n\nWe sign formal MoUs for structured partnerships.",
+  },
+  {
+    patterns: /\b(event|events|upcoming|calendar|workshop|training|conference|forum|summit)\b/i,
+    answer: "EJF regularly organises a wide range of events:\n\n📅 Community Dialogues — monthly grassroots forums in Taita Taveta and partner counties\n🎓 Workshops & Training — capacity building on economic rights, digital skills, and climate adaptation\n🏛️ Policy Forums — quarterly meetings with government and civil society leaders\n📣 Advocacy Campaigns — marches, petitions, and public awareness drives\n🍱 Relief Drives — food and essential goods distribution events\n🌳 Environmental Days — tree planting and clean-up campaigns\n\nTo see upcoming events:\n• Visit the Events page on our website\n• Follow us on social media for live updates\n• Subscribe to our newsletter for event invitations\n• Email events@economicjusticeforum.org to be added to our events list",
+  },
+  {
+    patterns: /\b(research|publication|report|study|paper|data|findings|document)\b/i,
+    answer: "EJF produces high-quality research to drive evidence-based advocacy and policy change:\n\n📄 Annual Impact Reports — documenting our yearly achievements and community outcomes\n📊 Policy Briefs — concise analysis of economic, climate, and social justice issues for policymakers\n🔬 Community Research — ground-level surveys and case studies from Taita Taveta and beyond\n📈 Data Dashboards — visual tools showing economic inequality, climate vulnerability, and digital access gaps\n📚 Educational Materials — easy-to-read guides on rights, policies, and civic participation\n\nAll EJF publications are free to access. Download them from:\n• Publications section on our website\n• Contact research@economicjusticeforum.org for specific reports\n• Members get early access to new research",
+  },
+  {
+    patterns: /\b(fee|cost|price|free|paid|how much|subscription|dues)\b/i,
+    answer: "EJF membership is free and open to all individuals committed to economic justice. We believe that no one should be excluded from the movement due to financial barriers.\n\nHere's our fee structure:\n👤 Individual Membership — FREE\n👨‍👩‍👧 Community Group Membership — FREE\n🏢 Organisational Membership — Small solidarity contribution (contact us for details)\n🌐 International/Institutional Partnership — Negotiated contribution\n\nAll members, regardless of contribution level, receive the same core benefits. Donations are always welcome but never required to participate. Contact membership@economicjusticeforum.org for more details.",
+  },
+  {
+    patterns: /\b(help|what can you do|how can you help|topics|options|menu|assist)\b/i,
+    answer: "I'm your EJF AI Assistant and I can help you with a wide range of topics! Here's what I can tell you about:\n\n🏛️ About EJF — our mission, vision, history, and pillars\n👤 Membership — how to join, registration steps, and requirements\n⭐ Benefits — what you get as an EJF member\n🙋 Volunteering — how to contribute your time and skills\n💰 Donations — how to support EJF financially\n📋 Programmes — our climate, digital, social, and economic initiatives\n📅 Events — upcoming forums, workshops, and community activities\n📚 Research — our publications and reports\n🤝 Partnerships — how organisations can collaborate with EJF\n📞 Contact — how to reach our team\n📍 Location — where we're based\n\nJust ask me anything and I'll do my best to give you a thorough answer!",
+  },
+];
+
+function getAIResponse(msg: string): string {
+  const lower = msg.toLowerCase().trim();
+  for (const entry of EJF_AI_RESPONSES) {
+    if (entry.patterns.test(lower)) return entry.answer;
+  }
+  return `Thank you for your question about "${msg}"! EJF is always happy to assist.\n\nFor specific enquiries not covered here, please reach out directly:\n\n📧 info@economicjusticeforum.org\n📞 +254 741 357 830\n🌐 economicjusticeforum.org\n\nYou can also try asking me about: membership, volunteering, programmes, events, climate justice, digital justice, donations, or partnerships — and I'll give you a detailed answer!`;
+}
+
 function AIChatSection() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hello! I'm here to help you learn about EJF and guide you through registration. What would you like to know or how can I assist you today?",
+      text: "Hello! 👋 I'm the EJF AI Assistant. I can give you detailed information about our mission, programmes, membership, events, research, and more. What would you like to know?",
     },
   ]);
   const [input, setInput] = useState("");
+  const [interacting, setInteracting] = useState(false);
+  const [focused, setFocused] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
+  const interactTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const quickReplies = ["What is EJF?", "Become a Member", "Membership Benefits", "Volunteer Opportunities"];
+  const quickReplies = ["What is EJF?", "Membership Benefits", "Volunteer", "Programmes", "Donate", "Contact Us"];
+
+  const triggerInteracting = () => {
+    setInteracting(true);
+    if (interactTimerRef.current) clearTimeout(interactTimerRef.current);
+    interactTimerRef.current = setTimeout(() => setInteracting(false), 4000);
+  };
 
   const handleSend = (text?: string) => {
     const msg = text || input.trim();
     if (!msg) return;
-
+    triggerInteracting();
     setMessages((prev) => [...prev, { role: "user", text: msg }]);
     setInput("");
-
     setTimeout(() => {
-      let response = "Thank you for your interest in EJF! We'll be happy to assist you. Please contact us at economicjusticeforum.org or call +254 741 357 830 for more information.";
-
-      if (msg.toLowerCase().includes("what is ejf") || msg.toLowerCase() === "what is ejf?") {
-        response = "The Economic Justice Forum (EJF) is the people's platform for Economic, Climate, Social, and Digital Justice in Kenya. We champion equitable development, participatory governance, and sustainable prosperity for all.";
-      } else if (msg.toLowerCase().includes("member") || msg.toLowerCase().includes("register")) {
-        response = "To become a member, you can register on our website or type 'register' to start the process. Membership is open to individuals, organizations, and community groups committed to economic justice.";
-      } else if (msg.toLowerCase().includes("benefit")) {
-        response = "EJF membership benefits include: access to research and publications, participation in advocacy campaigns, networking with justice champions, training opportunities, and a voice in policy decisions.";
-      } else if (msg.toLowerCase().includes("volunteer")) {
-        response = "EJF welcomes volunteers! You can contribute your skills in research, community organizing, digital communications, legal advocacy, and more. Contact us to learn about current volunteer opportunities.";
-      }
-
+      const response = getAIResponse(msg);
       setMessages((prev) => [...prev, { role: "assistant", text: response }]);
-    }, 800);
+    }, 700);
   };
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const isActive = interacting || focused;
+
   return (
-    <section className="bg-gray-50 py-12 px-4">
+    <section className="bg-gray-50 py-14 px-4">
+      <style>{`
+        @keyframes ejfRainbow {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .ejf-rainbow-wrap {
+          background: linear-gradient(270deg,
+            #3b82f6, #6366f1, #8b5cf6, #a855f7,
+            #ec4899, #ef4444, #f97316, #eab308,
+            #22c55e, #06b6d4, #3b82f6
+          );
+          background-size: 400% 400%;
+          animation: ejfRainbow 6s ease infinite;
+          border-radius: 20px;
+          padding: 2px;
+          transition: padding 0.4s ease, box-shadow 0.4s ease, animation-duration 0.4s;
+          box-shadow: 0 0 0px 0px rgba(139,92,246,0);
+        }
+        .ejf-rainbow-wrap.active {
+          animation-duration: 1.8s;
+          padding: 3px;
+          box-shadow: 0 0 28px 4px rgba(139,92,246,0.22), 0 0 60px 8px rgba(236,72,153,0.12);
+        }
+        .ejf-inner {
+          background: white;
+          border-radius: 18px;
+          overflow: hidden;
+        }
+        .ejf-msg-pre {
+          white-space: pre-wrap;
+          font-family: inherit;
+          font-size: inherit;
+          line-height: 1.65;
+          margin: 0;
+        }
+      `}</style>
+
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0e1f3d] mb-2">Join EJF - AI Assisted Registration</h2>
-        <p className="text-gray-600 mb-6">
-          Our AI assistant can help you register as a member, volunteer, or partner. Get instant answers to your questions about EJF and complete your registration smoothly.
+        <h2 className="text-2xl font-bold text-[#0e1f3d] mb-2">Join EJF — AI Assisted Registration</h2>
+        <p className="text-gray-500 text-sm mb-6 max-w-2xl">
+          Our AI assistant gives detailed answers about EJF's mission, programmes, membership, volunteering, events, research, and more. Ask anything.
         </p>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-          {/* Chat messages */}
-          <div className="min-h-[200px] max-h-[300px] overflow-y-auto mb-4 space-y-3">
-            {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-start gap-2`}>
-                {m.role === "assistant" && (
-                  <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 text-sm">🤖</div>
-                )}
-                <div
-                  className={`max-w-[80%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
+        <div className={`ejf-rainbow-wrap ${isActive ? "active" : ""}`}>
+          <div className="ejf-inner p-5 md:p-7">
+
+            {/* Messages */}
+            <div className="min-h-[220px] max-h-[360px] overflow-y-auto mb-5 space-y-4 pr-1">
+              {messages.map((m, i) => (
+                <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-start gap-2.5`}>
+                  {m.role === "assistant" && (
+                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-base"
+                      style={{ background: "linear-gradient(135deg,#0e1f3d,#1a3a6e)" }}>
+                      🤖
+                    </div>
+                  )}
+                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
                     m.role === "assistant"
-                      ? "bg-[#0e1f3d] text-white"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
-                >
-                  {m.role === "assistant" && <span className="font-bold text-[#d4a017]">EJF Assistant: </span>}
-                  {m.text}
+                      ? "bg-[#0e1f3d] text-white rounded-tl-sm"
+                      : "bg-gray-100 text-gray-800 rounded-tr-sm"
+                  }`}>
+                    {m.role === "assistant" && (
+                      <span className="font-bold text-[#d4a017] block mb-1 text-xs tracking-wide">EJF ASSISTANT</span>
+                    )}
+                    <pre className="ejf-msg-pre">{m.text}</pre>
+                  </div>
                 </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
 
-          {/* Input */}
-          <div className="flex gap-2 mb-3">
-            <input
-              type="text"
-              placeholder="Ask about EJF or type 'register' to become a member..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              className="flex-1 border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0e1f3d]/30"
-            />
-            <button
-              onClick={() => handleSend()}
-              className="bg-[#0e1f3d] hover:bg-[#1a2f5e] text-white font-semibold px-5 py-2.5 rounded text-sm transition-colors"
-            >
-              Send
-            </button>
-          </div>
-
-          {/* Quick replies */}
-          <div className="flex flex-wrap gap-2">
-            {quickReplies.map((qr) => (
+            {/* Input row */}
+            <div className="flex gap-2 mb-3">
+              <input
+                type="text"
+                placeholder="Ask about EJF, membership, programmes, events..."
+                value={input}
+                onChange={(e) => { setInput(e.target.value); triggerInteracting(); }}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-[#8b5cf6]/40 transition-all"
+              />
               <button
-                key={qr}
-                onClick={() => handleSend(qr)}
-                className="border border-gray-300 text-gray-700 hover:border-[#0e1f3d] hover:text-[#0e1f3d] text-xs px-3 py-1.5 rounded-full transition-colors"
+                onClick={() => handleSend()}
+                className="bg-[#0e1f3d] hover:bg-[#1a3a6e] text-white font-bold px-5 py-3 rounded-xl text-sm transition-colors shadow-sm"
               >
-                {qr}
+                Send
               </button>
-            ))}
+            </div>
+
+            {/* Quick replies */}
+            <div className="flex flex-wrap gap-2">
+              {quickReplies.map((qr) => (
+                <button
+                  key={qr}
+                  onClick={() => handleSend(qr)}
+                  className="border border-gray-200 text-gray-600 hover:border-[#8b5cf6] hover:text-[#8b5cf6] hover:bg-[#8b5cf6]/5 text-xs px-3 py-1.5 rounded-full transition-all"
+                >
+                  {qr}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
