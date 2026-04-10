@@ -22,6 +22,30 @@ function useInView(threshold = 0.15) {
 const pillars = [
   {
     number: "01",
+    icon: "⚖️",
+    title: "Economic, Fiscal & Debt Justice",
+    color: "from-amber-900 to-[#0e1f3d]",
+    accent: "#d4a017",
+    quote: "Fair economies are built when communities have power over the resources they steward.",
+    focusAreas: [
+      {
+        label: "Equitable Revenue & Fiscal Allocation",
+        bold: true,
+        children: [
+          "Increasing county government share of national revenue from 15% to at least 35%.",
+          "Mandatory, structured public participation in county budgeting and expenditure tracking.",
+          "Equitable natural resource revenue-sharing between national and county governments and host communities.",
+        ],
+      },
+      { label: "Transparent public debt management, responsible borrowing, and debt-for-development swaps.", bold: true },
+      { label: "Progressive taxation reform to reduce inequality, eliminate illicit financial flows, and ensure multinationals pay fair taxes in Kenya." },
+      { label: "Grassroots economic empowerment — microfinance, cooperative finance, and community-owned enterprises for women, youth, and marginalized groups." },
+      { label: "Living wages, social protection floors, and universal basic services (healthcare, education, water, energy)." },
+      { label: "Community benefit agreements for mega infrastructure projects (ports, roads, dams, pipelines) to guarantee local employment and economic inclusion." },
+    ],
+  },
+  {
+    number: "02",
     icon: "🌍",
     title: "Climate & Resource Justice",
     color: "from-emerald-900 to-[#0e1f3d]",
@@ -55,7 +79,7 @@ const pillars = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     icon: "🗳️",
     title: "Democracy, Digital Justice, Leadership & Devolution",
     color: "from-blue-900 to-[#0e1f3d]",
@@ -71,7 +95,7 @@ const pillars = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     icon: "🌐",
     title: "Global Advocacy & Governance Reforms",
     color: "from-purple-900 to-[#0e1f3d]",
@@ -158,7 +182,7 @@ function PillarsHero() {
           Strategic Pillars, Core Values &amp;<br className="hidden md:block" /> Guiding Principles
         </h1>
         <p className="text-white/75 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-          EJF's work is organized around three strategic pillars that guide our advocacy, programs, and partnerships toward achieving economic, climate, social, and digital justice.
+          EJF's work is organized around four strategic pillars that guide our advocacy, programs, and partnerships toward achieving economic, climate, social, and digital justice.
         </p>
       </div>
     </section>
@@ -201,7 +225,7 @@ function StrategicPillars() {
         <div ref={ref} className={`text-center mb-12 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0e1f3d] mb-3">Our Strategic Pillars</h2>
           <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
-            The foundation of our mission rests on three key pillars that guide our work towards achieving comprehensive justice and equality.
+            The foundation of our mission rests on four key pillars that guide our work towards achieving comprehensive justice and equality.
           </p>
         </div>
 
@@ -340,7 +364,7 @@ function IntegratedApproach() {
           <div className="bg-gray-50 rounded-2xl border border-gray-100 p-8">
             <h2 className="text-2xl font-bold text-[#0e1f3d] mb-3">Integrated Approach</h2>
             <p className="text-gray-600 text-sm leading-relaxed mb-8 max-w-2xl">
-              Our three pillars are interconnected and mutually reinforcing. We believe that sustainable change requires addressing economic, governance, and social issues simultaneously through an integrated approach that recognizes their complex interrelationships.
+              Our four pillars are interconnected and mutually reinforcing. We believe that sustainable change requires addressing economic, fiscal, climate, governance, and social issues simultaneously through an integrated approach that recognizes their complex interrelationships.
             </p>
             {/* Connecting visual */}
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-5">

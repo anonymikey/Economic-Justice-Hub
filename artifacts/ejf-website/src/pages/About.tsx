@@ -180,14 +180,14 @@ function VisionMission() {
             <div className="h-0.5 bg-gradient-to-r from-[#d4a017] to-transparent mb-5 w-32" />
             <h3 className="font-bold text-[#0e1f3d] text-lg mb-3">Our Vision</h3>
             <p className="text-gray-700 leading-relaxed">
-              A just, equitable, sustainable, and digitally inclusive Kenya where every person — including those in rural, coastal, and marginalized communities — enjoys dignity, opportunity, and prosperity.
+              A just, equitable, sustainable, and digitally inclusive Kenya where every person enjoys dignity, opportunity, and prosperity, and where resource-hosting communities are empowered to claim their rightful share of wealth, decision-making, and recognition of their cultural heritage.
             </p>
           </div>
           <div className="p-8">
             <div className="h-0.5 bg-gradient-to-r from-[#d4a017] to-transparent mb-5 w-32" />
             <h3 className="font-bold text-[#0e1f3d] text-lg mb-3">Our Mission</h3>
             <p className="text-gray-700 leading-relaxed">
-              To advance Economic and Social Justice by empowering communities, promoting systemic reforms, ensuring transparent and fair management of resources, and fostering sustainable development — locally, nationally, and globally.
+              To advance economic, climate, resource, social, and digital justice by empowering communities, promoting systemic reforms, ensuring transparent and fair management of resources, preserving cultural identity, and fostering sustainable development locally, nationally, and globally.
             </p>
           </div>
         </div>

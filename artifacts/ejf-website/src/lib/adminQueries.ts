@@ -9,7 +9,7 @@ export interface DBEvent {
   location: string;
   time: string;
   category: string;
-  image_url: string;
+  emoji: string;
   featured: boolean;
   published: boolean;
   created_at: string;
@@ -20,23 +20,25 @@ export interface DBProgram {
   title: string;
   description: string;
   category: string;
-  image_url: string;
-  status: string;
+  icon: string;
+  published: boolean;
   created_at: string;
+  updated_at: string;
 }
 
 export interface DBPublication {
   id: string;
   title: string;
   subtitle: string;
-  type: string;
-  category: string;
   description: string;
-  image_url: string;
-  file_url: string;
+  tags: string;
+  pdf_url: string;
+  cover_image: string;
+  published_at: string;
   featured: boolean;
   published: boolean;
   created_at: string;
+  updated_at: string;
 }
 
 export interface DBContact {
@@ -87,15 +89,15 @@ export const adminQueries = {
   },
   programs: {
     list: () => supabase.from("programs").select("*").order("created_at", { ascending: false }),
-    listActive: () => supabase.from("programs").select("*").eq("status", "active").order("created_at", { ascending: false }),
-    insert: (data: Omit<DBProgram, "id" | "created_at">) => supabase.from("programs").insert(data).select().single(),
+    listActive: () => supabase.from("programs").select("*").eq("published", true).order("created_at", { ascending: false }),
+    insert: (data: Omit<DBProgram, "id" | "created_at" | "updated_at">) => supabase.from("programs").insert(data).select().single(),
     update: (id: string, data: Partial<DBProgram>) => supabase.from("programs").update(data).eq("id", id).select().single(),
     delete: (id: string) => supabase.from("programs").delete().eq("id", id),
   },
   publications: {
     list: () => supabase.from("publications").select("*").order("created_at", { ascending: false }),
     listPublished: () => supabase.from("publications").select("*").eq("published", true).order("created_at", { ascending: false }),
-    insert: (data: Omit<DBPublication, "id" | "created_at">) => supabase.from("publications").insert(data).select().single(),
+    insert: (data: Omit<DBPublication, "id" | "created_at" | "updated_at">) => supabase.from("publications").insert(data).select().single(),
     update: (id: string, data: Partial<DBPublication>) => supabase.from("publications").update(data).eq("id", id).select().single(),
     delete: (id: string) => supabase.from("publications").delete().eq("id", id),
   },

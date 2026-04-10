@@ -576,15 +576,9 @@ function LivePrograms() {
                 key={prog.id}
                 className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
               >
-                {prog.image_url ? (
-                  <div className="h-40 overflow-hidden bg-[#0e1f3d]/5">
-                    <img src={prog.image_url} alt={prog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                ) : (
-                  <div className="h-20 bg-gradient-to-br from-[#0e1f3d] to-[#1a3a6e] flex items-center justify-center">
-                    <span className="text-3xl">🌱</span>
-                  </div>
-                )}
+                <div className="h-20 bg-gradient-to-br from-[#0e1f3d] to-[#1a3a6e] flex items-center justify-center">
+                  <span className="text-3xl">{prog.icon || "🌱"}</span>
+                </div>
                 <div className="p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${categoryColors[prog.category] ?? "bg-gray-100 text-gray-600"}`}>

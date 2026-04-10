@@ -31,8 +31,11 @@ function getInitials(name: string) {
 
 async function fetchIsAdmin(email: string): Promise<boolean> {
   try {
-    const { data } = await supabase.from("users").select("is_admin").eq("email", email).single();
-    return data?.is_admin === true;
+    const timeout = new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 6000));
+    const query = Promise.resolve(
+      supabase.from("users").select("is_admin").eq("email", email).maybeSingle()
+    ).then(({ data }) => data?.is_admin === true).catch(() => false);
+    return await Promise.race([query, timeout]);
   } catch {
     return false;
   }

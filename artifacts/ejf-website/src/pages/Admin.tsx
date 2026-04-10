@@ -50,7 +50,7 @@ function EventsTab() {
 
   const blank: Omit<DBEvent, "id" | "created_at"> = {
     title: "", description: "", date: "", date_iso: "", location: "", time: "", category: "Environmental",
-    image_url: "", featured: false, published: true,
+    emoji: "", featured: false, published: true,
   };
   const [form, setForm] = useState(blank);
 
@@ -63,7 +63,7 @@ function EventsTab() {
   useEffect(() => { load(); }, []);
 
   const openAdd = () => { setForm(blank); setError(""); setModal("add"); };
-  const openEdit = (r: DBEvent) => { setForm({ title: r.title, description: r.description, date: r.date, date_iso: r.date_iso, location: r.location, time: r.time, category: r.category, image_url: r.image_url, featured: r.featured, published: r.published }); setError(""); setModal(r); };
+  const openEdit = (r: DBEvent) => { setForm({ title: r.title, description: r.description, date: r.date, date_iso: r.date_iso, location: r.location, time: r.time, category: r.category, emoji: r.emoji, featured: r.featured, published: r.published }); setError(""); setModal(r); };
 
   const save = async () => {
     if (!form.title.trim() || !form.date.trim()) { setError("Title and date are required."); return; }
@@ -146,7 +146,7 @@ function EventsTab() {
               </select>
             </div>
             <div><label className={labelCls}>Description</label><textarea className={textareaCls} rows={3} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Event description..." /></div>
-            <div><label className={labelCls}>Image URL</label><input className={inputCls} value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." /></div>
+            <div><label className={labelCls}>Emoji / Icon</label><input className={inputCls} value={form.emoji} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} placeholder="🌿 (optional emoji for this event)" /></div>
             <div className="flex gap-6">
               <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                 <input type="checkbox" checked={form.published} onChange={e => setForm(f => ({ ...f, published: e.target.checked }))} className="w-4 h-4 accent-[#0e1f3d]" />
@@ -177,14 +177,14 @@ function ProgramsTab() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const blank: Omit<DBProgram, "id" | "created_at"> = { title: "", description: "", category: "Environmental", image_url: "", status: "active" };
+  const blank: Omit<DBProgram, "id" | "created_at" | "updated_at"> = { title: "", description: "", category: "Environmental", icon: "", published: true };
   const [form, setForm] = useState(blank);
 
   const load = async () => { setLoading(true); const { data } = await adminQueries.programs.list(); setRows(data ?? []); setLoading(false); };
   useEffect(() => { load(); }, []);
 
   const openAdd = () => { setForm(blank); setError(""); setModal("add"); };
-  const openEdit = (r: DBProgram) => { setForm({ title: r.title, description: r.description, category: r.category, image_url: r.image_url, status: r.status }); setError(""); setModal(r); };
+  const openEdit = (r: DBProgram) => { setForm({ title: r.title, description: r.description, category: r.category, icon: r.icon, published: r.published }); setError(""); setModal(r); };
 
   const save = async () => {
     if (!form.title.trim()) { setError("Title is required."); return; }
@@ -218,7 +218,7 @@ function ProgramsTab() {
                 <tr key={r.id} className="hover:bg-gray-50/50">
                   <td className="px-4 py-3 font-medium text-[#0e1f3d] max-w-[200px] truncate">{r.title}</td>
                   <td className="px-4 py-3"><Badge label={r.category} color="bg-emerald-50 text-emerald-700" /></td>
-                  <td className="px-4 py-3">{r.status === "active" ? <Badge label="Active" color="bg-green-50 text-green-700" /> : <Badge label="Inactive" color="bg-gray-100 text-gray-500" />}</td>
+                  <td className="px-4 py-3">{r.published ? <Badge label="Published" color="bg-green-50 text-green-700" /> : <Badge label="Draft" color="bg-gray-100 text-gray-500" />}</td>
                   <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.created_at)}</td>
                   <td className="px-4 py-3 text-right"><button onClick={() => openEdit(r)} className="text-[#0e1f3d] hover:underline text-xs font-bold mr-3">Edit</button><button onClick={() => del(r.id)} className="text-red-500 hover:underline text-xs font-bold">Delete</button></td>
                 </tr>
@@ -238,11 +238,12 @@ function ProgramsTab() {
               </select>
             </div>
             <div><label className={labelCls}>Description</label><textarea className={textareaCls} rows={4} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Program description..." /></div>
-            <div><label className={labelCls}>Image URL</label><input className={inputCls} value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." /></div>
-            <div><label className={labelCls}>Status</label>
-              <select className={inputCls} value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}>
-                <option value="active">Active</option><option value="inactive">Inactive</option>
-              </select>
+            <div><label className={labelCls}>Icon / Emoji</label><input className={inputCls} value={form.icon} onChange={e => setForm(f => ({ ...f, icon: e.target.value }))} placeholder="🌱 (emoji or icon identifier)" /></div>
+            <div>
+              <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer mt-2">
+                <input type="checkbox" checked={form.published} onChange={e => setForm(f => ({ ...f, published: e.target.checked }))} className="w-4 h-4 accent-[#0e1f3d]" />
+                Published (visible on public site)
+              </label>
             </div>
             <button onClick={save} disabled={saving} className="w-full bg-[#0e1f3d] hover:bg-[#1a3a6e] disabled:bg-gray-300 text-white font-bold py-2.5 rounded-xl text-sm transition-colors">{saving ? "Saving…" : "Save Program"}</button>
           </div>
@@ -262,14 +263,14 @@ function PublicationsTab() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const blank: Omit<DBPublication, "id" | "created_at"> = { title: "", subtitle: "", type: "pdf", category: "Research", description: "", image_url: "", file_url: "", featured: false, published: true };
+  const blank: Omit<DBPublication, "id" | "created_at" | "updated_at"> = { title: "", subtitle: "", description: "", tags: "", pdf_url: "", cover_image: "", published_at: "", featured: false, published: true };
   const [form, setForm] = useState(blank);
 
   const load = async () => { setLoading(true); const { data } = await adminQueries.publications.list(); setRows(data ?? []); setLoading(false); };
   useEffect(() => { load(); }, []);
 
   const openAdd = () => { setForm(blank); setError(""); setModal("add"); };
-  const openEdit = (r: DBPublication) => { setForm({ title: r.title, subtitle: r.subtitle, type: r.type, category: r.category, description: r.description, image_url: r.image_url, file_url: r.file_url, featured: r.featured, published: r.published }); setError(""); setModal(r); };
+  const openEdit = (r: DBPublication) => { setForm({ title: r.title, subtitle: r.subtitle, description: r.description, tags: r.tags, pdf_url: r.pdf_url, cover_image: r.cover_image, published_at: r.published_at, featured: r.featured, published: r.published }); setError(""); setModal(r); };
 
   const save = async () => {
     if (!form.title.trim()) { setError("Title is required."); return; }
@@ -283,21 +284,20 @@ function PublicationsTab() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-gray-500">Published items appear in the Research & Publications page.</p>
+        <p className="text-sm text-gray-500">Published items appear in the Research &amp; Publications page.</p>
         <button onClick={openAdd} className="bg-[#0e1f3d] hover:bg-[#1a3a6e] text-white font-bold text-sm px-5 py-2 rounded-xl transition-colors">+ Add Publication</button>
       </div>
       {loading ? <Spinner /> : rows.length === 0 ? <EmptyState msg="No publications yet." /> : (
         <div className="overflow-x-auto rounded-xl border border-gray-100">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-[#0e1f3d] text-xs uppercase tracking-wide">
-              <tr><th className="text-left px-4 py-3">Title</th><th className="text-left px-4 py-3">Type</th><th className="text-left px-4 py-3">Category</th><th className="text-left px-4 py-3">Status</th><th className="px-4 py-3" /></tr>
+              <tr><th className="text-left px-4 py-3">Title</th><th className="text-left px-4 py-3">Tags</th><th className="text-left px-4 py-3">Status</th><th className="px-4 py-3" /></tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {rows.map(r => (
                 <tr key={r.id} className="hover:bg-gray-50/50">
                   <td className="px-4 py-3 font-medium text-[#0e1f3d] max-w-[200px] truncate">{r.title}</td>
-                  <td className="px-4 py-3"><Badge label={r.type.toUpperCase()} color="bg-purple-50 text-purple-700" /></td>
-                  <td className="px-4 py-3 text-gray-500">{r.category}</td>
+                  <td className="px-4 py-3 text-gray-500 text-xs max-w-[150px] truncate">{r.tags}</td>
                   <td className="px-4 py-3">{r.published ? <Badge label="Published" color="bg-green-50 text-green-700" /> : <Badge label="Draft" color="bg-gray-100 text-gray-500" />}{r.featured && <Badge label="Featured" color="bg-[#d4a017]/10 text-[#d4a017] ml-1" />}</td>
                   <td className="px-4 py-3 text-right"><button onClick={() => openEdit(r)} className="text-[#0e1f3d] hover:underline text-xs font-bold mr-3">Edit</button><button onClick={() => del(r.id)} className="text-red-500 hover:underline text-xs font-bold">Delete</button></td>
                 </tr>
@@ -312,21 +312,11 @@ function PublicationsTab() {
             {error && <p className="text-red-500 text-xs bg-red-50 rounded-lg px-3 py-2">{error}</p>}
             <div><label className={labelCls}>Title *</label><input className={inputCls} value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="Publication title" /></div>
             <div><label className={labelCls}>Subtitle</label><input className={inputCls} value={form.subtitle} onChange={e => setForm(f => ({ ...f, subtitle: e.target.value }))} placeholder="Click to view or download" /></div>
-            <div className="grid grid-cols-2 gap-3">
-              <div><label className={labelCls}>Type</label>
-                <select className={inputCls} value={form.type} onChange={e => setForm(f => ({ ...f, type: e.target.value }))}>
-                  <option value="pdf">PDF</option><option value="docx">DOCX</option><option value="link">External Link</option>
-                </select>
-              </div>
-              <div><label className={labelCls}>Category</label>
-                <select className={inputCls} value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}>
-                  {["Research", "Policy Brief", "Report", "Case Study", "Guide"].map(c => <option key={c}>{c}</option>)}
-                </select>
-              </div>
-            </div>
             <div><label className={labelCls}>Description</label><textarea className={textareaCls} rows={3} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Brief description..." /></div>
-            <div><label className={labelCls}>Cover Image URL</label><input className={inputCls} value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." /></div>
-            <div><label className={labelCls}>File / Download URL</label><input className={inputCls} value={form.file_url} onChange={e => setForm(f => ({ ...f, file_url: e.target.value }))} placeholder="https://... or /file.pdf" /></div>
+            <div><label className={labelCls}>Tags</label><input className={inputCls} value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} placeholder="e.g. Research, Climate, Policy (comma-separated)" /></div>
+            <div><label className={labelCls}>Cover Image URL</label><input className={inputCls} value={form.cover_image} onChange={e => setForm(f => ({ ...f, cover_image: e.target.value }))} placeholder="https://..." /></div>
+            <div><label className={labelCls}>PDF / Download URL</label><input className={inputCls} value={form.pdf_url} onChange={e => setForm(f => ({ ...f, pdf_url: e.target.value }))} placeholder="https://... or /file.pdf" /></div>
+            <div><label className={labelCls}>Published Date</label><input type="date" className={inputCls} value={form.published_at ? form.published_at.slice(0, 10) : ""} onChange={e => setForm(f => ({ ...f, published_at: e.target.value }))} /></div>
             <div className="flex gap-6">
               <label className="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" checked={form.published} onChange={e => setForm(f => ({ ...f, published: e.target.checked }))} className="w-4 h-4 accent-[#0e1f3d]" />Published</label>
               <label className="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" checked={form.featured} onChange={e => setForm(f => ({ ...f, featured: e.target.checked }))} className="w-4 h-4 accent-[#d4a017]" />Featured</label>
