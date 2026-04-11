@@ -591,7 +591,7 @@ function Impact360Gallery() {
       photos={IMPACT360_PHOTOS}
       eventLabel="IMPACT360 Budget Power Lab · EJF & ActionAid Kenya · April 2026"
       bgClass="bg-white"
-      speed={55}
+      speed={90}
       banner={
         <div>
           <div className="inline-flex items-center gap-2 bg-[#d4a017]/10 border border-[#d4a017]/30 text-[#d4a017] text-[10px] font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
@@ -639,7 +639,7 @@ function LatestEventsGallery() {
       photos={TTNP_PHOTOS}
       eventLabel="Taita Taveta National Park · EJF 2025 Event"
       bgClass="bg-gray-50"
-      speed={55}
+      speed={90}
       banner={
         <div>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0e1f3d] mb-1">TTNP Community Event — 2025</h2>
