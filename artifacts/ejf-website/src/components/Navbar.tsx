@@ -57,9 +57,9 @@ export default function Navbar() {
           {/* Logo — always visible */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
             <img
-              src="/logo.jpeg"
-              alt="EJF Logo"
-              className="h-10 w-10 sm:h-11 sm:w-11 rounded-md object-cover"
+              src="/logo.png"
+              alt="Economic Justice Forum Logo"
+              className="h-[42px] sm:h-14 w-auto object-contain"
             />
             <div className="hidden sm:block leading-tight">
               <div className="text-white font-bold text-sm lg:text-base whitespace-nowrap">

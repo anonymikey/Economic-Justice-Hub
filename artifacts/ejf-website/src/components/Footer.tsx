@@ -68,9 +68,9 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <img
-                src="/logo.jpeg"
-                alt="EJF Logo"
-                className="h-16 w-16 rounded-lg object-cover shadow-lg border border-white/10"
+                src="/logo.png"
+                alt="Economic Justice Forum Logo"
+                className="h-14 w-auto object-contain"
               />
               <div>
                 <div className="font-bold text-sm leading-snug text-white">

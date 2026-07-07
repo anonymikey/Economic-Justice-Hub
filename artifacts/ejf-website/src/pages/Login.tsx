@@ -88,7 +88,7 @@ export default function Login() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <Link href="/">
-            <img src="/logo.jpeg" alt="EJF" className="w-16 h-16 rounded-xl object-cover shadow-lg mb-3 cursor-pointer hover:scale-105 transition-transform" />
+            <img src="/logo.png" alt="Economic Justice Forum Logo" className="h-14 w-auto object-contain shadow-lg mb-3 cursor-pointer hover:scale-105 transition-transform" />
           </Link>
           <h1 className="text-white font-bold text-xl">Economic Justice Forum</h1>
           <p className="text-[#d4a017] text-xs font-semibold tracking-widest uppercase mt-0.5">Equity · Justice · Prosperity</p>

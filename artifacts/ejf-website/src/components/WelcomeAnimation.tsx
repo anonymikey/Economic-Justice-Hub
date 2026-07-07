@@ -104,8 +104,8 @@ export default function WelcomeAnimation() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mb-6"
             >
-              <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/20">
-                <img src="/logo.jpeg" alt="EJF" className="w-full h-full object-cover" />
+              <div className="shadow-2xl ring-4 ring-white/20 rounded-2xl p-2 bg-white/5">
+                <img src="/logo.png" alt="Economic Justice Forum Logo" className="h-20 w-auto object-contain" />
               </div>
             </motion.div>
 
