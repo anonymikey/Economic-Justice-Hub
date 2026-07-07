@@ -1,0 +1,58 @@
+Redesign the homepage while preserving the existing layout structure and visual storytelling.
+
+Requirements:
+
+- Keep the current homepage sections and image placements where appropriate.
+- Do not convert the homepage into a long text document.
+- Replace the existing content with the new Economic Justice Forum content while maintaining a visually engaging design.
+- Reuse the current animations and responsive layout.
+- Update the color palette to Deep Navy (#08152F), Gold (#C9A24A), White and Light Gray.
+- Use the new logo throughout the homepage.
+
+Images:
+
+- Retain existing background and feature images if they are relevant.
+- Replace any images that no longer fit the new Natural Wealth and Economic Justice theme.
+- Add elegant image overlays instead of placing large blocks of text directly on images.
+- Pair each major content section with an appropriate full-width banner, side image, or illustration.
+
+Homepage flow should be:
+
+1. Hero Banner
+   - Large background image related to Natural Wealth (forests, rivers, wildlife, mountains or communities)
+   - Headline:
+     "A Just World Where Natural Wealth Creates Equitable and Sustainable Prosperity"
+   - Two CTA buttons:
+     Explore Our Work
+     Partner With Us
+
+2. The Promise of Natural Wealth
+   - Two-column layout
+   - Text on one side
+   - Large supporting image on the other
+
+3. The EJF Idea
+   - Image with elegant content card
+
+4. Vision & Mission
+   - Two premium cards with subtle icons
+
+5. Equity • Justice • Prosperity
+   - Three modern cards with icons and hover effects
+
+6. Strategic Platforms
+   - Four premium cards with icons or illustrations
+
+7. Shape the Future With Us
+   - Full-width call-to-action section with an inspiring background image
+   - Buttons:
+     Partner With Us
+     Learn More
+
+General Design:
+
+- Keep generous spacing.
+- Avoid walls of text.
+- Break long paragraphs into readable blocks.
+- Preserve the premium institutional look.
+- Keep all existing animations unless they conflict with the new design.
