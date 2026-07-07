@@ -1,0 +1,206 @@
+Redesign the About page of the Economic Justice Forum to match the new branding and homepage design.
+
+IMPORTANT
+
+- Preserve the existing header, navigation and footer.
+- Keep the page fully responsive.
+- Match the visual style of the redesigned homepage.
+- Do not create large walls of text.
+- Use premium spacing, elegant typography and subtle animations.
+
+Brand Colors
+
+- Deep Navy (#08152F)
+- Gold (#C9A24A)
+- White
+- Light Gray (#F7F8FA)
+
+Typography
+
+- Elegant serif headings
+- Modern sans-serif body text
+
+Use high-quality imagery related to Natural Wealth including forests, rivers, oceans, wildlife, mountains, mining, communities and conservation.
+
+------------------------------------------------
+
+HERO SECTION
+
+Large banner image with dark overlay.
+
+Heading:
+
+ABOUT THE ECONOMIC JUSTICE FORUM
+
+Subheading:
+
+Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital
+
+Display a subtle gold divider beneath the heading.
+
+------------------------------------------------
+
+WHO WE ARE
+
+Create a two-column layout.
+
+Left:
+Large image representing Natural Wealth and communities.
+
+Right:
+
+The Economic Justice Forum (EJF) is an independent global think tank, policy institute and partnership platform advancing Economic Justice by strengthening the relationship between People and Natural Capital.
+
+EJF was founded on a simple but profound idea:
+
+Natural Wealth fulfils its highest purpose through Economic Justice.
+
+This idea shapes everything we do. It informs our research, inspires our partnerships, strengthens our policy engagement and guides our commitment to creating a world where Natural Wealth advances Human Dignity, enables the full enjoyment of Human Rights, promotes Equity, strengthens Justice, creates Equitable and Sustainable Prosperity, and inspires the long-term conservation of Natural Capital.
+
+------------------------------------------------
+
+OUR PURPOSE
+
+Full-width section with elegant background.
+
+Heading:
+
+Our Purpose
+
+Content:
+
+Natural Wealth has the power to transform lives.
+
+Yet across the world, many communities living alongside forests, wildlife, oceans, rivers, minerals and other forms of Natural Wealth continue to experience poverty, inequality, unemployment, exclusion and environmental degradation.
+
+From the coastal communities of Mombasa and Taita Taveta to the mineral-rich landscapes of Kivu, the Copperbelt, the Niger Delta and the Amazon, this paradox remains one of the defining development challenges of our time.
+
+Natural Wealth should create opportunity, not exclusion.
+
+It should strengthen communities, not leave them behind.
+
+It should build resilient economies while protecting the Natural Capital upon which future generations depend.
+
+The Economic Justice Forum exists to help realise that future.
+
+Include a supporting image alongside the content.
+
+------------------------------------------------
+
+OUR DISTINCTIVE CONTRIBUTION
+
+Create a split section.
+
+Heading:
+
+Our Distinctive Contribution
+
+Highlight this statement inside a premium quote block:
+
+"We begin with Natural Wealth."
+
+Below it include:
+
+Natural Wealth is humanity's greatest opportunity for advancing Human Dignity, the full enjoyment of Human Rights, Equity, Justice and Equitable and Sustainable Prosperity.
+
+Economic Justice is the pathway through which that opportunity is realised.
+
+This philosophy enables EJF to connect Natural Capital governance with public finance, responsible investment, climate resilience, democratic governance, technological innovation, community development and sustainable economic transformation within one integrated framework.
+
+------------------------------------------------
+
+OUR APPROACH
+
+Create four premium cards with icons.
+
+Research
+
+Generating original ideas, evidence and knowledge that shape policy and strengthen decision-making.
+
+Policy
+
+Supporting governments and institutions to develop practical, inclusive and forward-looking policies.
+
+Partnerships
+
+Building trusted relationships with governments, international organizations, development partners, academia, civil society, responsible enterprise and host communities.
+
+Action
+
+Supporting practical initiatives that demonstrate how Natural Wealth can create lasting public value through Economic Justice.
+
+------------------------------------------------
+
+FROM LOCAL REALITIES TO GLOBAL SOLUTIONS
+
+Use an engaging timeline or alternating content layout.
+
+Include:
+
+• A young entrepreneur seeking opportunity through the blue economy in Mombasa.
+
+• A pastoralist adapting to climate change in northern Kenya.
+
+• A mining community in Taita Taveta striving for equitable benefit sharing.
+
+• A family living alongside cobalt mines in Kivu.
+
+• A fishing community protecting mangroves on the East African coast.
+
+Conclude with:
+
+Although these realities differ, they are connected by one common question:
+
+How can Natural Wealth fulfil its highest purpose?
+
+EJF contributes to answering that question by combining local knowledge, global perspectives and practical solutions that strengthen the relationship between People and Natural Capital.
+
+------------------------------------------------
+
+OUR COMMITMENT
+
+Create a full-width section with an inspiring background image.
+
+Heading:
+
+Our Commitment
+
+Display the commitments as elegant bullet points with icons:
+
+• Communities prosper because of the Natural Wealth around them—not despite it.
+
+• Governments strengthen public trust through transparent and accountable stewardship.
+
+• Responsible enterprise creates shared value.
+
+• Research informs better policy.
+
+• Innovation expands opportunity.
+
+• Partnerships transform ideas into lasting impact.
+
+Finish with a highlighted statement:
+
+Above all, we are committed to ensuring that Natural Wealth fulfils its highest purpose through Economic Justice.
+
+------------------------------------------------
+
+FINAL SECTION
+
+Center the following:
+
+Economic Justice Forum
+
+Equity • Justice • Prosperity
+
+Include a gold divider and a "Partner With Us" button.
+
+------------------------------------------------
+
+ANIMATIONS
+
+- Fade-in on scroll.
+- Cards lift slightly on hover.
+- Smooth transitions.
+- Premium, minimal and professional appearance.
+- Keep image placement balanced throughout the page to avoid long blocks of text.
