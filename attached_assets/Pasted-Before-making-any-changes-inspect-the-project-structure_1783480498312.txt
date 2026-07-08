@@ -1,0 +1,282 @@
+Before making any changes, inspect the project structure.
+
+1. Check whether these pages already exist:
+- Research & Knowledge
+- Insights
+- Contact
+
+2. If a page already exists:
+- Preserve its route.
+- Preserve navigation links.
+- Replace its content with the new content below.
+- Redesign the page without breaking existing functionality.
+
+3. If a page does not exist:
+- Create a new page.
+- Create the appropriate route.
+- Add it to the navigation menu.
+
+Maintain consistency with the new Economic Justice Forum branding while giving every page its own unique layout, animations and visual identity.
+
+Global Design Requirements
+
+- Deep Navy (#08152F)
+- Gold (#C9A24A)
+- White
+- Light Gray backgrounds
+- Elegant serif headings
+- Modern sans-serif body text
+- Responsive on all devices
+- Accessible
+- Smooth scrolling
+- Fade-up animations
+- Cards lift on hover
+- Premium institutional appearance
+
+Avoid reusing the exact same layout on every page.
+
+--------------------------------------------------
+PAGE 1
+RESEARCH & KNOWLEDGE
+--------------------------------------------------
+
+Theme:
+Knowledge • Evidence • Research
+
+Use a modern academic/research institute design.
+
+Hero:
+Large background image of research, policy discussions or environmental fieldwork.
+
+Headline:
+
+Generating Ideas.
+Informing Policy.
+Inspiring Action.
+
+Use alternating layouts throughout the page.
+
+Create visually distinct sections for:
+
+• Research Philosophy
+
+• Areas of Research
+Display these as six animated cards.
+
+Natural Wealth & Natural Capital
+
+Economic Justice
+
+Public Finance & Fiscal Justice
+
+Governance & Public Policy
+
+Climate, Nature & Resilience
+
+Digital Innovation
+
+Create a separate section for:
+
+Knowledge Products
+
+Present these as elegant publication cards instead of a bullet list.
+
+Research Reports
+
+Policy Papers
+
+Policy Briefs
+
+Discussion Papers
+
+Working Papers
+
+Legislative Analysis
+
+Institutional Briefs
+
+Strategic Frameworks
+
+Opinion & Insight Articles
+
+Create another section:
+
+Knowledge Through Partnership
+
+Use a two-column image layout.
+
+Create a final CTA section:
+
+From Knowledge to Impact
+
+Finish with the institutional commitment and the statement:
+
+Ideas • Evidence • Partnerships • Action
+
+--------------------------------------------------
+PAGE 2
+INSIGHTS
+--------------------------------------------------
+
+Theme:
+Ideas in Motion
+
+Give this page a magazine/newsroom feel.
+
+Hero:
+
+Ideas That Shape Better Decisions
+
+Instead of standard content sections, use modern news-style cards.
+
+Create sections for:
+
+Research & Publications
+
+Policy Insights
+
+Perspectives
+
+News & Announcements
+
+Events & Dialogues
+
+Use different card styles for each category.
+
+Create a visually engaging timeline for:
+
+From Local Realities to Global Conversations
+
+Illustrate locations such as:
+
+• Taita Taveta
+
+• Mombasa
+
+• Nairobi
+
+• Kivu
+
+• Amazon
+
+• Cabo Delgado
+
+Connect these with elegant animations.
+
+Create a highlighted quote section for:
+
+Knowledge should not remain on bookshelves.
+
+It should influence policy.
+
+Strengthen institutions.
+
+Improve investment.
+
+Empower communities.
+
+Inspire innovation.
+
+And create lasting public value.
+
+Finish with:
+
+Join the Conversation
+
+Include buttons such as:
+
+Read Publications
+
+Upcoming Events
+
+Partner With Us
+
+--------------------------------------------------
+PAGE 3
+CONTACT
+--------------------------------------------------
+
+Theme:
+Partnership Begins Here
+
+Use a welcoming, premium contact experience.
+
+Hero:
+
+Let's Shape the Future Together
+
+Use a strong background image showing collaboration, leadership or sustainable development.
+
+Below the hero create three animated cards:
+
+Strategic Partnerships
+
+Joint Research
+
+Policy Dialogue
+
+Create a premium contact section.
+
+Display:
+
+Economic Justice Forum (EJF)
+
+Email
+
+info@economicjusticeforum.org
+
+Website
+
+www.economicjusticeforum.org
+
+If a contact form already exists:
+
+- Keep it.
+- Restyle it.
+
+If no contact form exists:
+
+Create one with:
+
+Name
+
+Organization
+
+Email
+
+Subject
+
+Message
+
+Submit button
+
+Below that create:
+
+Visit Us
+
+Use a map placeholder or office illustration instead of leaving empty space.
+
+Finish with:
+
+A Shared Future
+
+Use a full-width closing banner with elegant typography and the closing institutional statement.
+
+--------------------------------------------------
+GENERAL REQUIREMENTS
+
+Every page should have:
+
+• Different layouts
+
+• Different section arrangements
+
+• Different animation styles
+
+• Different image compositions
+
+Avoid making every page look identical.
+
+Keep the overall branding consistent while ensuring visitors feel each page has its own identity.
+
+Do not remove any existing functionality without confirmation.

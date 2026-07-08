@@ -281,7 +281,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/50 text-xs text-center sm:text-left">
-            &copy; 2025 Economic Justice Forum (EJF) — Building a Future of Justice, Equity, and Prosperity
+            &copy; 2026 Economic Justice Forum (EJF) — Building a Future of Justice, Equity, and Prosperity
           </p>
           <div className="flex items-center gap-4 text-xs text-white/40 flex-wrap justify-center">
             <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
