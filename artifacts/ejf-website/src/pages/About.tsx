@@ -13,6 +13,7 @@ import imgArnold  from "@assets/arnold_1775864978910.jpeg";
 import imgHassan  from "@assets/hassan_1775864978921.jpeg";
 import imgIsaac   from "@assets/issac_1775864978922.jpeg";
 import imgMoses   from "@assets/moses_1775864978933.jpeg";
+import imgAmriya  from "@assets/WhatsApp_Image_2026-07-07_at_06.52.37_1783479525445.jpeg";
 import imgTeam    from "@assets/WhatsApp_Image_2026-04-08_at_17.23.53_(2)_1775865230373.jpeg";
 
 // ─── TEAM DATA ───────────────────────────────────────────────────────────────
@@ -28,13 +29,13 @@ const president = {
 
 const coFounders = [
   {
-    name: "Hon. Amriya Boy Juma",
+    name: "Hon. Amriya Juma",
     role: "Co-Founder",
     initials: "AJ",
-    photo: null as string | null,
+    photo: imgAmriya as string | null,
     photoPos: "object-center",
     color: "from-[#1a4a7a] to-[#2a6aaa]",
-    bio: "Hon. Amriya Boy Juma, fondly known as Wakili Mtetezi, is the first elected female Member of the County Assembly (MCA) for Mjambere Ward, Mombasa County, renowned for her commitment to justice, equity, and community empowerment. She is a distinguished Advocate of the High Court of Kenya, holding an LL.B. from the University of Nairobi and a Postgraduate Diploma in Law from the Kenya School of Law, and is the founder of Amriya Juma Boy and Company Advocates, championing human rights, gender equality, legal aid expansion, and community legal education. Elected in 2025 to chair the Lands Committee, she continues to advocate for land rights, good governance, social justice, and equitable resource distribution, inspiring communities and nurturing future leaders.",
+    bio: "Hon. Amriya Juma, fondly known as Wakili Mtetezi, is the first elected female Member of the County Assembly (MCA) for Mjambere Ward, Mombasa County, renowned for her commitment to justice, equity, and community empowerment. She is a distinguished Advocate of the High Court of Kenya, holding an LL.B. from the University of Nairobi and a Postgraduate Diploma in Law from the Kenya School of Law, and is the founder of Amriya Juma Boy and Company Advocates, championing human rights, gender equality, legal aid expansion, and community legal education. Elected in 2025 to chair the Lands Committee, she continues to advocate for land rights, good governance, social justice, and equitable resource distribution, inspiring communities and nurturing future leaders.",
   },
   {
     name: "Moses Macharia",

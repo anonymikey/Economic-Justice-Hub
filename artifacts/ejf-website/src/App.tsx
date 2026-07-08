@@ -21,6 +21,7 @@ import Login from "@/pages/Login";
 import Profile from "@/pages/Profile";
 import Donate from "@/pages/Donate";
 import Admin from "@/pages/Admin";
+import Philosophy from "@/pages/Philosophy";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      <Route path="/philosophy" component={Philosophy} />
       <Route path="/pillars" component={Pillars} />
       <Route path="/programs" component={Programs} />
       <Route path="/research" component={Research} />
