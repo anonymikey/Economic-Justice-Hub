@@ -1,0 +1,152 @@
+The homepage is complete. We will now update the "Our Philosophy" page.
+
+IMPORTANT
+
+Do NOT redesign the page.
+
+Preserve:
+
+• Existing animations
+• Existing responsive layout
+• Existing typography
+• Existing image sections
+• Existing premium styling
+• Existing spacing
+• Existing card design
+• Existing scroll effects
+
+The objective is to replace the page content with the official institutional philosophy while keeping the site's current visual identity.
+
+------------------------------------------------
+
+HERO
+
+Update the hero section.
+
+Title:
+
+OUR PHILOSOPHY
+
+Subtitle:
+
+Natural Wealth fulfils its highest purpose through Economic Justice.
+
+Use a premium background image related to Natural Wealth with a subtle dark overlay.
+
+------------------------------------------------
+
+INTRODUCTION
+
+Replace the introduction with:
+
+Natural Wealth fulfils its highest purpose through Economic Justice.
+
+This is the philosophy upon which the Economic Justice Forum was founded.
+
+It shapes how we understand development.
+
+It guides how we approach governance.
+
+It informs our research.
+
+It inspires our partnerships.
+
+And it defines the future we seek to build.
+
+Natural Wealth has always sustained life, shaped civilizations and created opportunity.
+
+Its highest purpose, however, is realised only when it improves people’s lives while safeguarding the Natural Capital upon which present and future generations depend.
+
+Economic Justice is the pathway through which this becomes possible.
+
+------------------------------------------------
+
+CORE PRINCIPLES
+
+Instead of one long block of text, create premium animated cards (or reuse existing card components if available).
+
+Create one card for each concept:
+
+• Natural Wealth
+• Economic Justice
+• Human Dignity
+• Human Rights
+• Equity
+• Justice
+• Equitable and Sustainable Prosperity
+• Natural Capital
+
+Populate each card using the approved content exactly as provided.
+
+Do not shorten or rewrite the institutional language unless necessary for readability.
+
+------------------------------------------------
+
+OUR WAY OF THINKING
+
+Replace any existing framework with the official sequence.
+
+Present it visually using a vertical timeline, connected cards or flow diagram while matching the existing design language.
+
+Display:
+
+Natural Wealth
+
+↓
+
+Economic Justice
+
+↓
+
+Human Dignity
+
+↓
+
+The Full Enjoyment of Human Rights
+
+↓
+
+Equity
+
+↓
+
+Justice
+
+↓
+
+Equitable and Sustainable Prosperity
+
+↓
+
+Long-term Conservation of Natural Capital
+
+Below the visual include:
+
+"This framework guides our research, informs our policy, shapes our partnerships and inspires our action."
+
+------------------------------------------------
+
+INSTITUTIONAL DECLARATION
+
+Create a full-width closing section.
+
+Display:
+
+Natural Wealth fulfils its highest purpose through Economic Justice.
+
+The future of People and the future of Natural Capital are inseparable.
+
+Equity • Justice • Prosperity.
+
+Include a prominent "Explore Research & Knowledge" button linking to /research.
+
+------------------------------------------------
+
+QUALITY CHECK
+
+Before finishing:
+
+• Verify there are no references to deleted About, Pillars or Programs pages.
+• Ensure all internal links point to active routes.
+• Preserve all animations, spacing, colors and responsiveness.
+• Summarize every section updated before moving to the next page.

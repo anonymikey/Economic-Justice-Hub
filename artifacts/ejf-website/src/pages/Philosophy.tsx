@@ -370,9 +370,9 @@ function DeclarationSection() {
           <div className="h-px w-24 bg-[#C9A24A]/40" />
         </div>
 
-        <Link href="/pillars"
+        <Link href="/research"
           className="inline-flex items-center gap-2 bg-[#C9A24A] hover:bg-[#b08a35] text-white font-bold px-10 py-4 rounded-xl transition-all text-sm shadow-xl shadow-[#C9A24A]/25">
-          Explore Our Work →
+          Explore Research &amp; Knowledge →
         </Link>
       </div>
     </section>
