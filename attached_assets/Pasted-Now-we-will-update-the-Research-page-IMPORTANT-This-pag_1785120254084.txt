@@ -1,0 +1,170 @@
+Now we will update the Research page.
+
+IMPORTANT
+
+This page will now become the official "Research & Knowledge" page.
+
+Do NOT redesign the page.
+
+Preserve:
+
+• Existing layout
+• Existing animations
+• Existing image sections
+• Existing responsive design
+• Existing typography
+• Existing spacing
+• Existing premium styling
+• Existing cards wherever possible
+
+The objective is to replace the content with the new approved institutional content while preserving the visual quality of the page.
+
+----------------------------------------------------
+
+PAGE TITLE
+
+Research & Knowledge
+
+Subtitle
+
+Generating Ideas.
+Informing Policy.
+Inspiring Action.
+
+----------------------------------------------------
+
+INTRODUCTION
+
+Replace the introduction with:
+
+Knowledge is one of the world's most valuable resources.
+
+At the Economic Justice Forum (EJF), we believe that better ideas lead to better decisions, stronger institutions and more equitable outcomes.
+
+Our Research & Knowledge platform generates evidence, policy analysis and practical solutions that strengthen the relationship between People and Natural Capital through Economic Justice.
+
+We combine rigorous research with lived realities to influence policy, support decision-makers and contribute to global conversations on Natural Wealth, governance and sustainable development.
+
+----------------------------------------------------
+
+OUR RESEARCH PHILOSOPHY
+
+Display as a premium feature section.
+
+Research should do more than explain the world.
+
+It should help improve it.
+
+EJF produces research that is practical, policy-oriented and grounded in the experiences of communities, governments, institutions and responsible enterprise.
+
+Our work bridges the gap between evidence and action, ensuring that research contributes to better governance, stronger institutions and more equitable and sustainable prosperity.
+
+----------------------------------------------------
+
+OUR AREAS OF RESEARCH
+
+Reuse existing cards if available.
+
+Create six cards:
+
+• Natural Wealth & Natural Capital
+
+• Economic Justice
+
+• Public Finance & Fiscal Justice
+
+• Governance & Public Policy
+
+• Climate, Nature & Resilience
+
+• Digital Innovation
+
+Populate each card using the approved institutional content.
+
+----------------------------------------------------
+
+OUR KNOWLEDGE PRODUCTS
+
+Present these as publication cards instead of bullet lists.
+
+Include:
+
+Research Reports
+
+Policy Papers
+
+Policy Briefs
+
+Discussion Papers
+
+Working Papers
+
+Legislative Analysis
+
+Institutional Briefs
+
+Strategic Frameworks
+
+Opinion & Insight Articles
+
+----------------------------------------------------
+
+KNOWLEDGE THROUGH PARTNERSHIP
+
+Create a premium two-column section using existing styling.
+
+Display the approved partnership content exactly.
+
+----------------------------------------------------
+
+FROM KNOWLEDGE TO IMPACT
+
+Create a closing feature section.
+
+Include the approved text explaining that research exists to improve lives, influence policy, strengthen institutions, inform investment, support governance and enable Natural Wealth to fulfil its highest purpose.
+
+----------------------------------------------------
+
+OUR COMMITMENT
+
+Display the commitments using premium cards or checklist styling.
+
+Original in thought.
+
+Rigorous in analysis.
+
+Grounded in lived realities.
+
+Practical in application.
+
+Globally relevant.
+
+Locally meaningful.
+
+Focused on solutions.
+
+Finish with:
+
+Because ideas have the power to transform institutions, and institutions have the power to transform lives.
+
+----------------------------------------------------
+
+FOOTER STATEMENT
+
+Economic Justice Forum (EJF)
+
+Ideas • Evidence • Partnerships • Action
+
+----------------------------------------------------
+
+QUALITY CHECK
+
+Before completing:
+
+• Verify there are no references to deleted About, Pillars or Programs pages.
+
+• Verify all internal links are valid.
+
+• Preserve every existing animation and responsive behavior.
+
+• Summarize every section that was updated.

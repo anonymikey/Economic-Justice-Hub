@@ -200,6 +200,46 @@ function LivePublications() {
   );
 }
 
+// ─── INTRODUCTION ─────────────────────────────────────────────────────────────
+function ResearchIntro() {
+  return (
+    <section className="bg-white py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div>
+            <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4 border-b border-[#C9A24A]/30 pb-1">
+              Introduction
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08152F] leading-tight mb-6">
+              Knowledge is one of the world's most valuable resources.
+            </h2>
+            <div className="space-y-4">
+              <p className="text-[#08152F]/80 text-base leading-relaxed">
+                At the Economic Justice Forum (EJF), we believe that better ideas lead to better decisions, stronger institutions and more equitable outcomes.
+              </p>
+              <p className="text-[#08152F]/70 text-base leading-relaxed">
+                Our Research & Knowledge platform generates evidence, policy analysis and practical solutions that strengthen the relationship between People and Natural Capital through Economic Justice.
+              </p>
+              <p className="text-[#08152F]/70 text-base leading-relaxed">
+                We combine rigorous research with lived realities to influence policy, support decision-makers and contribute to global conversations on Natural Wealth, governance and sustainable development.
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
+              <img src={imgComEv} alt="Research and community knowledge"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="absolute -bottom-5 -left-5 bg-[#C9A24A] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[240px]">
+              <p className="font-bold text-sm leading-snug">Ideas that advance Economic Justice for All</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 function ResearchHero() {
   return (
@@ -243,10 +283,13 @@ function ResearchPhilosophy() {
             <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4">Our Approach</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6">Research Philosophy</h2>
             <p className="text-white/70 text-base leading-relaxed mb-4">
-              EJF research begins with the communities who live alongside Natural Wealth and the institutions that govern it. We combine rigorous analysis with lived experience to generate ideas that are grounded in reality.
+              Research should do more than explain the world. It should help improve it.
+            </p>
+            <p className="text-white/70 text-base leading-relaxed mb-4">
+              EJF produces research that is practical, policy-oriented and grounded in the experiences of communities, governments, institutions and responsible enterprise.
             </p>
             <p className="text-white/70 text-base leading-relaxed mb-6">
-              Our research is designed not to sit on shelves but to influence policy, strengthen institutions, improve investment and empower communities to claim the benefits of the Natural Wealth around them.
+              Our work bridges the gap between evidence and action, ensuring that research contributes to better governance, stronger institutions and more equitable and sustainable prosperity.
             </p>
             <div className="grid grid-cols-3 gap-4">
               {[["🔬", "Evidence-Based"], ["🤝", "Community-Led"], ["📣", "Policy-Focused"]].map(([icon, label]) => (
@@ -412,12 +455,81 @@ function KnowledgeToImpact() {
           <p className="text-[#C9A24A] font-bold text-lg tracking-widest">Ideas • Evidence • Partnerships • Action</p>
           <div className="h-px flex-1 max-w-[60px] bg-[#C9A24A]/50" />
         </div>
-        <p className="text-white/65 text-base leading-relaxed mb-10 max-w-xl mx-auto">
-          EJF is committed to ensuring that knowledge does not remain on bookshelves. Every research output is designed to influence policy, strengthen institutions and create lasting public value through Economic Justice.
+        <p className="text-white/65 text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+          EJF research exists to improve lives, influence policy, strengthen institutions, inform investment, support governance and enable Natural Wealth to fulfil its highest purpose through Economic Justice.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#C9A24A] hover:bg-[#b08a35] text-white font-bold px-9 py-4 rounded-xl transition-all text-sm shadow-xl shadow-[#C9A24A]/25">Partner With Us →</Link>
           <Link href="/philosophy" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-9 py-4 rounded-xl transition-all text-sm backdrop-blur-sm">Our Philosophy</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── OUR COMMITMENT ───────────────────────────────────────────────────────────
+const COMMITMENTS = [
+  { icon: "💡", label: "Original in thought." },
+  { icon: "🔬", label: "Rigorous in analysis." },
+  { icon: "🌍", label: "Grounded in lived realities." },
+  { icon: "⚙️", label: "Practical in application." },
+  { icon: "🌐", label: "Globally relevant." },
+  { icon: "📍", label: "Locally meaningful." },
+  { icon: "🎯", label: "Focused on solutions." },
+];
+
+function OurCommitment() {
+  const { ref, inView } = useInView();
+  return (
+    <section className="bg-[#F7F8FA] py-20 px-4">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-14">
+          <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-3">Standards</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08152F] mb-3">Our Commitment</h2>
+          <p className="text-[#08152F]/55 max-w-xl mx-auto text-base">
+            Every piece of research EJF produces is held to a consistent standard.
+          </p>
+        </div>
+
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {COMMITMENTS.map((c, i) => (
+            <div key={c.label}
+              className={`group flex items-center gap-4 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-[#C9A24A]/30 transition-all duration-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              style={{ transitionDelay: `${i * 70}ms` }}>
+              <div className="w-10 h-10 rounded-xl bg-[#08152F] group-hover:bg-[#C9A24A] flex items-center justify-center text-lg flex-shrink-0 transition-colors duration-300">
+                {c.icon}
+              </div>
+              <span className="text-[#08152F] font-semibold text-sm leading-snug">{c.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="border border-[#C9A24A]/30 bg-white rounded-2xl p-8 text-center shadow-sm">
+          <div className="h-0.5 w-16 bg-[#C9A24A] mx-auto mb-5" />
+          <p className="text-[#08152F] font-semibold text-base leading-relaxed italic">
+            "Because ideas have the power to transform institutions, and institutions have the power to transform lives."
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FOOTER STATEMENT ─────────────────────────────────────────────────────────
+function FooterStatement() {
+  return (
+    <section className="bg-[#08152F] py-10 px-4">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-white font-bold text-sm sm:text-base">
+          Economic Justice Forum <span className="text-[#C9A24A]">(EJF)</span>
+        </p>
+        <div className="flex items-center gap-3">
+          {["Ideas", "Evidence", "Partnerships", "Action"].map((item, i, arr) => (
+            <span key={item} className="flex items-center gap-3">
+              <span className="text-[#C9A24A] font-bold text-sm tracking-wide">{item}</span>
+              {i < arr.length - 1 && <span className="text-white/20">•</span>}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -429,12 +541,15 @@ export default function Research() {
   return (
     <>
       <ResearchHero />
+      <ResearchIntro />
       <LivePublications />
       <ResearchPhilosophy />
       <AreasOfResearch />
       <KnowledgeProducts />
       <KnowledgePartnership />
       <KnowledgeToImpact />
+      <OurCommitment />
+      <FooterStatement />
     </>
   );
 }
