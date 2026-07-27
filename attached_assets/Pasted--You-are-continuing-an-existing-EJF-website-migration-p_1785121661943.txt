@@ -1,0 +1,435 @@
+
+
+
+
+
+
+
+
+You are continuing an existing EJF website migration project. **Do not start from scratch.**
+
+
+
+### FIRST: Inspect the entire project before making any changes.
+
+
+
+Read and verify:
+
+
+
+* `src/App.tsx`
+
+* `src/components/Navbar.tsx`
+
+* `src/components/Footer.tsx`
+
+* `src/components/WelcomeAnimation.tsx`
+
+* `src/pages/Home.tsx`
+
+* `src/pages/Philosophy.tsx`
+
+* `src/pages/Research.tsx`
+
+* `src/pages/Insights.tsx`
+
+* `src/pages/Contact.tsx`
+
+
+
+Then summarize:
+
+
+
+* what has already been completed
+
+* what remains
+
+* any broken links
+
+* any placeholder content
+
+* any console errors
+
+
+
+Do not modify anything until you've finished the inspection.
+
+
+
+---
+
+
+
+## PROJECT STATUS
+
+
+
+The project is approximately **98% complete**.
+
+
+
+Already completed:
+
+
+
+* About page removed
+
+* Pillars page removed
+
+* Programs page removed
+
+* Navigation updated
+
+* Home page updated
+
+* Philosophy page updated
+
+* Research & Knowledge page updated
+
+* Research route retained
+
+* Colors remain Deep Navy + Gold
+
+* Animations preserved
+
+* Layout preserved
+
+* Responsive design preserved
+
+* Existing component structure preserved
+
+
+
+Do NOT redesign anything.
+
+
+
+---
+
+
+
+## DESIGN RULES
+
+
+
+Maintain exactly:
+
+
+
+* Current color palette
+
+* Current typography
+
+* Existing animations
+
+* Hero sections
+
+* Card layouts
+
+* Scroll effects
+
+* Responsive behavior
+
+* Existing component hierarchy
+
+
+
+Only update content where required.
+
+
+
+---
+
+
+
+## BEFORE MAKING CHANGES
+
+
+
+Verify these four files carefully because they still need polishing:
+
+
+
+* Footer.tsx
+
+* WelcomeAnimation.tsx
+
+* Home.tsx
+
+* Research.tsx
+
+
+
+Check them against the approved institutional content.
+
+
+
+---
+
+
+
+## FIX ANY REMAINING ISSUES
+
+
+
+Look for:
+
+
+
+* old references to /about
+
+* old references to /pillars
+
+* old references to /programs
+
+* outdated tagline
+
+* outdated mission statement
+
+* incorrect footer wording
+
+* incorrect welcome animation text
+
+* placeholder text
+
+* lorem ipsum
+
+* temporary content
+
+* broken buttons
+
+* incorrect CTA labels
+
+* inconsistent capitalization
+
+
+
+---
+
+
+
+## FOOTER REQUIREMENTS
+
+
+
+Footer must reflect:
+
+
+
+Economic Justice Forum
+
+
+
+Equity • Justice • Prosperity
+
+
+
+Mission:
+
+
+
+Transforming Economic Systems for People to Achieve Economic Justice.
+
+
+
+Tagline:
+
+
+
+Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital.
+
+
+
+Website
+
+
+
+[www.economicjusticeforum.org](http://www.economicjusticeforum.org)
+
+
+
+Email
+
+
+
+[info@economicjusticeforum.org](mailto:info@economicjusticeforum.org)
+
+
+
+Head Office
+
+
+
+Mwatate, Taita Taveta County, Kenya
+
+
+
+---
+
+
+
+## WELCOME ANIMATION
+
+
+
+Ensure:
+
+
+
+* latest EJF logo
+
+* latest institutional tagline
+
+* smooth animation retained
+
+* no outdated wording
+
+
+
+---
+
+
+
+## VERIFY RESEARCH PAGE
+
+
+
+Ensure the following sections exist:
+
+
+
+✓ Hero
+
+
+
+✓ Introduction
+
+
+
+✓ Research Philosophy
+
+
+
+✓ Areas of Research
+
+
+
+✓ Knowledge Products
+
+
+
+✓ Knowledge Through Partnership
+
+
+
+✓ From Knowledge to Impact
+
+
+
+✓ Our Commitment
+
+
+
+✓ Footer Statement
+
+
+
+Do not change the layout.
+
+
+
+---
+
+
+
+## IMPORTANT
+
+
+
+Do not redesign anything.
+
+
+
+Do not simplify anything.
+
+
+
+Do not replace animations.
+
+
+
+Do not change colors.
+
+
+
+Do not change spacing.
+
+
+
+Only polish remaining content and remove inconsistencies.
+
+
+
+---
+
+
+
+## AFTER COMPLETION
+
+
+
+Provide a report in this format:
+
+
+
+### Files modified
+
+
+
+(list)
+
+
+
+### Issues fixed
+
+
+
+(list)
+
+
+
+### Remaining issues
+
+
+
+(list)
+
+
+
+### Console errors
+
+
+
+(list)
+
+
+
+### Overall completion
+
+
+
+XX%
+
+
+
+If the project is complete, clearly state:
+
+
+
+"Website migration is complete and ready for final QA and deployment."
+
+
+
+
