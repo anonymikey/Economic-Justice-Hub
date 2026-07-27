@@ -289,7 +289,7 @@ function VisitSection() {
           </a>
           <div className="space-y-4">
             {[
-              { icon: "📍", label: "Primary Base", value: "Taita-Taveta County, Kenya" },
+              { icon: "📍", label: "Head Office", value: "Mwatate, Taita Taveta County, Kenya" },
               { icon: "📞", label: "Phone", value: "+254 741 357 830" },
               { icon: "✉️", label: "Email", value: "info@economicjusticeforum.org" },
               { icon: "🌐", label: "Website", value: "economicjusticeforum.org" },

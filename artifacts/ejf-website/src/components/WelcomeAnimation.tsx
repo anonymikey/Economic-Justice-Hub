@@ -159,7 +159,7 @@ export default function WelcomeAnimation() {
             >
               {isReturning
                 ? "Great to see you again. Together we continue the work for a just and equitable world."
-                : "Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital."}
+                : "Transforming Economic Systems for People to Achieve Economic Justice."}
             </motion.p>
 
             {/* Progress bar */}

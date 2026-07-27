@@ -98,7 +98,7 @@ function HeroSection() {
         <p key={`sub-${current}`}
           className="text-sm md:text-base text-white/65 mb-7 max-w-xl leading-relaxed"
           style={{ animation: "heroSlideUp 0.7s 0.45s cubic-bezier(0.4,0,0.2,1) both" }}>
-          Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital.
+          Transforming Economic Systems for People to Achieve Economic Justice.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3"
@@ -298,7 +298,7 @@ function VisionMissionSection() {
             </div>
             <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4">Our Vision</span>
             <h3 className="text-xl font-bold text-white leading-snug mb-4">
-              A Just World Where Natural Wealth Creates Equitable and Sustainable Prosperity
+              Economic Justice for All.
             </h3>
             <div className="h-0.5 w-12 bg-[#C9A24A] rounded mb-4" />
             <p className="text-white/55 text-sm leading-relaxed">
@@ -312,7 +312,7 @@ function VisionMissionSection() {
             </div>
             <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4">Our Mission</span>
             <h3 className="text-xl font-bold text-white leading-snug mb-4">
-              Strengthening the Relationship Between People and Natural Capital Through Economic Justice
+              Transforming Economic Systems for People to Achieve Economic Justice.
             </h3>
             <div className="h-0.5 w-12 bg-[#C9A24A] rounded mb-4" />
             <p className="text-white/55 text-sm leading-relaxed">
@@ -529,7 +529,7 @@ const EJF_AI_RESPONSES: { patterns: RegExp; answer: string }[] = [
   },
   {
     patterns: /\b(programme|programs|initiatives|activities|projects|platform|what do you do)\b/i,
-    answer: "EJF delivers through four strategic platforms:\n\n🦁 Tsavo LifeBank™ — equitable benefit sharing, Natural Capital Governance, biodiversity conservation\n💻 BlueGREEN Digital Justice Hub™ — AI, technology, digital inclusion\n📊 IMPACT360™ Budget Power Lab™ — fiscal justice, citizen-led budgeting\n⚖️ Policy, Law & Advocacy Lab™ — evidence generation, policy reform\n\nVisit our Pillars and Programs pages to explore these in detail.",
+    answer: "EJF works across five priority areas:\n\n🌿 Natural Wealth & Climate Justice — equitable governance of natural wealth, climate resilience, biodiversity and sustainable development\n💰 Public Finance & Economic Governance — transparent, accountable and participatory public finance systems\n🏛️ Democracy, Governance & Institutional Development — stronger public institutions, citizen participation and policy reform\n🔬 Research, Innovation & Digital Transformation — generating evidence, advancing innovation and leveraging digital technologies\n💼 Economic Empowerment — pathways for youth, women and communities to participate in economic development\n\nVisit the Research page to explore our work in detail.",
   },
   {
     patterns: /\b(climate|environment|green|environmental justice|carbon|natural wealth|resource)\b/i,
@@ -541,11 +541,11 @@ const EJF_AI_RESPONSES: { patterns: RegExp; answer: string }[] = [
   },
   {
     patterns: /\b(vision|mission|purpose|goal|objective)\b/i,
-    answer: "EJF's Vision:\n'A Just World Where Natural Wealth Creates Equitable and Sustainable Prosperity'\n\nEJF's Mission:\n'Strengthening the Relationship Between People and Natural Capital Through Economic Justice'\n\nOur guiding principles are Equity • Justice • Prosperity — the three principles that shape how we understand Economic Justice and define the future we are committed to building together.",
+    answer: "EJF's Vision:\n'Economic Justice for All.'\n\nEJF's Mission:\n'Transforming Economic Systems for People to Achieve Economic Justice.'\n\nOur guiding principles are Equity • Justice • Prosperity — the three principles that shape our understanding of Economic Justice and define the future we are committed to building together.",
   },
   {
     patterns: /\b(location|where|address|office|based|headquarter|kenya|taita|nairobi)\b/i,
-    answer: "EJF is headquartered in Kenya:\n\n📍 Taita Taveta County — our founding base\n📍 Nairobi — national advocacy and partnerships\n📍 Mombasa & Coast — community outreach\n\n🏢 Office: Wundanyi, Taita Taveta County, Kenya\n📧 info@economicjusticeforum.org\n📞 +254 741 357 830\n🌐 economicjusticeforum.org",
+    answer: "EJF is headquartered in Kenya:\n\n📍 Head Office: Mwatate, Taita Taveta County, Kenya\n\n📧 info@economicjusticeforum.org\n📞 +254 741 357 830\n🌐 economicjusticeforum.org",
   },
   {
     patterns: /\b(contact|reach|email|phone|call|get in touch|speak to)\b/i,

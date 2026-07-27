@@ -83,11 +83,8 @@ export default function Footer() {
             <p className="text-white/60 text-sm leading-relaxed mb-1">
               Equity &bull; Justice &bull; Prosperity
             </p>
-            <p className="text-white/40 text-xs leading-relaxed mb-1">
+            <p className="text-white/40 text-xs leading-relaxed mb-5">
               Transforming Economic Systems for People to Achieve Economic Justice.
-            </p>
-            <p className="text-white/30 text-xs leading-relaxed mb-5">
-              Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital.
             </p>
 
             {/* Social icons */}
@@ -284,7 +281,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/50 text-xs text-center sm:text-left">
-            &copy; 2026 Economic Justice Forum (EJF) — Building a Future of Justice, Equity, and Prosperity
+            &copy; 2026 Economic Justice Forum (EJF) — Advancing Economic Justice for All
           </p>
           <div className="flex items-center gap-4 text-xs text-white/40 flex-wrap justify-center">
             <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
