@@ -1,0 +1,196 @@
+You are updating an existing production website for the Economic Justice Forum (EJF).
+
+This is NOT a redesign from scratch.
+
+First inspect the entire project before making any changes.
+
+Your first objective is to understand the existing structure, routes, components and navigation.
+
+Then prepare the website for a comprehensive institutional update.
+
+IMPORTANT
+
+• Preserve all existing functionality.
+• Preserve responsiveness.
+• Preserve SEO.
+• Preserve routing.
+• Preserve accessibility.
+• Preserve animations unless they conflict with the new design.
+
+Do not remove any pages without confirmation.
+
+------------------------------------------------
+
+The institution has adopted a completely new identity.
+
+The website must now consistently communicate:
+
+Economic Justice Forum (EJF)
+
+Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital.
+
+The website should feel like a premium global think tank rather than an NGO website.
+
+The design language should resemble institutions like:
+
+• World Bank
+• UNDP
+• OECD
+• World Resources Institute
+• Chatham House
+
+------------------------------------------------
+
+GLOBAL BRAND
+
+Primary Color
+Deep Navy (#08152F)
+
+Accent
+Gold (#C9A24A)
+
+Backgrounds
+
+White
+
+Very light gray
+
+Typography
+
+Elegant serif headings
+
+Modern sans-serif body
+
+Large whitespace
+
+Premium institutional feel
+
+------------------------------------------------
+
+GLOBAL PHILOSOPHY
+
+Every page should reinforce the following ideas:
+
+Natural Wealth
+
+People
+
+Natural Capital
+
+Human Dignity
+
+Human Rights
+
+Economic Justice
+
+Equity
+
+Justice
+
+Equitable and Sustainable Prosperity
+
+------------------------------------------------
+
+LOGO
+
+Replace the old logo everywhere with the new logo.
+
+Use the transparent version.
+
+Update:
+
+Navbar
+
+Footer
+
+Loading screen
+
+Favicon if applicable
+
+------------------------------------------------
+
+NAVIGATION
+
+Inspect the navigation.
+
+Ensure the website contains these pages.
+
+Home
+
+About
+
+Our Philosophy
+
+Research & Knowledge
+
+Insights
+
+Strategic Platforms
+
+Contact
+
+If pages already exist:
+
+Update them.
+
+If missing:
+
+Create them.
+
+------------------------------------------------
+
+CONTENT
+
+Do not generate placeholder content.
+
+Wait for my page-by-page content updates.
+
+------------------------------------------------
+
+IMAGES
+
+Retain existing image sections where appropriate.
+
+Replace images only if they no longer match the new institutional identity.
+
+Use elegant photography focused on:
+
+Natural landscapes
+
+Communities
+
+Policy dialogue
+
+Leadership
+
+Research
+
+Natural Capital
+
+Sustainable development
+
+------------------------------------------------
+
+ANIMATIONS
+
+Maintain premium subtle animations.
+
+Different pages should have different layouts.
+
+Avoid repetitive designs.
+
+------------------------------------------------
+
+Before making content changes, provide me with a summary of:
+
+1. Existing pages
+
+2. Existing routes
+
+3. Existing navigation
+
+4. Components that will be updated
+
+5. Components that will remain unchanged
+
+Then wait for further instructions.
