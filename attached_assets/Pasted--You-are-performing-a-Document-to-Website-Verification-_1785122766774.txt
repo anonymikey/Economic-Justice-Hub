@@ -1,0 +1,563 @@
+ 
+
+
+
+You are performing a **Document-to-Website Verification Audit** for the Economic Justice Forum website.
+
+
+
+The uploaded Headquarters documents are the **authoritative source**.
+
+
+
+Do **NOT** assume the website is correct.
+
+
+
+Your task is to compare every public page against the uploaded documents.
+
+
+
+## Source of Truth
+
+
+
+Treat the uploaded documents as the official institutional content.
+
+
+
+If any website content differs from the documents, the documents take precedence.
+
+
+
+---
+
+
+
+## Compare every page
+
+
+
+Verify:
+
+
+
+* Home
+
+* Our Philosophy
+
+* Research & Knowledge
+
+* Insights
+
+* Contact
+
+* Footer
+
+* Welcome Animation
+
+* Navbar
+
+
+
+---
+
+
+
+## For each page verify
+
+
+
+### Headings
+
+
+
+Compare every heading.
+
+
+
+Report if:
+
+
+
+* missing
+
+* changed
+
+* shortened
+
+* rewritten
+
+* duplicated
+
+
+
+---
+
+
+
+### Paragraphs
+
+
+
+Compare every paragraph.
+
+
+
+Check for:
+
+
+
+* missing sentences
+
+
+
+* extra sentences
+
+
+
+* wording changes
+
+
+
+* grammatical errors
+
+
+
+* punctuation differences
+
+
+
+* capitalization
+
+
+
+* spelling
+
+
+
+---
+
+
+
+### Lists
+
+
+
+Verify every:
+
+
+
+* bullet list
+
+
+
+* numbered list
+
+
+
+* strategic partner
+
+
+
+* research area
+
+
+
+* commitment
+
+
+
+* knowledge product
+
+
+
+* contact detail
+
+
+
+---
+
+
+
+### Mission
+
+
+
+Verify:
+
+
+
+Mission
+
+
+
+Vision
+
+
+
+Tagline
+
+
+
+Declaration
+
+
+
+Footer statement
+
+
+
+Closing statements
+
+
+
+must exactly match Headquarters documents.
+
+
+
+---
+
+
+
+### Strategic Partners
+
+
+
+Verify every partner.
+
+
+
+Check:
+
+
+
+Organization name
+
+
+
+Country
+
+
+
+City
+
+
+
+Ordering
+
+
+
+Spelling
+
+
+
+Abbreviations
+
+
+
+---
+
+
+
+### Contact
+
+
+
+Verify:
+
+
+
+Website
+
+
+
+Email
+
+
+
+Head Office
+
+
+
+Mission
+
+
+
+Vision
+
+
+
+---
+
+
+
+### Research
+
+
+
+Verify:
+
+
+
+Research Philosophy
+
+
+
+Areas of Research
+
+
+
+Knowledge Products
+
+
+
+Knowledge Through Partnership
+
+
+
+Our Commitment
+
+
+
+From Knowledge to Impact
+
+
+
+Footer Statement
+
+
+
+---
+
+
+
+### Insights
+
+
+
+Verify:
+
+
+
+Every section
+
+
+
+Every heading
+
+
+
+Every paragraph
+
+
+
+Every closing statement
+
+
+
+---
+
+
+
+### Home
+
+
+
+Verify:
+
+
+
+Hero
+
+
+
+Promise of Natural Wealth
+
+
+
+The EJF Idea
+
+
+
+Vision
+
+
+
+Mission
+
+
+
+Strategic Platforms
+
+
+
+CTA
+
+
+
+---
+
+
+
+### Philosophy
+
+
+
+Verify:
+
+
+
+Introduction
+
+
+
+Core Principles
+
+
+
+Way of Thinking
+
+
+
+Institutional Declaration
+
+
+
+Philosophy in Action
+
+
+
+---
+
+
+
+## Compare line by line
+
+
+
+Do not summarize.
+
+
+
+Perform a line-by-line comparison.
+
+
+
+---
+
+
+
+## Output Format
+
+
+
+Return a report like this:
+
+
+
+# Home
+
+
+
+✅ Matches HQ exactly
+
+
+
+or
+
+
+
+❌ Differences Found
+
+
+
+Difference 1
+
+
+
+Website:
+
+
+
+...
+
+
+
+HQ:
+
+
+
+...
+
+
+
+Recommended correction:
+
+
+
+...
+
+
+
+---
+
+
+
+Repeat for every page.
+
+
+
+---
+
+
+
+## Final Summary
+
+
+
+Provide:
+
+
+
+Total pages checked
+
+
+
+Total paragraphs checked
+
+
+
+Total headings checked
+
+
+
+Total differences found
+
+
+
+Minor issues
+
+
+
+Major issues
+
+
+
+---
+
+
+
+If everything matches perfectly, finish with exactly:
+
+
+
+> **Verification Complete**
+
+>
+
+> The website content matches the Headquarters documents and is ready for production.
+
+
+
+"If there is any conflict between the documents, treat the newest Headquarters document as authoritative and explicitly identify any conflicts instead of guessing."  
