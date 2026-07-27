@@ -10,7 +10,7 @@ import imgFood   from "@assets/food_ev_1775860211047.jpeg";
 function HeroSection() {
   return (
     <section className="relative h-[72vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-      <img src={imgHero} alt="Natural wealth philosophy"
+      <img src={imgHero} alt="Economic Justice philosophy"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ animation: "philKB 14s ease-in-out infinite alternate" }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#08152F]/85 via-[#08152F]/70 to-[#08152F]/92" />
@@ -29,7 +29,7 @@ function HeroSection() {
           <div className="h-px w-16 bg-[#C9A24A]/60" />
         </div>
         <p className="text-white/75 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto">
-          Natural Wealth fulfils its highest purpose through Economic Justice.
+          People • Economic Systems • Human Dignity → Economic Justice.
         </p>
         <div className="mt-10 flex flex-col items-center gap-2 text-white/40 text-xs">
           <span>Scroll to explore</span>
@@ -55,42 +55,39 @@ function IntroSection() {
 
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img src={imgComDia} alt="Natural wealth and communities"
+              <img src={imgComDia} alt="Community dialogue"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="absolute -bottom-5 -right-5 bg-[#08152F] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[220px]">
               <p className="text-[#C9A24A] text-[10px] font-bold tracking-widest uppercase mb-1">Our Foundation</p>
-              <p className="font-bold text-sm leading-snug">The idea that shapes everything we do</p>
+              <p className="font-bold text-sm leading-snug">The worldview that defines everything we do</p>
             </div>
           </div>
 
           <div>
             <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4 border-b border-[#C9A24A]/30 pb-1">
-              Introduction
+              What We Believe
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08152F] leading-tight mb-6">
-              The Idea That Shapes Everything
+              Ideas Shape Institutions. Institutions Shape Economic Systems. Economic Systems Shape People's Lives.
             </h2>
             <div className="space-y-4">
               {[
-                "Natural Wealth fulfils its highest purpose through Economic Justice.",
-                "This is the philosophy upon which the Economic Justice Forum was founded.",
-                "It shapes how we understand development.",
-                "It guides how we approach governance.",
-                "It informs our research.",
-                "It inspires our partnerships.",
-                "And it defines the future we seek to build.",
+                "The Economic Justice Forum affirms that human dignity is the foundation of Economic Justice. Every person possesses inherent worth, and every economy derives its legitimacy from its ability to respect, protect and advance that dignity.",
+                "We recognise economic rights as fundamental human rights. The opportunity to participate in economic life, pursue enterprise, create value, innovate, work with dignity, own productive assets and benefit fairly from economic progress is essential to the full enjoyment of human rights.",
+                "We are guided by the enduring principles of Equity • Justice • Prosperity. These principles shape our understanding of Economic Justice and define every idea, institution and partnership we build.",
+                "We understand Economic Justice as the condition in which people are able to realise their economic potential, exercise their economic rights and participate fully in economic systems that uphold human dignity, expand opportunity and create equitable and sustainable prosperity.",
               ].map((line, i) => (
-                <p key={i} className={`text-base leading-relaxed ${i === 0 ? "text-[#08152F] font-bold text-lg" : i >= 1 && i <= 6 ? "text-[#08152F]/80 font-medium" : "text-[#08152F]/70"}`}>
+                <p key={i} className={`text-base leading-relaxed ${i === 0 ? "text-[#08152F] font-bold text-lg" : "text-[#08152F]/80 font-medium"}`}>
                   {line}
                 </p>
               ))}
               <div className="h-px bg-[#C9A24A]/20 my-4" />
               <p className="text-[#08152F]/70 text-base leading-relaxed">
-                Natural Wealth has always sustained life, shaped civilizations and created opportunity. Its highest purpose, however, is realised only when it improves people's lives while safeguarding the Natural Capital upon which present and future generations depend.
+                People are the purpose of every economy. Institutions, markets, policies and investments derive their significance from their contribution to people's ability to achieve Economic Justice. We therefore evaluate economic systems by the opportunities they create, the rights they protect, the dignity they uphold and the prosperity they enable people to achieve.
               </p>
               <p className="text-[#08152F] font-semibold text-base">
-                Economic Justice is the pathway through which this becomes possible.
+                Economic Justice is achieved by transforming economic systems — not treating their symptoms.
               </p>
             </div>
           </div>
@@ -103,13 +100,93 @@ function IntroSection() {
 // ─── CORE PHILOSOPHY CARDS ────────────────────────────────────────────────────
 const PHIL_CARDS = [
   {
+    icon: "🏅",
+    title: "Human Dignity",
+    accent: "#C9A24A",
+    paras: [
+      "Human dignity is the foundation of Economic Justice.",
+      "Every economy, institution and public policy derives its legitimacy from its ability to respect, protect and advance the dignity of every person.",
+    ],
+  },
+  {
+    icon: "📜",
+    title: "Economic Rights",
+    accent: "#C9A24A",
+    paras: [
+      "Economic rights are fundamental human rights.",
+      "They enable people to participate in economic life, pursue opportunity, create value, innovate, work with dignity, own productive assets and benefit fairly from economic progress.",
+    ],
+  },
+  {
+    icon: "👥",
+    title: "People",
+    accent: "#60a5fa",
+    paras: [
+      "People are the purpose of every economy.",
+      "Economic systems exist to expand people's opportunities, strengthen their capabilities, protect their rights and enable them to achieve Economic Justice.",
+    ],
+  },
+  {
+    icon: "🚪",
+    title: "Opportunity",
+    accent: "#34d399",
+    paras: [
+      "Opportunity is the pathway through which people realise their economic potential.",
+      "Inclusive access to education, knowledge, finance, enterprise, technology, productive assets and decent work strengthens people's capacity to participate fully in economic life.",
+    ],
+  },
+  {
+    icon: "🏛️",
+    title: "Institutions",
+    accent: "#f472b6",
+    paras: [
+      "Institutions are the architects of economic systems.",
+      "Their quality determines how rights are protected, opportunities are created, public value is generated and prosperity is shared. Strong institutions are essential to advancing Economic Justice.",
+    ],
+  },
+  {
+    icon: "⚙️",
+    title: "Economic Systems",
+    accent: "#a78bfa",
+    paras: [
+      "Economic systems are the means through which Economic Justice is advanced.",
+      "Governance, markets, public finance, enterprise, innovation and regulation collectively shape the conditions under which people pursue opportunity and achieve prosperity.",
+    ],
+  },
+  {
     icon: "🌿",
     title: "Natural Wealth",
     accent: "#C9A24A",
     paras: [
-      "Natural Wealth is the collective value of Earth's forests, wildlife, rivers, oceans, minerals, mountains, biodiversity, fertile landscapes and renewable energy resources.",
-      "It is the natural foundation upon which human life, economic prosperity and sustainable development depend.",
-      "Natural Wealth is not simply a collection of natural resources. It is humanity's greatest opportunity to build a more just, prosperous and sustainable future.",
+      "Natural wealth is a strategic public asset that should expand opportunity, strengthen resilience and generate shared prosperity.",
+      "Its governance should enable people and communities to achieve Economic Justice while safeguarding opportunities for future generations.",
+    ],
+  },
+  {
+    icon: "💡",
+    title: "Innovation",
+    accent: "#34d399",
+    paras: [
+      "Innovation is a driver of institutional renewal and economic transformation.",
+      "Science, technology, entrepreneurship and human creativity strengthen economic systems, improve productivity and expand opportunities for people.",
+    ],
+  },
+  {
+    icon: "🌍",
+    title: "Shared Prosperity",
+    accent: "#C9A24A",
+    paras: [
+      "Shared prosperity is the outcome of economic systems that uphold human dignity, protect economic rights, expand opportunity and generate public value.",
+      "Prosperity is strengthened when more people are able to participate in and benefit from economic progress.",
+    ],
+  },
+  {
+    icon: "🔄",
+    title: "Transformation",
+    accent: "#60a5fa",
+    paras: [
+      "Transformation is the continuous process of strengthening institutions and economic systems so that more people are able to achieve Economic Justice.",
+      "Sustainable transformation requires ideas, leadership, collaboration and institutions capable of responding to changing economic realities.",
     ],
   },
   {
@@ -117,67 +194,8 @@ const PHIL_CARDS = [
     title: "Economic Justice",
     accent: "#C9A24A",
     paras: [
-      "Economic Justice is realised when Natural Wealth fulfils its highest purpose.",
-      "It is achieved when the opportunities and benefits generated by Natural Wealth advance Human Dignity, enable the full enjoyment of Human Rights, promote Equity, strengthen Justice, create Equitable and Sustainable Prosperity, and inspire the long-term conservation of Natural Capital.",
-      "Economic Justice ensures that communities prosper because of the Natural Wealth around them — not despite it.",
-    ],
-  },
-  {
-    icon: "🏅",
-    title: "Human Dignity",
-    accent: "#60a5fa",
-    paras: [
-      "Every person deserves the opportunity to live with dignity, security and hope.",
-      "Natural Wealth should expand those opportunities by creating decent livelihoods, strengthening local economies and improving quality of life.",
-      "Human Dignity is the first dividend of Economic Justice.",
-    ],
-  },
-  {
-    icon: "📜",
-    title: "Human Rights",
-    accent: "#34d399",
-    paras: [
-      "Natural Wealth should strengthen the enjoyment of Human Rights.",
-      "Communities should participate meaningfully in decisions affecting the Natural Wealth with which they live and should benefit fairly from the opportunities it creates.",
-      "Responsible stewardship of Natural Wealth strengthens social, economic, cultural and environmental rights for present and future generations.",
-    ],
-  },
-  {
-    icon: "🤝",
-    title: "Equity",
-    accent: "#f472b6",
-    paras: [
-      "Equity ensures that the opportunities and benefits generated by Natural Wealth are accessible and shared fairly across communities, regions and generations.",
-      "No community should remain excluded from the prosperity created by the Natural Wealth surrounding it.",
-    ],
-  },
-  {
-    icon: "🏛️",
-    title: "Justice",
-    accent: "#a78bfa",
-    paras: [
-      "Justice transforms Natural Wealth into lasting public value.",
-      "Transparent institutions, accountable leadership, the rule of law and responsible governance ensure that Natural Wealth serves the common good.",
-      "Justice builds public trust and strengthens sustainable development.",
-    ],
-  },
-  {
-    icon: "🌱",
-    title: "Equitable and Sustainable Prosperity",
-    accent: "#34d399",
-    paras: [
-      "Prosperity is meaningful only when it is equitable and sustainable.",
-      "Natural Wealth should improve lives, expand opportunities, strengthen resilient economies and create lasting value while conserving Natural Capital for future generations.",
-    ],
-  },
-  {
-    icon: "🌍",
-    title: "Natural Capital",
-    accent: "#C9A24A",
-    paras: [
-      "Natural Capital is the living foundation of sustainable prosperity.",
-      "Healthy forests, oceans, rivers, biodiversity, wildlife and ecosystems support economies, strengthen resilience and sustain life itself.",
-      "Protecting Natural Capital is therefore not only an environmental responsibility. It is an economic, social and moral imperative.",
+      "Economic Justice is the condition in which people are able to realise their economic potential, exercise their economic rights and participate fully in economic systems that uphold human dignity, expand opportunity and create equitable, sustainable and shared prosperity.",
+      "It is the purpose of our work, the outcome we advance and the standard by which we evaluate economic systems.",
     ],
   },
 ];
@@ -187,10 +205,10 @@ function CorePhilosophySection() {
     <section className="bg-[#F7F8FA] py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-3">Foundations</span>
+          <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-3">The Economic Justice Doctrine™</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08152F] mb-3">Core Philosophy</h2>
           <p className="text-[#08152F]/55 max-w-2xl mx-auto text-base">
-            Eight interconnected principles that define how EJF understands the relationship between Natural Wealth and human progress.
+            Eleven interconnected principles that define how EJF understands, interprets and advances Economic Justice.
           </p>
         </div>
 
@@ -218,14 +236,12 @@ function CorePhilosophySection() {
 
 // ─── OUR WAY OF THINKING ──────────────────────────────────────────────────────
 const FLOW_STEPS = [
-  { icon: "🌿", label: "Natural Wealth" },
-  { icon: "⚖️", label: "Economic Justice" },
-  { icon: "🏅", label: "Human Dignity" },
-  { icon: "📜", label: "The Full Enjoyment of Human Rights" },
-  { icon: "🤝", label: "Equity" },
-  { icon: "🏛️", label: "Justice" },
-  { icon: "🌱", label: "Equitable and Sustainable Prosperity" },
-  { icon: "🌍", label: "Long-term Conservation of Natural Capital" },
+  { icon: "🔍", label: "Discover" },
+  { icon: "💭", label: "Reimagine" },
+  { icon: "✏️", label: "Design" },
+  { icon: "🚀", label: "Implement" },
+  { icon: "📊", label: "Learn" },
+  { icon: "✨", label: "Transform" },
 ];
 
 function WayOfThinkingSection() {
@@ -233,10 +249,10 @@ function WayOfThinkingSection() {
     <section className="bg-[#08152F] py-20 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-3">Framework</span>
+          <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-3">The iMagine Model™</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Our Way of Thinking</h2>
           <p className="text-white/50 max-w-xl mx-auto text-base">
-            A principled progression from Natural Wealth to lasting conservation.
+            A disciplined progression from understanding to lasting transformation.
           </p>
         </div>
 
@@ -269,7 +285,7 @@ function WayOfThinkingSection() {
         <div className="border border-[#C9A24A]/30 bg-[#C9A24A]/5 rounded-2xl p-8 text-center max-w-2xl mx-auto">
           <div className="h-0.5 w-16 bg-[#C9A24A] mx-auto mb-5" />
           <p className="text-white/75 text-base leading-relaxed">
-            This framework guides our research, informs our policy, shapes our partnerships and inspires our action.
+            The iMagine Model™ and iMagine Framework™ connect the Forum's philosophy, doctrine and analytical perspectives with practical implementation, ensuring that ideas are translated into measurable and lasting outcomes.
           </p>
         </div>
       </div>
@@ -285,19 +301,22 @@ function ImagerySection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-block text-[#C9A24A] text-xs font-bold tracking-widest uppercase mb-4 border-b border-[#C9A24A]/30 pb-1">
-              From Principles to Practice
+              The Natural Wealth Lens™
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08152F] leading-tight mb-6">
-              Philosophy in Action
+              Seeing Economic Justice Through Natural Wealth
             </h2>
             <p className="text-[#08152F]/70 text-base leading-relaxed mb-5">
-              EJF translates this philosophy into research, advocacy, partnerships and practical solutions that strengthen the relationship between people and Natural Capital.
+              The Natural Wealth Lens™ is EJF's distinctive analytical perspective for understanding how natural wealth influences people's ability to achieve Economic Justice.
             </p>
             <p className="text-[#08152F]/70 text-base leading-relaxed mb-5">
-              Every programme we run, every partnership we build and every policy we influence begins with a single commitment: ensuring that Natural Wealth fulfils its highest purpose.
+              Forests, wildlife, oceans, fisheries, agriculture, minerals, water, biodiversity, energy and land are more than natural assets. They are forms of natural wealth that shape livelihoods, economies and the future of societies. Natural wealth acquires its greatest value when it expands opportunities for people, strengthens communities and contributes to equitable and sustainable prosperity.
+            </p>
+            <p className="text-[#08152F]/70 text-base leading-relaxed mb-5">
+              The true measure of natural wealth is not the quantity of resources a country possesses, but the opportunities those resources create for people. Where natural wealth fails to improve people's lives, the challenge often lies not in the resource itself, but in the institutions, policies and economic systems that govern it.
             </p>
             <p className="text-[#08152F] font-semibold text-base">
-              That commitment is Economic Justice.
+              Natural wealth governance should enable people and communities to achieve Economic Justice while safeguarding opportunities for future generations.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -340,7 +359,7 @@ function DeclarationSection() {
 
         <div className="space-y-8 mb-12">
           <p className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
-            Natural Wealth fulfils its highest purpose through Economic Justice.
+            People are the purpose of every economy.
           </p>
 
           <div className="flex items-center justify-center gap-4">
@@ -350,7 +369,7 @@ function DeclarationSection() {
           </div>
 
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed">
-            The future of People and the future of Natural Capital are inseparable.
+            Economic Justice is achieved by transforming economic systems — not treating their symptoms.
           </p>
 
           <div className="flex items-center justify-center gap-4">
