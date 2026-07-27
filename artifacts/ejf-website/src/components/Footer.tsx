@@ -3,10 +3,10 @@ import { useState } from "react";
 import { socialLinks } from "@/data/socialLinks";
 
 const exploreLinks = [
-  { label: "About", href: "/about" },
-  { label: "Pillars", href: "/pillars" },
-  { label: "Programs", href: "/programs" },
-  { label: "Research", href: "/research" },
+  { label: "Home", href: "/" },
+  { label: "Our Philosophy", href: "/philosophy" },
+  { label: "Research & Knowledge", href: "/research" },
+  { label: "Insights", href: "/insights" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
   { label: "Donate", href: "/donate" },
@@ -83,8 +83,11 @@ export default function Footer() {
             <p className="text-white/60 text-sm leading-relaxed mb-1">
               Equity &bull; Justice &bull; Prosperity
             </p>
-            <p className="text-white/40 text-xs leading-relaxed mb-5">
-              The people's platform for Economic, Climate, Social, and Digital Justice.
+            <p className="text-white/40 text-xs leading-relaxed mb-1">
+              Transforming Economic Systems for People to Achieve Economic Justice.
+            </p>
+            <p className="text-white/30 text-xs leading-relaxed mb-5">
+              Advancing Economic Justice by Strengthening the Relationship Between People and Natural Capital.
             </p>
 
             {/* Social icons */}
@@ -267,7 +270,7 @@ export default function Footer() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                Taita-Taveta, Kenya
+                Mwatate, Taita Taveta County, Kenya
               </div>
             </div>
           </div>

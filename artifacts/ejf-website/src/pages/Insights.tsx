@@ -22,7 +22,7 @@ const CATEGORIES = [
     id: "policy", icon: "🏛️", label: "Policy Insights",
     accent: "#60a5fa", bg: "bg-blue-50", border: "border-blue-100",
     items: [
-      { title: "Fiscal Decentralization and Community Equity", date: "Aug 2025", tag: "Fiscal Justice", img: imgTm() },
+      { title: "Fiscal Decentralization and Community Equity", date: "Aug 2025", tag: "Fiscal Justice", img: imgComDia },
       { title: "Community Land Rights and Investment Frameworks", date: "Jul 2025", tag: "Governance", img: imgFood },
       { title: "Legislative Analysis: Taita Taveta County Mining Bill", date: "Jun 2025", tag: "Policy", img: imgHero },
     ],
@@ -55,8 +55,6 @@ const CATEGORIES = [
     ],
   },
 ];
-
-function imgTm() { return imgComDia; }
 
 const TIMELINE = [
   { location: "Taita Taveta", icon: "⛏️", desc: "Mining communities seeking equitable benefit sharing and transparent governance of mineral wealth." },
