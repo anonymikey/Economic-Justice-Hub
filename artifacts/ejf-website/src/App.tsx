@@ -11,9 +11,6 @@ import WelcomeAnimation from "@/components/WelcomeAnimation";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import CookiePolicy from "@/pages/CookiePolicy";
 import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Pillars from "@/pages/Pillars";
-import Programs from "@/pages/Programs";
 import Research from "@/pages/Research";
 import Events from "@/pages/Events";
 import Contact from "@/pages/Contact";
@@ -25,6 +22,13 @@ import Philosophy from "@/pages/Philosophy";
 import Insights from "@/pages/Insights";
 
 const queryClient = new QueryClient();
+
+/** Instant client-side redirect to home */
+function RedirectHome() {
+  useLocation(); // ensure hook context
+  if (typeof window !== "undefined") window.location.replace("/");
+  return null;
+}
 
 function NotFound() {
   return (
@@ -57,13 +61,11 @@ function ComingSoon({ title }: { title: string }) {
 function Router() {
   return (
     <Switch>
+      {/* ── Active routes ── */}
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
       <Route path="/philosophy" component={Philosophy} />
-      <Route path="/insights" component={Insights} />
-      <Route path="/pillars" component={Pillars} />
-      <Route path="/programs" component={Programs} />
       <Route path="/research" component={Research} />
+      <Route path="/insights" component={Insights} />
       <Route path="/events" component={Events} />
       <Route path="/contact" component={Contact} />
       <Route path="/login" component={Login} />
@@ -76,6 +78,12 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/cookies" component={CookiePolicy} />
       <Route path="/join">{() => <ComingSoon title="Join EJF" />}</Route>
+
+      {/* ── Legacy redirects → Home ── */}
+      <Route path="/about" component={RedirectHome} />
+      <Route path="/pillars" component={RedirectHome} />
+      <Route path="/programs" component={RedirectHome} />
+
       <Route component={NotFound} />
     </Switch>
   );
