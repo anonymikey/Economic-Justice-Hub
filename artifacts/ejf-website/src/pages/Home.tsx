@@ -217,7 +217,7 @@ function PromiseSection() {
                 className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-5 -left-5 bg-[#C9A24A] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[240px]">
-              <p className="font-bold text-sm leading-snug">Host communities as rightful partners in shaping the future</p>
+              <p className="font-bold text-sm leading-snug">Communities as rightful partners in shaping the future</p>
             </div>
           </div>
         </div>

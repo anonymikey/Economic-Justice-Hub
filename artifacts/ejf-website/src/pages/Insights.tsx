@@ -40,7 +40,7 @@ const CATEGORIES = [
     id: "news", icon: "📢", label: "News & Announcements",
     accent: "#f472b6", bg: "bg-pink-50", border: "border-pink-100",
     items: [
-      { title: "EJF Launches BlueGREEN Digital Justice Hub", date: "Jan 2026", tag: "Launch", img: imgComDia },
+      { title: "EJF Launches BlueGREEN Digital Justice Hub", date: "Jan 2026", tag: "Historical Initiative", img: imgComDia },
       { title: "EJF Partners with East African Policy Network", date: "Dec 2025", tag: "Partnership", img: imgFood },
       { title: "New Research Programme on Mineral Governance", date: "Nov 2025", tag: "Programme", img: imgHero },
     ],

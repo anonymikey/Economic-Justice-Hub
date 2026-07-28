@@ -562,7 +562,7 @@ function PhotoScrollGallery({ id, photos, banner, eventLabel, bgClass = "bg-whit
 }
 
 /* ─────────────────────────────────────────────
-   IMPACT360 GALLERY — 2026 (LATEST)
+   IMPACT360 GALLERY — 2026 (ARCHIVE)
 ───────────────────────────────────────────── */
 const IMPACT360_PHOTOS: GalleryPhoto[] = [
   { src: imp3,  caption: "IMPACT360 participants group photo" },
@@ -595,7 +595,7 @@ function Impact360Gallery() {
       banner={
         <div>
           <div className="inline-flex items-center gap-2 bg-[#d4a017]/10 border border-[#d4a017]/30 text-[#d4a017] text-[10px] font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            ⭐ Latest Event — April 2026
+            ⭐ Archive — April 2026
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-[#0e1f3d] mb-1">IMPACT360 — Budget Power Lab Launch</h2>
           <p className="text-gray-500 text-sm mb-4">EJF partnered with ActionAid Kenya to launch the IMPACT360 Budget Power Lab — empowering youth as Legislative Budget Fellows to claim Budget Power to the Youth.</p>

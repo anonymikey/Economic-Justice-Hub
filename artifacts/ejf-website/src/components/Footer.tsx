@@ -151,37 +151,14 @@ export default function Footer() {
             <ul className="space-y-2.5 mb-5">
               {resourceLinks.map((item) => (
                 <li key={item}>
-                  <a
-                    href="#"
-                    className="text-white/60 hover:text-[#d4a017] text-sm transition-colors flex items-center gap-1.5 group"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-[#d4a017]/40 group-hover:bg-[#d4a017] transition-colors flex-shrink-0" />
+                  <span className="text-white/60 text-sm flex items-center gap-1.5">
+                    <span className="w-1 h-1 rounded-full bg-[#d4a017]/40 flex-shrink-0" />
                     {item}
-                  </a>
+                  </span>
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-col gap-2 pt-4 border-t border-white/10">
-              <a
-                href="#"
-                className="flex items-center gap-2 bg-[#d4a017] hover:bg-[#b8891a] text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shadow-md"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                EJF Brochure
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2 bg-[#d4a017] hover:bg-[#b8891a] text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shadow-md"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-                Impact Report
-              </a>
-            </div>
           </div>
 
           {/* ── Column 4: Subscribe + Contact ── */}
@@ -284,13 +261,7 @@ export default function Footer() {
             &copy; 2026 Economic Justice Forum (EJF) — Advancing Economic Justice for All
           </p>
           <div className="flex items-center gap-4 text-xs text-white/40 flex-wrap justify-center">
-            <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
-            <span className="text-white/20">|</span>
             <Link href="/cookies" className="hover:text-[#d4a017] transition-colors">🍪 Cookie Policy</Link>
-            <span className="text-white/20">|</span>
-            <a href="#" className="hover:text-white/70 transition-colors">Terms of Service</a>
-            <span className="text-white/20">|</span>
-            <a href="#" className="hover:text-white/70 transition-colors">Accessibility</a>
           </div>
         </div>
         <p className="text-center text-white/25 text-xs mt-3">

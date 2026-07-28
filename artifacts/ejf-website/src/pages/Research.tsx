@@ -218,7 +218,7 @@ function ResearchIntro() {
                 At the Economic Justice Forum (EJF), we believe that better ideas lead to better decisions, stronger institutions and more equitable outcomes.
               </p>
               <p className="text-[#08152F]/70 text-base leading-relaxed">
-                Our Research & Knowledge platform generates evidence, policy analysis and practical solutions that strengthen the relationship between People and Natural Capital through Economic Justice.
+                Our Research & Knowledge platform generates evidence, policy analysis and practical solutions that help people, institutions and decision-makers transform economic systems, expand opportunity and advance Economic Justice.
               </p>
               <p className="text-[#08152F]/70 text-base leading-relaxed">
                 We combine rigorous research with lived realities to influence policy, support decision-makers and contribute to global conversations on Natural Wealth, governance and sustainable development.

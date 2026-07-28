@@ -1,0 +1,118 @@
+PHASE 5A — FINAL HQ CONTENT CERTIFICATION
+
+Before making any changes, inspect the active project and verify every change against the uploaded HQ Institutional Profile (2026), the EJF Website DOCX, and the completed Phase 1–4 migrations.
+
+This phase is CONTENT CERTIFICATION ONLY.
+
+Do NOT redesign the website.
+Do NOT modify layouts.
+Do NOT change colors.
+Do NOT alter animations.
+Do NOT change responsiveness.
+Do NOT change spacing or component structure.
+
+Only perform the following targeted corrections:
+
+1. Research Page
+- Rewrite the remaining institutional sentence that still says:
+  "strengthen the relationship between People and Natural Capital through Economic Justice."
+- Replace it with wording that reflects the HQ philosophy centered on:
+  • People
+  • Economic Systems
+  • Institutions
+  • Opportunity
+  • Economic Justice
+- Keep the Natural Wealth Lens only where supported by the HQ documents.
+
+2. Home Page
+- Replace the remaining "Host communities" wording with current HQ-approved terminology.
+- Preserve all existing cards, images, animations, and layout.
+
+3. Historical Content
+Inspect:
+- Insights.tsx
+- Events.tsx
+
+If BlueGREEN Digital Justice Hub or IMPACT360 represent genuine historical events, retain them but clearly label them as:
+
+• Historical Initiative
+or
+• Archive
+
+Do NOT present them as current institutional platforms.
+
+4. Footer
+Replace every placeholder "#" link with a real destination if one already exists.
+
+If no destination exists,
+remove the placeholder link instead of leaving "#".
+
+5. Final Scan
+Search the ENTIRE ACTIVE PROJECT for:
+
+"The Promise of Natural Wealth"
+
+"The EJF Idea"
+
+"Natural Wealth fulfils its highest purpose"
+
+"Our Strategic Platforms"
+
+"Tsavo LifeBank"
+
+"BlueGREEN Digital Justice Hub"
+
+"IMPACT360"
+
+"Policy Law & Advocacy Lab"
+
+"People and Natural Capital are inseparable"
+
+"Host communities"
+
+Report every remaining occurrence.
+
+Differentiate between:
+
+• Active content
+• Historical archive
+• Legacy code
+
+6. Verification
+
+Run:
+
+✓ production build
+
+✓ typecheck
+
+✓ browser console verification
+
+✓ broken internal link scan
+
+Then produce a report with:
+
+SECTION A
+Files modified
+
+SECTION B
+Remaining HQ mismatches
+
+SECTION C
+Historical references retained
+
+SECTION D
+Broken links fixed
+
+SECTION E
+Production build status
+
+SECTION F
+Current HQ compliance percentage
+
+SECTION G
+Recommendation:
+Ready to continue to Phase 5B? (Yes/No)
+
+Do not proceed to SEO, metadata, or deployment tasks.
+This phase ends after content certification is complete.

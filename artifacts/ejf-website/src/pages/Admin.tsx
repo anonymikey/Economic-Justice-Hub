@@ -1083,9 +1083,9 @@ function makeEmailTemplate({
   <!-- FOOTER -->
   <div class="footer">
     <div class="social">
-      <a href="#">𝕏</a>
-      <a href="#">in</a>
-      <a href="#">f</a>
+      <a href="https://x.com/Economicjusti">𝕏</a>
+      <a href="https://www.linkedin.com/in/economic-justice-forum-65758238b">in</a>
+      <a href="https://www.facebook.com/share/17Zf49Rkb9/?mibextid=wwXIfr">f</a>
     </div>
     <p>
       &copy; ${new Date().getFullYear()} Economic Justice Forum &middot; Nairobi, Kenya<br />
