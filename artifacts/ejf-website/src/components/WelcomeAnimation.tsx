@@ -69,6 +69,16 @@ export default function WelcomeAnimation() {
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: "linear-gradient(135deg, #0e1f3d 0%, #1a3a6e 50%, #0e1f3d 100%)" }}
           onClick={() => setDismissed(true)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape" || event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setDismissed(true);
+            }
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isReturning ? "Welcome back to Economic Justice Forum" : "Welcome to Economic Justice Forum"}
+          tabIndex={0}
         >
           {/* Dot grid */}
           <div

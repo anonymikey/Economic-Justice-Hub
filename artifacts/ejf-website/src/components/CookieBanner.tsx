@@ -95,6 +95,8 @@ export default function CookieBanner() {
       className={`fixed bottom-0 left-0 right-0 z-[999] transition-all duration-500 ${
         saved ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
       }`}
+      role="dialog"
+      aria-label="Cookie consent"
     >
       {/* Backdrop blur strip */}
       <div className="bg-[#0a1628]/97 backdrop-blur-md border-t-2 border-[#d4a017]/60 shadow-2xl">
@@ -123,6 +125,8 @@ export default function CookieBanner() {
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row flex-wrap gap-2 flex-shrink-0 w-full lg:w-auto">
                 <button
+                  type="button"
+                  aria-expanded={showSettings}
                   onClick={() => setShowSettings(true)}
                   className="w-full sm:w-auto px-3.5 py-1.5 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
                 >
@@ -153,7 +157,7 @@ export default function CookieBanner() {
                     <p className="text-white/40 text-xs">Choose which cookies you allow</p>
                   </div>
                 </div>
-                <button aria-label="Close cookie preferences" onClick={() => setShowSettings(false)} className="text-white/40 hover:text-white text-xl leading-none">✕</button>
+                <button type="button" aria-label="Close cookie preferences" onClick={() => setShowSettings(false)} className="text-white/40 hover:text-white text-xl leading-none">✕</button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
@@ -238,6 +242,7 @@ function CookieToggleRow({
         <button
           aria-label={`${label} cookies ${checked ? "enabled" : "disabled"}`}
           type="button"
+          aria-pressed={checked}
           disabled={disabled}
           onClick={() => !disabled && onChange(!checked)}
           className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors flex-shrink-0 ${

@@ -1,0 +1,121 @@
+PHASE 5D — FINAL UI POLISH & PRODUCTION QA
+
+Phase 5C is complete.
+
+This phase is strictly for production polish.
+
+DO NOT change any HQ institutional content.
+
+DO NOT redesign any pages.
+
+DO NOT modify branding, colors, animations or layouts unless fixing a usability issue.
+
+==================================================
+TASK 1 — COOKIE BANNER FINAL POLISH
+==================================================
+
+Review the Cookie Banner on:
+
+• Desktop
+• Tablet
+• Mobile
+
+Improve the overall user experience.
+
+Requirements:
+
+• Make the banner more compact on desktop.
+• Ensure it never obscures important page content unnecessarily.
+• Verify all buttons align correctly.
+• Verify text remains readable.
+• Verify the animation remains smooth.
+• Ensure keyboard accessibility remains intact.
+
+==================================================
+TASK 2 — LOGIN EXPERIENCE
+==================================================
+
+Review the Login/Create Account page.
+
+Ensure:
+
+✓ Maintenance notice spacing is consistent.
+
+✓ Continue as Guest button is visually balanced.
+
+✓ Forms do not require unnecessary scrolling on common laptop resolutions.
+
+✓ Everything remains centered.
+
+==================================================
+TASK 3 — SITE-WIDE RESPONSIVE QA
+==================================================
+
+Audit every public page.
+
+Check for:
+
+• overflow
+• clipped text
+• uneven spacing
+• image overflow
+• card alignment
+• button alignment
+• inconsistent typography
+• z-index conflicts
+
+Fix only genuine issues.
+
+==================================================
+TASK 4 — ACCESSIBILITY QA
+==================================================
+
+Verify:
+
+• keyboard navigation
+
+• focus indicators
+
+• button labels
+
+• aria labels
+
+• contrast
+
+• heading hierarchy
+
+==================================================
+TASK 5 — FINAL PRODUCTION VERIFICATION
+==================================================
+
+Run:
+
+✓ production build
+
+✓ typecheck
+
+✓ responsive preview
+
+✓ browser console
+
+✓ accessibility audit
+
+Report:
+
+Section A — Files modified
+
+Section B — UI polish
+
+Section C — Responsive fixes
+
+Section D — Accessibility
+
+Section E — Build
+
+Section F — Production readiness
+
+If no issues remain, state clearly:
+
+"The frontend is production-ready."
+
+Do not perform deployment or Supabase configuration during this phase.

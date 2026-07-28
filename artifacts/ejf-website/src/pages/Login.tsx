@@ -78,7 +78,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0e1f3d] via-[#1a3a6e] to-[#0e1f3d] flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0e1f3d] via-[#1a3a6e] to-[#0e1f3d] flex items-center justify-center px-4 py-6 sm:py-8 relative overflow-hidden">
       {/* Decorative bg */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       <div className="absolute top-0 right-0 w-80 h-80 bg-[#d4a017]/10 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
@@ -86,7 +86,7 @@ export default function Login() {
 
       <div className="relative w-full max-w-md">
         {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
+        <div className="flex flex-col items-center mb-5 sm:mb-6">
           <Link href="/">
             <img src="/logo.png" alt="Economic Justice Forum Logo" className="h-14 w-auto object-contain shadow-lg mb-3 cursor-pointer hover:scale-105 transition-transform" />
           </Link>
@@ -127,7 +127,7 @@ export default function Login() {
             </Link>
           </div>
 
-          <div className="p-7">
+          <div className="p-6 sm:p-7">
             {tab === "login" ? (
               <>
                 {showForgot ? (
