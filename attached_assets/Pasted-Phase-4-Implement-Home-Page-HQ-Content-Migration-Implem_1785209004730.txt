@@ -1,0 +1,135 @@
+Phase 4 – Implement Home Page HQ Content Migration (Implementation Only)
+
+The planning and verification are complete.
+
+Now implement the Home page migration.
+
+Important
+
+Do not inspect again.
+
+Do not redesign.
+
+Do not improve visuals.
+
+Do not change animations.
+
+Do not change spacing.
+
+Do not change colors.
+
+Do not modify reusable components.
+
+Only update the content of src/pages/Home.tsx.
+
+The uploaded HQ documents are the single source of truth.
+
+Replace Section 1
+
+Remove:
+
+The Promise of Natural Wealth
+
+Replace it with the HQ-approved What We Believe content.
+
+Use the wording from the HQ documents exactly.
+
+Replace Section 2
+
+Remove:
+
+The EJF Idea
+
+Replace it with the HQ institutional philosophy.
+
+The content must align with the rewritten Our Philosophy page.
+
+Replace Section 3
+
+Delete the existing Strategic Platforms cards:
+
+Tsavo LifeBank™
+BlueGREEN Digital Justice Hub™
+IMPACT360™ Budget Power Lab™
+Policy, Law & Advocacy Lab™
+
+Replace them with the five official HQ Priority Areas:
+
+Natural Wealth & Climate Justice
+Public Finance & Economic Governance
+Democracy, Governance & Institutional Development
+Research, Innovation & Digital Transformation
+Economic Empowerment
+
+Reuse the existing card component.
+
+Do not redesign it.
+
+Add Strategic Partners
+
+Insert a new section immediately after the Priority Areas.
+
+Include exactly:
+
+Skill Addis — Addis Ababa, Ethiopia
+Initiative for Responsible Mining Assurance (IRMA) — Washington, D.C., United States
+Our Ocean Centres Kenya — Nairobi, Kenya
+Open Forest Protocol (OFP) — Lausanne, Switzerland
+NatureGrid — Lausanne, Switzerland
+Women in Mining Africa (WiM-Africa) — Freetown, Sierra Leone
+
+Use the existing card/grid styling.
+
+Replace Final CTA
+
+Remove:
+
+"Shape the Future With Us"
+
+Replace it with:
+
+"Let's Build Economic Justice Together"
+
+Use the HQ wording exactly.
+
+Keep the current CTA design.
+
+Update AI Assistant
+
+Remove every remaining response based on the previous institutional framework.
+
+Synchronize AI responses with:
+
+HQ Vision
+HQ Mission
+HQ Priority Areas
+HQ Strategic Partners
+HQ Philosophy
+Verification
+
+Before finishing:
+
+Build the project.
+Verify no console errors.
+Confirm no remaining references to:
+The Promise of Natural Wealth
+The EJF Idea
+Tsavo LifeBank™
+BlueGREEN Digital Justice Hub™
+IMPACT360™ Budget Power Lab™
+Policy, Law & Advocacy Lab™
+
+except where intentionally preserved in archived files.
+
+Final Report
+
+Return:
+
+Files modified
+Sections migrated
+Build status
+Console status
+Remaining HQ differences
+Updated completion percentage
+
+Do not perform any other changes outside src/pages/Home.tsx unless fixing AI responses that directly depend on the Home page content.
