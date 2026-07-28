@@ -1,0 +1,115 @@
+Perform a FINAL HQ CERTIFICATION AUDIT across the ENTIRE EJF project.
+
+Do NOT modify any files until the audit is complete.
+
+Inspect every active page and every AI knowledge source.
+
+Files to inspect include (but are not limited to):
+
+- Home.tsx
+- Philosophy.tsx
+- Research.tsx
+- Insights.tsx
+- Contact.tsx
+- Footer.tsx
+- Navbar.tsx
+- WelcomeAnimation.tsx
+- Chat Assistant / AI knowledge files
+- constants.ts
+- data.ts
+- JSON files
+- markdown files
+- prompt files
+- search indexes
+- any static content source
+- any helper file that stores institutional text
+
+Search the entire project for ALL old institutional language including:
+
+"The Promise of Natural Wealth"
+
+"The EJF Idea"
+
+"Natural Wealth fulfils its highest purpose"
+
+"A Just World Where Natural Wealth Creates Equitable and Sustainable Prosperity"
+
+"Strengthening the Relationship Between People and Natural Capital Through Economic Justice"
+
+"Tsavo LifeBank"
+
+"BlueGREEN Digital Justice Hub"
+
+"IMPACT360"
+
+"Policy Law & Advocacy Lab"
+
+"Our Strategic Platforms"
+
+"Shape the Future With Us"
+
+"Natural Capital"
+
+"host communities"
+
+"How can Natural Wealth fulfil its highest purpose?"
+
+"People and Natural Capital are inseparable"
+
+Also search for:
+
+Vision
+
+Mission
+
+Head Office
+
+Wundanyi
+
+old AI assistant responses
+
+old quick replies
+
+old navigation references
+
+old footer text
+
+Verify every occurrence.
+
+For EACH occurrence:
+
+• show file name
+• line number
+• whether active or dead code
+• whether it should remain
+• whether it conflicts with HQ documents
+
+Then produce:
+
+SECTION A
+Remaining HQ mismatches
+
+SECTION B
+Residual old institutional language
+
+SECTION C
+Broken links
+
+SECTION D
+404 routes
+
+SECTION E
+Unused legacy files
+
+SECTION F
+Production readiness score (0–100)
+
+SECTION G
+Exact percentage of HQ compliance
+
+Only after the audit,
+recommend any remaining corrections.
+
+Do not make speculative recommendations.
+
+Base every finding only on the uploaded HQ documents and the active codebase.
