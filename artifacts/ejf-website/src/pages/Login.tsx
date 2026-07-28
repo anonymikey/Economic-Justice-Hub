@@ -113,6 +113,14 @@ export default function Login() {
             ))}
           </div>
 
+          <div className="mx-4 mt-4 rounded-2xl border border-[#d4a017]/35 bg-[#0e1f3d]/[0.04] px-4 py-3.5" role="status">
+            <p className="text-sm font-bold text-[#0e1f3d]">🚧 Account System Under Maintenance</p>
+            <p className="mt-1 text-xs leading-relaxed text-gray-600">
+              We&apos;re currently completing the account system. For now, everyone can explore the website as a Guest.
+              User accounts, saved profiles and member features will be available soon. Thank you for your patience.
+            </p>
+          </div>
+
           <div className="p-7">
             {tab === "login" ? (
               <>
@@ -134,7 +142,7 @@ export default function Login() {
                       <div>
                         <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Email Address</label>
                         <input
-                          type="email" required placeholder="your@email.com"
+                          type="email" required autoComplete="email" placeholder="your@email.com"
                           value={resetEmail} onChange={(e) => setResetEmail(e.target.value)}
                           onFocus={() => setFocused("reset-email")} onBlur={() => setFocused(null)}
                           className={inputClass("reset-email")}
@@ -201,7 +209,7 @@ export default function Login() {
                         <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Password</label>
                         <div className="relative">
                           <input
-                            type={showPass ? "text" : "password"} required placeholder="••••••••" minLength={6}
+                          type={showPass ? "text" : "password"} required autoComplete="current-password" placeholder="••••••••" minLength={6}
                             value={password} onChange={(e) => setPassword(e.target.value)}
                             onFocus={() => setFocused("pass")} onBlur={() => setFocused(null)}
                             className={`${inputClass("pass")} pr-12`}
@@ -271,7 +279,7 @@ export default function Login() {
                   <div>
                     <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Full Name</label>
                     <input
-                      type="text" required placeholder="Your full name"
+                      type="text" required autoComplete="name" placeholder="Your full name"
                       value={name} onChange={(e) => setName(e.target.value)}
                       onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
                       className={inputClass("name")}
@@ -280,7 +288,7 @@ export default function Login() {
                   <div>
                     <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Email Address</label>
                     <input
-                      type="email" required placeholder="your@email.com"
+                      type="email" required autoComplete="email" placeholder="your@email.com"
                       value={email} onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
                       className={inputClass("email")}
@@ -290,7 +298,7 @@ export default function Login() {
                     <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Password</label>
                     <div className="relative">
                       <input
-                        type={showPass ? "text" : "password"} required placeholder="Min. 6 characters" minLength={6}
+                        type={showPass ? "text" : "password"} required autoComplete="new-password" placeholder="Min. 6 characters" minLength={6}
                         value={password} onChange={(e) => setPassword(e.target.value)}
                         onFocus={() => setFocused("pass")} onBlur={() => setFocused(null)}
                         className={`${inputClass("pass")} pr-12`}

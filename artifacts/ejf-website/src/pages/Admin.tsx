@@ -546,7 +546,7 @@ CREATE POLICY "Admin deletes contact_submissions"
                   </div>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0 ml-3">
-                  <span className="text-xs text-gray-400">{fmt(r.submitted_at || (r as Record<string, string>).created_at)}</span>
+                  <span className="text-xs text-gray-400">{fmt(r.submitted_at || (r as unknown as Record<string, string>).created_at)}</span>
                   <svg className={`w-4 h-4 text-gray-400 transition-transform ${expanded === r.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </div>
               </button>

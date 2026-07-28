@@ -1,0 +1,162 @@
+PHASE 5B — TECHNICAL QA, RESPONSIVENESS & GUEST ACCESS
+
+Phase 5A is complete.
+
+This phase focuses ONLY on technical polish, responsiveness, user experience, and temporary guest-access messaging.
+
+DO NOT redesign the website.
+
+DO NOT change the Deep Navy + Gold branding.
+
+DO NOT alter layouts unnecessarily.
+
+DO NOT modify the HQ institutional content.
+
+Preserve all animations and responsiveness unless specifically improving them.
+
+====================================================
+TASK 1 — COOKIE BANNER RESPONSIVENESS
+====================================================
+
+Inspect CookieBanner.tsx.
+
+Fix all responsiveness issues.
+
+Requirements:
+
+• Desktop looks clean.
+• Tablet layout is balanced.
+• Mobile (320px–480px) fits without overflow.
+• Buttons should stack neatly on smaller screens.
+• Text should wrap naturally.
+• No horizontal scrolling.
+• Banner should not cover important navigation.
+• Improve spacing and padding where necessary.
+• Preserve the existing design language.
+
+Also fix the existing TypeScript warning in CookieBanner.tsx if it can be corrected safely.
+
+====================================================
+TASK 2 — TEMPORARY MAINTENANCE MESSAGE
+====================================================
+
+Until authentication is completed, users should be informed that account features are still under development.
+
+On BOTH:
+
+• Login page
+• Sign Up / Register page
+
+add a professional information notice.
+
+Suggested wording:
+
+--------------------------------
+
+🚧 Account System Under Maintenance
+
+We're currently completing the account system.
+
+For now, everyone can explore the website as a Guest.
+
+User accounts, saved profiles and member features will be available soon.
+
+Thank you for your patience.
+
+--------------------------------
+
+Requirements:
+
+• Use an attractive info card.
+• Match the site's Deep Navy + Gold branding.
+• Responsive.
+• Accessible.
+• Do NOT block access to Guest browsing.
+• Keep login/register forms intact for future activation.
+
+====================================================
+TASK 3 — TECHNICAL QA
+====================================================
+
+Inspect:
+
+• Navbar
+• Footer
+• Cookie Banner
+• Welcome Animation
+• Home
+• Philosophy
+• Research
+• Insights
+• Events
+• Contact
+
+Verify:
+
+✓ responsive on desktop
+✓ responsive on tablet
+✓ responsive on mobile
+
+Fix any:
+
+• overflow
+• broken spacing
+• misaligned buttons
+• text clipping
+• image overflow
+• z-index conflicts
+
+without redesigning.
+
+====================================================
+TASK 4 — TYPECHECK CLEANUP
+====================================================
+
+Attempt to safely fix the remaining typecheck issues:
+
+CookieBanner.tsx
+
+Admin.tsx
+
+Only if they are straightforward and do not change functionality.
+
+====================================================
+TASK 5 — FINAL VERIFICATION
+====================================================
+
+Run:
+
+✓ production build
+
+✓ typecheck
+
+✓ browser console check
+
+✓ responsive preview
+
+Produce a report containing:
+
+SECTION A
+Files modified
+
+SECTION B
+Cookie banner improvements
+
+SECTION C
+Maintenance notice implementation
+
+SECTION D
+Responsive fixes
+
+SECTION E
+Typecheck status
+
+SECTION F
+Build status
+
+SECTION G
+Production readiness percentage
+
+Do NOT perform SEO, metadata, deployment, sitemap or robots.txt work yet.
+
+This completes Phase 5B only.

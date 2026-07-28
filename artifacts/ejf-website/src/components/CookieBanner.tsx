@@ -44,6 +44,7 @@ export default function CookieBanner() {
       const t = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, []);
 
   const dismiss = () => {
@@ -97,7 +98,7 @@ export default function CookieBanner() {
     >
       {/* Backdrop blur strip */}
       <div className="bg-[#0a1628]/97 backdrop-blur-md border-t-2 border-[#d4a017]/60 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 max-h-[min(70vh,32rem)] overflow-y-auto">
 
           {!showSettings ? (
             /* ── Default banner ── */
@@ -120,22 +121,22 @@ export default function CookieBanner() {
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-wrap gap-2 flex-shrink-0 w-full lg:w-auto">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 flex-shrink-0 w-full lg:w-auto">
                 <button
                   onClick={() => setShowSettings(true)}
-                  className="px-4 py-2 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
+                  className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
                 >
                   ⚙️ Manage
                 </button>
                 <button
                   onClick={acceptEssential}
-                  className="px-4 py-2 text-xs font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 rounded-lg transition-all"
+                  className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 rounded-lg transition-all"
                 >
                   Essential Only
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="px-5 py-2 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105 shadow-md"
+                  className="w-full sm:w-auto px-5 py-2 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105 shadow-md"
                 >
                   Accept All ✓
                 </button>
@@ -152,7 +153,7 @@ export default function CookieBanner() {
                     <p className="text-white/40 text-xs">Choose which cookies you allow</p>
                   </div>
                 </div>
-                <button onClick={() => setShowSettings(false)} className="text-white/40 hover:text-white text-xl leading-none">✕</button>
+                <button aria-label="Close cookie preferences" onClick={() => setShowSettings(false)} className="text-white/40 hover:text-white text-xl leading-none">✕</button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
@@ -188,22 +189,22 @@ export default function CookieBanner() {
                 />
               </div>
 
-              <div className="flex flex-wrap gap-2 justify-end">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 justify-end">
                 <button
                   onClick={acceptEssential}
-                  className="px-4 py-2 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
+                  className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
                 >
                   Essential Only
                 </button>
                 <button
                   onClick={saveCustom}
-                  className="px-5 py-2 text-xs font-bold bg-[#0e1f3d] border border-[#d4a017]/50 hover:bg-[#1a3a6e] text-white rounded-lg transition-all"
+                  className="w-full sm:w-auto px-5 py-2 text-xs font-bold bg-[#0e1f3d] border border-[#d4a017]/50 hover:bg-[#1a3a6e] text-white rounded-lg transition-all"
                 >
                   Save My Choices
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="px-5 py-2 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105"
+                  className="w-full sm:w-auto px-5 py-2 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105"
                 >
                   Accept All ✓
                 </button>
@@ -235,6 +236,7 @@ function CookieToggleRow({
         </div>
         {/* Toggle */}
         <button
+          aria-label={`${label} cookies ${checked ? "enabled" : "disabled"}`}
           type="button"
           disabled={disabled}
           onClick={() => !disabled && onChange(!checked)}
