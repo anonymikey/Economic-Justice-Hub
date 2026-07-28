@@ -1,0 +1,127 @@
+PHASE 5C — COOKIE UX & GUEST ACCESS
+
+Phase 5B is complete.
+
+This phase focuses ONLY on improving the user experience of the cookie banner and introducing Guest Access.
+
+Do NOT redesign the website.
+
+Do NOT modify HQ content.
+
+Do NOT change branding, colors or page layouts.
+
+==================================================
+TASK 1 — IMPROVE COOKIE BANNER UX
+==================================================
+
+The current cookie banner is responsive but visually occupies too much vertical space.
+
+Improve it while keeping the same Deep Navy + Gold style.
+
+Requirements:
+
+Desktop
+
+• Reduce overall height.
+• Make the banner more compact.
+• Keep all buttons visible without excessive spacing.
+• Align icon, title and text more efficiently.
+• Prevent it from covering a large portion of the page.
+
+Tablet
+
+• Compact layout.
+• Buttons may wrap naturally.
+
+Mobile
+
+• Maintain readability.
+• Buttons stack neatly.
+• No horizontal scrolling.
+
+Behavior
+
+• Once accepted or declined, the banner should never appear again unless cookies are cleared.
+• Add a smooth slide-up / slide-down animation.
+• Ensure z-index doesn't interfere with navigation or dialogs.
+
+==================================================
+TASK 2 — ADD "CONTINUE AS GUEST"
+==================================================
+
+The account system is still under maintenance.
+
+Users should be encouraged to browse without creating an account.
+
+On BOTH:
+
+• Login
+• Create Account
+
+add a secondary button beneath the maintenance notice.
+
+Button text:
+
+Continue as Guest
+
+Button style:
+
+Outlined Deep Navy + Gold
+
+Behavior:
+
+Navigate directly to the Home page (/)
+
+No authentication required.
+
+This should be presented as the recommended option until authentication is completed.
+
+==================================================
+TASK 3 — LOGIN PAGE UX
+==================================================
+
+Improve spacing so that:
+
+• Maintenance notice
+• Continue as Guest button
+• Login/Create Account forms
+
+all fit comfortably on standard laptop screens without requiring scrolling.
+
+Do not redesign the page.
+
+==================================================
+TASK 4 — VERIFY
+==================================================
+
+Run:
+
+✓ production build
+
+✓ typecheck
+
+✓ browser preview
+
+✓ responsive verification
+
+Provide a report with:
+
+Section A
+Files modified
+
+Section B
+Cookie banner improvements
+
+Section C
+Guest Access implementation
+
+Section D
+Responsive verification
+
+Section E
+Build & Typecheck
+
+Section F
+Production readiness percentage
+
+Do not perform SEO, deployment, metadata, or API work during this phase.

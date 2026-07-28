@@ -98,14 +98,14 @@ export default function CookieBanner() {
     >
       {/* Backdrop blur strip */}
       <div className="bg-[#0a1628]/97 backdrop-blur-md border-t-2 border-[#d4a017]/60 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 max-h-[min(70vh,32rem)] overflow-y-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 max-h-[min(70vh,32rem)] overflow-y-auto">
 
           {!showSettings ? (
             /* ── Default banner ── */
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-3">
               {/* Icon + text */}
               <div className="flex items-start gap-3 flex-1 min-w-0">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#d4a017]/20 flex items-center justify-center text-xl mt-0.5">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#d4a017]/20 flex items-center justify-center text-lg mt-0.5">
                   🍪
                 </div>
                 <div className="min-w-0">
@@ -124,19 +124,19 @@ export default function CookieBanner() {
               <div className="flex flex-col sm:flex-row flex-wrap gap-2 flex-shrink-0 w-full lg:w-auto">
                 <button
                   onClick={() => setShowSettings(true)}
-                  className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
+                  className="w-full sm:w-auto px-3.5 py-1.5 text-xs font-semibold text-white/70 border border-white/20 hover:border-white/50 hover:text-white rounded-lg transition-all"
                 >
                   ⚙️ Manage
                 </button>
                 <button
                   onClick={acceptEssential}
-                  className="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 rounded-lg transition-all"
+                  className="w-full sm:w-auto px-3.5 py-1.5 text-xs font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 rounded-lg transition-all"
                 >
                   Essential Only
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="w-full sm:w-auto px-5 py-2 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105 shadow-md"
+                  className="w-full sm:w-auto px-4 py-1.5 text-xs font-bold bg-[#d4a017] hover:bg-[#b8891a] text-white rounded-lg transition-all hover:scale-105 shadow-md"
                 >
                   Accept All ✓
                 </button>

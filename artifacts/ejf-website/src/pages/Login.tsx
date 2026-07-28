@@ -119,6 +119,12 @@ export default function Login() {
               We&apos;re currently completing the account system. For now, everyone can explore the website as a Guest.
               User accounts, saved profiles and member features will be available soon. Thank you for your patience.
             </p>
+            <Link
+              href="/"
+              className="mt-3 flex w-full items-center justify-center rounded-xl border border-[#d4a017] bg-white px-4 py-2.5 text-sm font-bold text-[#0e1f3d] transition-colors hover:bg-[#0e1f3d] hover:text-white"
+            >
+              Continue as Guest
+            </Link>
           </div>
 
           <div className="p-7">
@@ -199,7 +205,7 @@ export default function Login() {
                       <div>
                         <label className="block text-xs font-bold text-[#0e1f3d] mb-1.5 uppercase tracking-wider">Email Address</label>
                         <input
-                          type="email" required placeholder="your@email.com"
+                          type="email" required autoComplete="username" placeholder="your@email.com"
                           value={email} onChange={(e) => setEmail(e.target.value)}
                           onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
                           className={inputClass("email")}
