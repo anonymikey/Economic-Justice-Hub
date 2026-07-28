@@ -1,0 +1,135 @@
+Phase 4 – Home Page HQ Content Migration
+
+The visual polish is complete.
+
+Now perform the Home page content migration using the uploaded Headquarters documents as the only source of truth.
+
+Do not redesign the page.
+
+Preserve:
+
+Existing layout
+Hero design
+Images
+Animations
+Cards
+Responsive behaviour
+Deep Navy + Gold branding
+Scroll effects
+Typography
+Component structure
+
+Only replace institutional content.
+
+1. Replace the Introduction
+
+Remove:
+
+The Promise of Natural Wealth
+
+Replace with the HQ-approved What We Believe content.
+
+Use the wording from the Headquarters documents.
+
+Do not paraphrase.
+
+Do not shorten.
+
+2. Replace the EJF Idea
+
+Remove the old Natural Wealth-first narrative.
+
+Replace it with the HQ institutional philosophy centred on:
+
+Human Dignity
+Economic Rights
+People
+Institutions
+Economic Systems
+Opportunity
+Transformation
+Economic Justice
+
+Maintain the existing section layout.
+
+3. Replace Strategic Platforms
+
+Remove these cards:
+
+Tsavo LifeBank™
+BlueGREEN Digital Justice Hub™
+IMPACT360™ Budget Power Lab™
+Policy, Law & Advocacy Lab™
+
+Replace them with the five official HQ Priority Areas:
+
+Natural Wealth & Climate Justice
+Public Finance & Economic Governance
+Democracy, Governance & Institutional Development
+Research, Innovation & Digital Transformation
+Economic Empowerment
+
+Keep the same visual card design and animations.
+
+4. Add Strategic Partners
+
+Create a dedicated Strategic Partners section.
+
+Include exactly:
+
+Skill Addis — Addis Ababa, Ethiopia
+Initiative for Responsible Mining Assurance (IRMA) — Washington, D.C., United States
+Our Ocean Centres Kenya — Nairobi, Kenya
+Open Forest Protocol (OFP) — Lausanne, Switzerland
+NatureGrid — Lausanne, Switzerland
+Women in Mining Africa (WiM-Africa) — Freetown, Sierra Leone
+
+Use the existing design language.
+
+5. Replace the Final CTA
+
+Remove:
+
+"Shape the Future With Us"
+
+Replace with:
+
+"Let's Build Economic Justice Together"
+
+Use the Headquarters wording exactly.
+
+Preserve the CTA design.
+
+6. Update AI Assistant
+
+Remove all remaining references to:
+
+Natural Wealth fulfilling its highest purpose
+Old Strategic Platforms
+Deleted pages
+Previous institutional philosophy
+
+Ensure AI responses match the HQ documents.
+
+7. Verification
+
+After completion provide:
+
+Files modified
+Sections replaced
+HQ content added
+Remaining references to the old institutional framework (if any)
+Build status
+Console status
+Overall completion percentage
+One more recommendation
+
+Before publishing, ask Replit to generate a simple content traceability table like this:
+
+Website Section	HQ Document	Status
+Home Hero	HQ PDF Page X	✅
+What We Believe	HQ DOCX Section	✅
+Vision	HQ PDF	✅
+Mission	HQ PDF	✅
+Priority Areas	HQ Institutional Profile	✅
+Strategic Partners	HQ Institutional Profile	✅
