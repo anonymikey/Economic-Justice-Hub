@@ -46,7 +46,7 @@ export default function Navbar() {
   const visibleLinks = navLinks.filter((link) => !isActive(link.href));
 
   return (
-    <nav className={`bg-[#0e1f3d] sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-2xl" : "shadow-lg"}`}>
+    <nav className={`bg-[#0e1f3d]/95 backdrop-blur-md sticky top-0 z-50 transition-all duration-300 border-b border-[#C9A24A]/10 ${scrolled ? "shadow-2xl shadow-[#08152F]/30" : "shadow-lg"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* ── Single row: logo | links | actions ── */}
@@ -94,7 +94,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
             <Link
               href="/donate"
-              className="bg-[#d4a017] hover:bg-[#b8891a] text-white font-bold px-5 py-2 rounded-lg text-sm transition-colors shadow-md whitespace-nowrap"
+                className="ejf-shimmer bg-[#d4a017] hover:bg-[#b8891a] text-white font-bold px-5 py-2 rounded-lg text-sm transition-all shadow-md hover:-translate-y-0.5 whitespace-nowrap"
             >
               Donate
             </Link>

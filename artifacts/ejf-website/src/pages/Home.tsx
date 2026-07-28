@@ -48,7 +48,7 @@ function HeroSection() {
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: "clamp(560px, 88vh, 820px)" }}>
+    <section className="relative w-full overflow-hidden ejf-grain" style={{ height: "clamp(560px, 88vh, 820px)" }}>
 
       {HERO_SLIDES.map((s, i) => {
         const isActive = i === current;
@@ -72,12 +72,15 @@ function HeroSection() {
         );
       })}
 
-      <div className="absolute inset-0 z-10" style={{
-        background: "linear-gradient(to top, rgba(8,21,47,0.95) 0%, rgba(8,21,47,0.62) 45%, rgba(8,21,47,0.28) 100%)",
+       <div className="absolute inset-0 z-10" style={{
+         background: "linear-gradient(to top, rgba(5,14,34,0.98) 0%, rgba(8,21,47,0.68) 43%, rgba(8,21,47,0.22) 100%)",
       }} />
       <div className="absolute inset-0 z-10" style={{
-        background: "linear-gradient(to right, rgba(8,21,47,0.55) 0%, transparent 65%)",
+         background: "linear-gradient(105deg, rgba(5,14,34,0.82) 0%, rgba(8,21,47,0.42) 42%, transparent 76%)",
       }} />
+       <div className="absolute inset-0 z-10 opacity-70" style={{
+         background: "radial-gradient(circle at 72% 22%, rgba(201,162,74,0.18), transparent 22rem)",
+       }} />
 
       <div className="absolute inset-0 z-20 flex flex-col justify-end pb-20 md:pb-28 px-6 md:px-16 max-w-6xl">
 
@@ -92,7 +95,7 @@ function HeroSection() {
         <h1 key={`h1-${current}`}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 max-w-4xl"
           style={{ animation: "heroSlideUp 0.7s 0.35s cubic-bezier(0.4,0,0.2,1) both", textShadow: "0 2px 32px rgba(0,0,0,0.5)" }}>
-          A Just World Where Natural Wealth Creates Equitable and Sustainable Prosperity
+           Economic Justice for All.
         </h1>
 
         <p key={`sub-${current}`}
@@ -104,17 +107,17 @@ function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-3"
           style={{ animation: "heroSlideUp 0.7s 0.6s cubic-bezier(0.4,0,0.2,1) both" }}>
           <Link href="/research"
-            className="inline-flex items-center justify-center gap-2 bg-[#C9A24A] hover:bg-[#b08a35] text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm shadow-lg shadow-[#C9A24A]/30">
+             className="ejf-shimmer inline-flex items-center justify-center gap-2 bg-[#C9A24A] hover:bg-[#b08a35] text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm shadow-lg shadow-[#C9A24A]/30 hover:-translate-y-0.5">
             Explore Our Work →
           </Link>
           {user ? (
             <a href="https://ejf-members-registration.mgx.world" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm">
+               className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm hover:-translate-y-0.5">
               📋 Register with Us
             </a>
           ) : (
             <Link href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm">
+               className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white font-bold px-8 py-3.5 rounded-xl transition-all text-sm hover:-translate-y-0.5">
               Partner With Us
             </Link>
           )}
