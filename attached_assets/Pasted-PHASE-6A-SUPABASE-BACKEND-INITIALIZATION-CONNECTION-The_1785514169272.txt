@@ -1,0 +1,134 @@
+PHASE 6A — SUPABASE BACKEND INITIALIZATION & CONNECTION
+
+The frontend is complete.
+
+Do NOT redesign any UI.
+
+Do NOT modify HQ institutional content.
+
+Do NOT change branding, colors, layouts, animations, responsiveness, SEO, or metadata.
+
+This phase is ONLY for preparing the project to connect to the new Supabase backend.
+
+==================================================
+STEP 1 — INSPECT THE PROJECT
+==================================================
+
+Before making ANY changes:
+
+Inspect the existing codebase and determine:
+
+• Current Supabase client configuration
+• Existing authentication flow
+• Existing database queries
+• Existing environment variables
+• Existing migrations
+• Existing storage usage
+• Existing admin functionality
+• Existing protected routes
+
+Produce a summary showing:
+
+- Files using Supabase
+- Required environment variables
+- Expected database tables
+- Storage buckets referenced
+- Existing RLS expectations
+- Existing authentication providers
+
+Do NOT make assumptions.
+
+==================================================
+STEP 2 — VERIFY NEW SUPABASE READINESS
+==================================================
+
+Prepare the project to connect to a BRAND NEW Supabase project.
+
+Do NOT hardcode keys.
+
+Verify that the application is ready to receive:
+
+SUPABASE_URL
+
+SUPABASE_ANON_KEY
+
+SUPABASE_SERVICE_ROLE_KEY
+
+If additional environment variables are required,
+list them clearly.
+
+==================================================
+STEP 3 — DATABASE AUDIT
+==================================================
+
+Inspect the code and determine:
+
+• Required tables
+• Required columns
+• Required relationships
+• Required indexes
+• Required policies
+• Required storage buckets
+
+Generate a complete checklist.
+
+Do NOT create them yet.
+
+==================================================
+STEP 4 — AUTHENTICATION AUDIT
+==================================================
+
+Determine exactly which authentication features are expected by the frontend.
+
+Examples:
+
+• Sign up
+• Login
+• Logout
+• Email verification
+• Password reset
+• User profiles
+• Admin users
+• Session persistence
+• Guest browsing
+
+Identify any missing backend requirements.
+
+==================================================
+STEP 5 — OUTPUT
+==================================================
+
+Provide a report with:
+
+SECTION A
+Supabase files found
+
+SECTION B
+Environment variables required
+
+SECTION C
+Database schema required
+
+SECTION D
+Storage buckets required
+
+SECTION E
+Authentication requirements
+
+SECTION F
+Migration readiness
+
+SECTION G
+Recommended implementation order
+
+IMPORTANT:
+
+This phase is ANALYSIS ONLY.
+
+Do NOT modify code.
+
+Do NOT generate migrations.
+
+Do NOT connect to Supabase yet.
+
+The goal is to fully understand the existing project before connecting it to the new backend.
