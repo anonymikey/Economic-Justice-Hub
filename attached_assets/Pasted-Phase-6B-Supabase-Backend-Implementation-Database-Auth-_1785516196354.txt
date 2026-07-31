@@ -1,0 +1,256 @@
+Phase 6B — Supabase Backend Implementation (Database, Auth & API Connection)
+
+The Phase 6A audit is approved.
+
+Begin implementing the Supabase backend using the new Supabase project.
+
+Scope
+
+Implement the backend only.
+
+Do not redesign the website.
+
+Do not change branding, colors, animations, layout, typography, SEO, metadata, routing, or HQ content.
+
+Do not modify the completed Home, Philosophy, Research, Footer, Cookie Banner, or visual work unless required for backend integration.
+
+1. Connect the project to Supabase
+
+Use the existing frontend client.
+
+Connect the API server to the new Supabase project.
+
+Ensure the project uses:
+
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+
+The Service Role Key must remain server-side only.
+
+Never expose it to the frontend.
+
+2. Create the production database schema
+
+Create all required tables identified during Phase 6A.
+
+Required tables:
+
+users
+events
+publications
+contact_submissions
+newsletter_subscriptions
+donations
+pre_approved_admins
+
+Use UUID primary keys.
+
+Use consistent timestamp naming.
+
+Use created_at and updated_at where appropriate.
+
+Create indexes for:
+
+published
+created_at
+date_iso
+email
+submitted_at
+
+Add the required UNIQUE constraints.
+
+3. Link Supabase Auth
+
+Synchronize
+
+auth.users
+
+with
+
+public.users
+
+using a secure trigger or function.
+
+Each authenticated user should automatically receive a public.users record.
+
+Store:
+
+full_name
+phone
+organization
+email
+is_admin
+
+Default:
+
+is_admin = false
+
+4. Configure Authentication
+
+Enable:
+
+✅ Email/password
+
+✅ Email verification
+
+✅ Password reset
+
+Leave Google OAuth disabled unless callback URLs are fully configured.
+
+Guest browsing must continue working.
+
+The maintenance notice on Login must remain unchanged.
+
+5. Row Level Security
+
+Enable RLS.
+
+Create secure production policies.
+
+Requirements:
+
+Public
+
+Read only published content.
+
+Members
+
+Read/update only their own profile.
+
+Admins
+
+Manage:
+
+events
+publications
+contact submissions
+newsletter
+donations
+users
+admin allowlist
+
+Anonymous users must NOT access admin data.
+
+Do NOT use broad authenticated = true policies.
+
+6. Connect existing API routes
+
+Make these functional:
+
+Contact form
+
+Newsletter signup
+
+Admin reads
+
+Admin deletes
+
+Admin updates
+
+Ensure all API routes use the Service Role Key safely.
+
+7. Configure Admin authorization
+
+Replace browser-only admin checks.
+
+Production admin authorization must come from Supabase.
+
+Support:
+
+public.users.is_admin
+
+and
+
+pre_approved_admins
+
+where appropriate.
+
+Never trust frontend-only admin variables.
+
+8. Verify existing frontend
+
+Ensure these pages work without redesign:
+
+Home
+
+Research
+
+Insights
+
+Events
+
+Contact
+
+Login
+
+Profile
+
+Admin
+
+Cookie Policy
+
+Donate
+
+Guest browsing
+
+Authentication should continue displaying the maintenance notice.
+
+9. Build verification
+
+Run:
+
+Typecheck
+
+Production build
+
+Verify:
+
+No Supabase connection errors
+
+No API startup errors
+
+No browser console errors
+
+Verify:
+
+Contact form writes
+
+Newsletter writes
+
+User signup
+
+User login
+
+Password reset
+
+Profile creation
+
+Profile update
+
+Session persistence
+
+Admin detection
+
+Deliverables
+
+Provide:
+
+Tables created
+RLS policies created
+Auth trigger created
+API routes verified
+Build status
+Typecheck status
+Remaining issues (if any)
+Before starting
+
+First ask me for the following values instead of using placeholders:
+
+Supabase Project URL
+Supabase Anon Key
+Supabase Service Role Key
+
+Do not hardcode credentials.
+
+Wait until I provide the real values before creating the connection.
