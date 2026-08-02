@@ -114,13 +114,16 @@ function ContactForm() {
     setLoading(true);
     try {
       const base = import.meta.env.BASE_URL?.replace(/\/$/, "") ?? "";
-      await fetch(`${base}/api/contact`, {
+      const response = await fetch(`${base}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), subject: form.subject.trim(), message: form.message.trim() }),
       });
+      if (!response.ok) throw new Error("Contact submission failed");
     } catch (err) {
       console.error("Contact submission error:", err);
+      setLoading(false);
+      return;
     }
     setLoading(false);
     setSubmitted(true);

@@ -410,7 +410,7 @@ function PublicationsTab() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const blank: Omit<DBPublication, "id" | "created_at" | "updated_at"> = { title: "", subtitle: "", description: "", tags: "", pdf_url: "", cover_image: "", published_at: "", featured: false, published: true };
+  const blank: Omit<DBPublication, "id" | "created_at" | "updated_at"> = { title: "", subtitle: "", description: "", tags: "", pdf_url: "", cover_image: "", published_at: null, featured: false, published: true };
   const [form, setForm] = useState(blank);
 
   const load = async () => { setLoading(true); const { data } = await adminQueries.publications.list(); setRows(data ?? []); setLoading(false); };
@@ -422,8 +422,9 @@ function PublicationsTab() {
   const save = async () => {
     if (!form.title.trim()) { setError("Title is required."); return; }
     setSaving(true); setError("");
-    if (modal === "add") { const { error } = await adminQueries.publications.insert(form); if (error) { setError(error.message); setSaving(false); return; } }
-    else if (modal && typeof modal === "object") { const { error } = await adminQueries.publications.update(modal.id, form); if (error) { setError(error.message); setSaving(false); return; } }
+    const payload = { ...form, published_at: form.published_at || null };
+    if (modal === "add") { const { error } = await adminQueries.publications.insert(payload); if (error) { setError(error.message); setSaving(false); return; } }
+    else if (modal && typeof modal === "object") { const { error } = await adminQueries.publications.update(modal.id, payload); if (error) { setError(error.message); setSaving(false); return; } }
     setSaving(false); setModal(null); load();
   };
   const del = async (id: string) => { if (!confirm("Delete this publication?")) return; await adminQueries.publications.delete(id); load(); };
@@ -489,11 +490,6 @@ function ContactsTab() {
     setLoading(true);
     setRlsError(false);
     let { data, error } = await adminQueries.contacts.list();
-    if (error) {
-      const fb = await adminQueries.contacts.listFallback();
-      data = fb.data;
-      error = fb.error;
-    }
     if (error && (error.code === "42501" || error.message?.toLowerCase().includes("policy") || error.message?.toLowerCase().includes("permission"))) {
       setRlsError(true);
     }
@@ -511,24 +507,9 @@ function ContactsTab() {
       {(rlsError || (!loading && rows.length === 0)) && (
         <div className="mb-4 bg-amber-50 border border-amber-200 rounded-2xl p-5">
           <p className="font-bold text-amber-800 text-sm mb-1">
-            {rlsError ? "Permission blocked — run this SQL in Supabase to fix:" : "No messages yet. If you've submitted the contact form and don't see anything, run this SQL in Supabase:"}
+            {rlsError ? "Permission blocked — apply the Phase 6B Supabase migration:" : "No messages yet. If you've submitted the contact form and don't see anything, verify the Phase 6B Supabase migration:"}
           </p>
-          <p className="text-amber-700 text-xs mb-3">Go to Supabase → SQL Editor → paste and run:</p>
-          <pre className="bg-white border border-amber-100 rounded-xl p-3 text-xs text-gray-700 overflow-x-auto whitespace-pre-wrap">{`-- Allow visitors to submit contact forms (without being logged in)
-CREATE POLICY "Public can submit contact"
-  ON public.contact_submissions FOR INSERT
-  TO anon, authenticated
-  WITH CHECK (true);
-
--- Allow admins to read all submissions
-CREATE POLICY "Admin reads contact_submissions"
-  ON public.contact_submissions FOR SELECT
-  TO authenticated USING (true);
-
--- Allow admins to delete submissions
-CREATE POLICY "Admin deletes contact_submissions"
-  ON public.contact_submissions FOR DELETE
-  TO authenticated USING (true);`}</pre>
+          <p className="text-amber-700 text-xs mb-3">Apply <code>supabase/migrations/20260802000000_ejf_backend.sql</code> in the Supabase SQL Editor, then refresh.</p>
           <button onClick={load} className="mt-3 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors">Refresh after running SQL</button>
         </div>
       )}
@@ -546,7 +527,7 @@ CREATE POLICY "Admin deletes contact_submissions"
                   </div>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0 ml-3">
-                  <span className="text-xs text-gray-400">{fmt(r.submitted_at || (r as unknown as Record<string, string>).created_at)}</span>
+                  <span className="text-xs text-gray-400">{fmt(r.created_at)}</span>
                   <svg className={`w-4 h-4 text-gray-400 transition-transform ${expanded === r.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </div>
               </button>
@@ -603,7 +584,7 @@ function DonationsTab() {
                   <td className="px-4 py-3 font-bold text-[#0e1f3d]">{Number(r.amount_kes).toLocaleString()}</td>
                   <td className="px-4 py-3"><Badge label={r.payment_method || "—"} color="bg-blue-50 text-blue-700" /></td>
                   <td className="px-4 py-3 text-gray-500 text-xs font-mono">{r.reference || "—"}</td>
-                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.donated_at)}</td>
+                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.created_at)}</td>
                 </tr>
               ))}
             </tbody>
@@ -678,7 +659,7 @@ function NewsletterTab() {
                 <tr key={r.id} className="hover:bg-gray-50/50">
                   <td className="px-4 py-3 text-[#0e1f3d] font-medium">{r.email}</td>
                   <td className="px-4 py-3 text-gray-500">{r.name || "—"}</td>
-                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.subscribed_at)}</td>
+                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.created_at)}</td>
                   <td className="px-4 py-3">{r.active ? <Badge label="Active" color="bg-green-50 text-green-700" /> : <Badge label="Unsubscribed" color="bg-gray-100 text-gray-500" />}</td>
                   <td className="px-4 py-3 text-right">
                     <button onClick={() => toggle(r)} className="text-[#0e1f3d] hover:underline text-xs font-bold mr-3">{r.active ? "Deactivate" : "Activate"}</button>
@@ -824,7 +805,7 @@ function UsersTab() {
 /* ═══════════════════════════════════════════
    ADMIN ACCESS TAB
 ══════════════════════════════════════════ */
-interface PreApprovedAdmin { id: string; email: string; added_at: string; }
+interface PreApprovedAdmin { id: string; email: string; created_at: string; }
 
 function AdminAccessTab() {
   const [rows, setRows] = useState<PreApprovedAdmin[]>([]);
@@ -875,18 +856,7 @@ function AdminAccessTab() {
     return (
       <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
         <h3 className="font-bold text-amber-800 mb-2">One-time setup required</h3>
-        <p className="text-amber-700 text-sm mb-4">Run the following SQL in your Supabase SQL editor to enable admin email management:</p>
-        <pre className="bg-white border border-amber-200 rounded-xl p-4 text-xs text-gray-800 overflow-x-auto whitespace-pre-wrap">{`CREATE TABLE IF NOT EXISTS public.pre_approved_admins (
-  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  email text UNIQUE NOT NULL,
-  added_at timestamptz DEFAULT now()
-);
-ALTER TABLE public.pre_approved_admins ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow all for authenticated users"
-  ON public.pre_approved_admins FOR ALL
-  TO authenticated
-  USING (true)
-  WITH CHECK (true);`}</pre>
+        <p className="text-amber-700 text-sm mb-4">Apply <code>supabase/migrations/20260802000000_ejf_backend.sql</code> in your Supabase SQL Editor to enable secure admin email management.</p>
         <button onClick={load} className="mt-4 bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors">Check again after running SQL</button>
       </div>
     );
@@ -940,7 +910,7 @@ CREATE POLICY "Allow all for authenticated users"
               {rows.map(r => (
                 <tr key={r.id} className="hover:bg-gray-50/50">
                   <td className="px-4 py-3 font-medium text-[#0e1f3d]">{r.email}</td>
-                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.added_at)}</td>
+                  <td className="px-4 py-3 text-gray-400 text-xs">{fmt(r.created_at)}</td>
                   <td className="px-4 py-3 text-right">
                     <button onClick={() => remove(r.email)} className="text-red-500 hover:underline text-xs font-bold">Remove</button>
                   </td>

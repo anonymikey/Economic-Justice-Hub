@@ -34,7 +34,7 @@ export interface DBPublication {
   tags: string;
   pdf_url: string;
   cover_image: string;
-  published_at: string;
+  published_at: string | null;
   featured: boolean;
   published: boolean;
   created_at: string;
@@ -47,7 +47,7 @@ export interface DBContact {
   email: string;
   subject: string;
   message: string;
-  submitted_at: string;
+  created_at: string;
 }
 
 export interface DBDonation {
@@ -58,14 +58,15 @@ export interface DBDonation {
   payment_method: string;
   reference: string;
   message: string;
-  donated_at: string;
+  created_at: string;
 }
 
 export interface DBNewsletter {
   id: string;
   email: string;
   name: string;
-  subscribed_at: string;
+  created_at: string;
+  updated_at: string;
   active: boolean;
 }
 
@@ -102,15 +103,14 @@ export const adminQueries = {
     delete: (id: string) => supabase.from("publications").delete().eq("id", id),
   },
   contacts: {
-    list: () => supabase.from("contact_submissions").select("*").order("submitted_at", { ascending: false }),
-    listFallback: () => supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
+    list: () => supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
     delete: (id: string) => supabase.from("contact_submissions").delete().eq("id", id),
   },
   donations: {
-    list: () => supabase.from("donations").select("*").order("donated_at", { ascending: false }),
+    list: () => supabase.from("donations").select("*").order("created_at", { ascending: false }),
   },
   newsletter: {
-    list: () => supabase.from("newsletter_subscriptions").select("*").order("subscribed_at", { ascending: false }),
+    list: () => supabase.from("newsletter_subscriptions").select("*").order("created_at", { ascending: false }),
     listEmails: () => supabase.from("newsletter_subscriptions").select("email"),
     toggleActive: (id: string, active: boolean) => supabase.from("newsletter_subscriptions").update({ active }).eq("id", id),
     delete: (id: string) => supabase.from("newsletter_subscriptions").delete().eq("id", id),
@@ -126,7 +126,7 @@ export const adminQueries = {
     getByEmail: (email: string) => supabase.from("users").select("is_admin").eq("email", email).single(),
   },
   preApprovedAdmins: {
-    list: () => supabase.from("pre_approved_admins").select("*").order("added_at", { ascending: false }),
+    list: () => supabase.from("pre_approved_admins").select("*").order("created_at", { ascending: false }),
     add: (email: string) => supabase.from("pre_approved_admins").insert({ email: email.toLowerCase().trim() }).select().single(),
     remove: (email: string) => supabase.from("pre_approved_admins").delete().eq("email", email),
   },

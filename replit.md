@@ -33,6 +33,8 @@ The API server can be run separately:
 
 - `VITE_SUPABASE_URL` — Supabase project URL (set in `.replit` userenv)
 - `VITE_SUPABASE_ANON_KEY` — Supabase public anon key (set in `.replit` userenv)
+- `SUPABASE_SERVICE_ROLE_KEY` — Supabase server-only service role key (stored as a Replit Secret)
+- `RESEND_API_KEY` — optional server-only email notification key
 
 ## Key Commands
 

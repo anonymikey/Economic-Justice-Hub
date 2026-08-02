@@ -29,22 +29,16 @@ function getInitials(name: string) {
   return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
 }
 
-const DESIGNATED_ADMINS: string[] = (import.meta.env.VITE_ADMIN_EMAILS ?? "")
-  .split(",")
-  .map((e: string) => e.trim().toLowerCase())
-  .filter(Boolean);
-
-async function fetchIsAdmin(email: string): Promise<boolean> {
-  const normalizedEmail = email.trim().toLowerCase();
-  if (DESIGNATED_ADMINS.includes(normalizedEmail)) return true;
+async function fetchIsAdmin(): Promise<boolean> {
   try {
     const timeout = new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 6000));
-    const query = Promise.all([
-      supabase.from("users").select("is_admin").eq("email", email).maybeSingle(),
-      supabase.from("pre_approved_admins").select("email").eq("email", normalizedEmail).maybeSingle(),
-    ]).then(([usersRes, preApprovedRes]) =>
-      usersRes.data?.is_admin === true || preApprovedRes.data !== null
-    ).catch(() => false);
+    const query = (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      const usersRes = user
+        ? await supabase.from("users").select("is_admin").eq("id", user.id).maybeSingle()
+        : null;
+      return usersRes?.data?.is_admin === true;
+    })().catch(() => false);
     return await Promise.race([query, timeout]);
   } catch {
     return false;
@@ -54,7 +48,7 @@ async function fetchIsAdmin(email: string): Promise<boolean> {
 async function supabaseUserToEJF(supabaseUser: User): Promise<EJFUser> {
   const meta = supabaseUser.user_metadata ?? {};
   const name = meta.full_name ?? meta.name ?? supabaseUser.email?.split("@")[0] ?? "Member";
-  const isAdmin = await fetchIsAdmin(supabaseUser.email ?? "");
+  const isAdmin = await fetchIsAdmin();
   return {
     id: supabaseUser.id,
     name,
