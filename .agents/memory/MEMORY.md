@@ -1,3 +1,4 @@
 - [HQ documents as source of truth](hq-source-of-truth.md) — Institutional Profile PDF and EJF Website DOCX supersede website content when aligning EJF material.
 - [EJF philosophy framework](philosophy-framework.md) — People / Economic Systems / Human Dignity → Economic Justice, with the Doctrine, Natural Wealth Lens and iMagine Model as the defining tools.
 - [Supabase migration application](supabase-migration-application.md) — Hosted schema may need manual SQL Editor execution when no management SQL channel is available.
+- [Launch preparation boundaries](launch-preparation-boundaries.md) — Separate checked-in launch hooks from Vercel, Cloudflare, and Supabase production configuration.

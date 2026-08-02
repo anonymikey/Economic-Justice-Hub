@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useState } from "react";
 import { socialLinks } from "@/data/socialLinks";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 const exploreLinks = [
   { label: "Home", href: "/" },
@@ -28,6 +29,7 @@ export default function Footer() {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [subError, setSubError] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +42,7 @@ export default function Footer() {
       const res = await fetch(`${base}/api/newsletter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
+        body: JSON.stringify({ email: trimmed, captchaToken }),
       });
       if (res.ok) {
         setSubscribed(true);
@@ -195,6 +197,11 @@ export default function Footer() {
                       {loading ? "…" : "Subscribe"}
                     </button>
                   </form>
+                  <TurnstileWidget
+                    action="newsletter"
+                    onVerify={setCaptchaToken}
+                    onExpire={() => setCaptchaToken("")}
+                  />
                   {subError && <p className="text-white/80 text-xs mt-1.5">{subError}</p>}
                 </>
               )}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useLocation } from "wouter";
 import { adminQueries, DBEvent, DBProgram, DBPublication, DBContact, DBDonation, DBNewsletter, DBUser } from "@/lib/adminQueries";
+import { uploadPublicationAsset } from "@/lib/storage";
 import "./admin.css";
 
 /* ─── helpers ─── */
@@ -409,6 +410,8 @@ function PublicationsTab() {
   const [modal, setModal] = useState<null | "add" | DBPublication>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
 
   const blank: Omit<DBPublication, "id" | "created_at" | "updated_at"> = { title: "", subtitle: "", description: "", tags: "", pdf_url: "", cover_image: "", published_at: null, featured: false, published: true };
   const [form, setForm] = useState(blank);
@@ -416,13 +419,21 @@ function PublicationsTab() {
   const load = async () => { setLoading(true); const { data } = await adminQueries.publications.list(); setRows(data ?? []); setLoading(false); };
   useEffect(() => { load(); }, []);
 
-  const openAdd = () => { setForm(blank); setError(""); setModal("add"); };
-  const openEdit = (r: DBPublication) => { setForm({ title: r.title, subtitle: r.subtitle, description: r.description, tags: r.tags, pdf_url: r.pdf_url, cover_image: r.cover_image, published_at: r.published_at, featured: r.featured, published: r.published }); setError(""); setModal(r); };
+  const openAdd = () => { setForm(blank); setPdfFile(null); setCoverFile(null); setError(""); setModal("add"); };
+  const openEdit = (r: DBPublication) => { setForm({ title: r.title, subtitle: r.subtitle, description: r.description, tags: r.tags, pdf_url: r.pdf_url, cover_image: r.cover_image, published_at: r.published_at, featured: r.featured, published: r.published }); setPdfFile(null); setCoverFile(null); setError(""); setModal(r); };
 
   const save = async () => {
     if (!form.title.trim()) { setError("Title is required."); return; }
     setSaving(true); setError("");
-    const payload = { ...form, published_at: form.published_at || null };
+     let payload = { ...form, published_at: form.published_at || null };
+     try {
+       if (pdfFile) payload = { ...payload, pdf_url: await uploadPublicationAsset(pdfFile, "pdf") };
+       if (coverFile) payload = { ...payload, cover_image: await uploadPublicationAsset(coverFile, "cover") };
+     } catch (uploadError) {
+       setError(uploadError instanceof Error ? uploadError.message : "Unable to upload publication asset.");
+       setSaving(false);
+       return;
+     }
     if (modal === "add") { const { error } = await adminQueries.publications.insert(payload); if (error) { setError(error.message); setSaving(false); return; } }
     else if (modal && typeof modal === "object") { const { error } = await adminQueries.publications.update(modal.id, payload); if (error) { setError(error.message); setSaving(false); return; } }
     setSaving(false); setModal(null); load();
@@ -464,6 +475,10 @@ function PublicationsTab() {
             <div><label className={labelCls}>Tags</label><input className={inputCls} value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} placeholder="e.g. Research, Climate, Policy (comma-separated)" /></div>
             <div><label className={labelCls}>Cover Image URL</label><input className={inputCls} value={form.cover_image} onChange={e => setForm(f => ({ ...f, cover_image: e.target.value }))} placeholder="https://..." /></div>
             <div><label className={labelCls}>PDF / Download URL</label><input className={inputCls} value={form.pdf_url} onChange={e => setForm(f => ({ ...f, pdf_url: e.target.value }))} placeholder="https://... or /file.pdf" /></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div><label className={labelCls}>Upload Cover Image</label><input type="file" accept="image/png,image/jpeg,image/webp" className={inputCls} onChange={e => setCoverFile(e.target.files?.[0] ?? null)} /></div>
+              <div><label className={labelCls}>Upload PDF</label><input type="file" accept="application/pdf" className={inputCls} onChange={e => setPdfFile(e.target.files?.[0] ?? null)} /></div>
+            </div>
             <div><label className={labelCls}>Published Date</label><input type="date" className={inputCls} value={form.published_at ? form.published_at.slice(0, 10) : ""} onChange={e => setForm(f => ({ ...f, published_at: e.target.value }))} /></div>
             <div className="flex gap-6">
               <label className="flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" checked={form.published} onChange={e => setForm(f => ({ ...f, published: e.target.checked }))} className="w-4 h-4 accent-[#0e1f3d]" />Published</label>

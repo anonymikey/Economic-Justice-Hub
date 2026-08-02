@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { socialLinks } from "@/data/socialLinks";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 import imgHero  from "@assets/hero_1775860211048.jpeg";
 import imgComEv from "@assets/com_event_1775860211043.jpeg";
@@ -105,6 +106,7 @@ function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "", organization: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [focused, setFocused] = useState<string | null>(null);
 
   const update = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
@@ -117,7 +119,7 @@ function ContactForm() {
       const response = await fetch(`${base}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), subject: form.subject.trim(), message: form.message.trim() }),
+        body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), subject: form.subject.trim(), message: form.message.trim(), captchaToken }),
       });
       if (!response.ok) throw new Error("Contact submission failed");
     } catch (err) {
@@ -251,6 +253,11 @@ function ContactForm() {
                   className={`${inputClass("message")} resize-none`} />
                 <p className="text-right text-xs text-gray-400 mt-1">{form.message.length} / 1000</p>
               </div>
+              <TurnstileWidget
+                action="contact"
+                onVerify={setCaptchaToken}
+                onExpire={() => setCaptchaToken("")}
+              />
               <div className="flex items-start gap-2.5 p-3 bg-[#F7F8FA] rounded-xl border border-gray-100">
                 <span className="text-base mt-0.5 flex-shrink-0">🔒</span>
                 <p className="text-xs text-gray-500 leading-relaxed">Your information is safe with us. We respect your privacy and will never share your details with third parties without your consent.</p>

@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function Login() {
   const { login, register, user } = useAuth();
@@ -19,6 +20,7 @@ export default function Login() {
   const [resetEmail, setResetEmail] = useState("");
   const [resetLoading, setResetLoading] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
 
   // If already logged in, bounce to profile
   if (user) { navigate("/profile"); return null; }
@@ -65,7 +67,7 @@ export default function Login() {
       if (result.ok) navigate("/profile");
       else setError(result.error ?? "Sign in failed. Please try again.");
     } else {
-      const result = await register(name, email, password);
+      const result = await register(name, email, password, captchaToken);
       setLoading(false);
       if (result.ok) {
         setSuccess("Account created! Please check your email to confirm your address, then sign in.");
@@ -111,20 +113,6 @@ export default function Login() {
                 {t === "login" ? "Sign In" : "Create Account"}
               </button>
             ))}
-          </div>
-
-          <div className="mx-4 mt-4 rounded-2xl border border-[#d4a017]/35 bg-[#0e1f3d]/[0.04] px-4 py-3.5" role="status">
-            <p className="text-sm font-bold text-[#0e1f3d]">🚧 Account System Under Maintenance</p>
-            <p className="mt-1 text-xs leading-relaxed text-gray-600">
-              We&apos;re currently completing the account system. For now, everyone can explore the website as a Guest.
-              User accounts, saved profiles and member features will be available soon. Thank you for your patience.
-            </p>
-            <Link
-              href="/"
-              className="mt-3 flex w-full items-center justify-center rounded-xl border border-[#d4a017] bg-white px-4 py-2.5 text-sm font-bold text-[#0e1f3d] transition-colors hover:bg-[#0e1f3d] hover:text-white"
-            >
-              Continue as Guest
-            </Link>
           </div>
 
           <div className="p-6 sm:p-7">
@@ -230,7 +218,6 @@ export default function Login() {
                           </button>
                         </div>
                       </div>
-
                       <button
                         type="submit" disabled={loading}
                         className="w-full flex items-center justify-center gap-2 bg-[#0e1f3d] hover:bg-[#1a3a6e] disabled:bg-gray-300 text-white font-bold text-sm py-3.5 rounded-xl transition-all hover:scale-[1.02] shadow-md mt-2"
@@ -314,6 +301,11 @@ export default function Login() {
                       </button>
                     </div>
                   </div>
+                  <TurnstileWidget
+                    action="signup"
+                    onVerify={setCaptchaToken}
+                    onExpire={() => setCaptchaToken("")}
+                  />
 
                   <button
                     type="submit" disabled={loading}

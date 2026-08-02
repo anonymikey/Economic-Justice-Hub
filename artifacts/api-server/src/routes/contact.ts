@@ -19,6 +19,47 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 
 const ADMIN_EMAIL = "economicsjusticeforums@gmail.com";
 const FROM_EMAIL = "noreply@economicjusticeforum.org";
+const requestWindows = new Map<string, { count: number; resetAt: number }>();
+const WINDOW_MS = 15 * 60 * 1000;
+const MAX_REQUESTS = 5;
+
+function rateLimit(req: { ip?: string }, res: { status: (code: number) => { json: (value: unknown) => void } }) {
+  const key = req.ip ?? "unknown";
+  const now = Date.now();
+  const current = requestWindows.get(key);
+  if (!current || current.resetAt <= now) {
+    requestWindows.set(key, { count: 1, resetAt: now + WINDOW_MS });
+    return true;
+  }
+  if (current.count >= MAX_REQUESTS) {
+    res.status(429).json({ error: "Too many requests. Please try again later." });
+    return false;
+  }
+  current.count += 1;
+  return true;
+}
+
+async function verifyTurnstile(token: unknown, remoteIp: string | undefined) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (typeof token !== "string" || token.length === 0) return false;
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret,
+        response: token,
+        ...(remoteIp ? { remoteip: remoteIp } : {}),
+      }),
+    });
+    const result = await response.json() as { success?: boolean };
+    return result.success === true;
+  } catch (error) {
+    console.error("[captcha] Verification error:", error);
+    return false;
+  }
+}
 
 function escapeHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({
@@ -31,10 +72,15 @@ function escapeHtml(value: string) {
 }
 
 router.post("/contact", async (req, res) => {
+  if (!rateLimit(req, res)) return;
   const { name, email, subject, message } = req.body as Record<string, string>;
 
   if (!name?.trim() || !email?.trim() || !message?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
     res.status(400).json({ error: "name, email and message are required" });
+    return;
+  }
+  if (!(await verifyTurnstile(req.body?.captchaToken, req.ip))) {
+    res.status(400).json({ error: "Security verification failed. Please try again." });
     return;
   }
 
@@ -98,10 +144,15 @@ router.post("/contact", async (req, res) => {
 });
 
 router.post("/newsletter", async (req, res) => {
+  if (!rateLimit(req, res)) return;
   const { email, name } = req.body as { email?: string; name?: string };
 
   if (!email || !email.includes("@")) {
     res.status(400).json({ error: "Valid email is required" });
+    return;
+  }
+  if (!(await verifyTurnstile(req.body?.captchaToken, req.ip))) {
+    res.status(400).json({ error: "Security verification failed. Please try again." });
     return;
   }
 

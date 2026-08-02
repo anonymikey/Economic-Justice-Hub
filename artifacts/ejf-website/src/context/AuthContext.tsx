@@ -18,7 +18,7 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
-  register: (name: string, email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
+  register: (name: string, email: string, password: string, captchaToken?: string) => Promise<{ ok: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (data: Partial<EJFUser>) => Promise<void>;
 }
@@ -67,6 +67,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!session) return;
+    const timeoutMs = Number(import.meta.env.VITE_SESSION_TIMEOUT_MS ?? 30 * 60 * 1000);
+    const storageKey = "ejf:last-activity";
+    const markActivity = () => sessionStorage.setItem(storageKey, String(Date.now()));
+    const checkTimeout = () => {
+      const lastActivity = Number(sessionStorage.getItem(storageKey) ?? Date.now());
+      if (Date.now() - lastActivity > timeoutMs) {
+        sessionStorage.removeItem(storageKey);
+        void supabase.auth.signOut();
+      }
+    };
+    markActivity();
+    const events = ["click", "keydown", "pointerdown", "touchstart"];
+    events.forEach((event) => window.addEventListener(event, markActivity, { passive: true }));
+    const interval = window.setInterval(checkTimeout, 60_000);
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, markActivity));
+      window.clearInterval(interval);
+    };
+  }, [session]);
+
+  useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ? await supabaseUserToEJF(session.user) : null);
@@ -88,12 +110,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   };
 
-  const register = async (name: string, email: string, password: string): Promise<{ ok: boolean; error?: string }> => {
+  const register = async (name: string, email: string, password: string, captchaToken?: string): Promise<{ ok: boolean; error?: string }> => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: name },
+        ...(captchaToken ? { captchaToken } : {}),
       },
     });
     if (error) return { ok: false, error: error.message };
