@@ -49,7 +49,7 @@ timeoutMs = 20000
 [userenv]
 
 [userenv.shared]
-VITE_SUPABASE_URL = "https://djiscfadlchvrskzsfax.supabase.co"
+VITE_SUPABASE_URL = "https://mzczbvqlzyiwwclhgrxv.supabase.co"
 VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqaXNjZmFkbGNodnJza3pzZmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NDEwNTUsImV4cCI6MjA5MTExNzA1NX0.XFyn_jXJEPt2PD1htCvYJHpBLjyyjG-qKTziQVdSo_s"
 VITE_ADMIN_EMAILS = "anonymiketech@gmail.com"
 
