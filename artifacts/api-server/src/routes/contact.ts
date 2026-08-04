@@ -40,8 +40,11 @@ function rateLimit(req: { ip?: string }, res: { status: (code: number) => { json
 }
 
 async function verifyTurnstile(token: unknown, remoteIp: string | undefined) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true;
+  const secret = process.env.TURNSTILE_SECRET;
+  if (!secret) {
+    console.error("[captcha] TURNSTILE_SECRET is not configured");
+    return false;
+  }
   if (typeof token !== "string" || token.length === 0) return false;
   try {
     const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
@@ -53,6 +56,10 @@ async function verifyTurnstile(token: unknown, remoteIp: string | undefined) {
         ...(remoteIp ? { remoteip: remoteIp } : {}),
       }),
     });
+    if (!response.ok) {
+      console.error(`[captcha] Siteverify returned HTTP ${response.status}`);
+      return false;
+    }
     const result = await response.json() as { success?: boolean };
     return result.success === true;
   } catch (error) {
