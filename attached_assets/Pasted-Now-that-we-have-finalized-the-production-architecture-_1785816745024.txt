@@ -1,0 +1,195 @@
+Now that we have finalized the production architecture, please perform one final codebase-wide environment-variable audit.
+
+Production architecture:
+
+GitHub
+  ↓
+Vercel = frontend only
+  ↓
+Supabase = Auth / Database / Storage
+  ↓
+Render = Express API
+  ↓
+API production URL = https://api.economicjusticeforum.org
+
+The Render Express API is already deployed successfully and:
+https://api.economicjusticeforum.org/api/healthz
+returns:
+{"status":"ok"}
+
+I need an exact production deployment checklist based ONLY on the current repository code.
+
+Please inspect the entire repository and produce TWO separate sections:
+
+==================================================
+A. VERCEL — FRONTEND ENVIRONMENT VARIABLES
+==================================================
+
+List every environment variable that the Vercel frontend actually requires.
+
+For each variable provide:
+
+1. Exact variable name
+2. Required / Optional / Unused
+3. Where it is referenced in the code
+4. Whether it is browser-visible
+5. Exact purpose
+6. Whether it should be set for:
+   - Production
+   - Preview
+   - Development
+7. Whether the value comes from Supabase, Cloudflare, Render, Resend, Google, or elsewhere
+
+Pay particular attention to all variables beginning with:
+
+VITE_
+
+Also check for any non-VITE variables accessed by the frontend/build configuration.
+
+Determine whether the frontend needs an API base URL variable now that the Express API has its own production domain:
+
+https://api.economicjusticeforum.org
+
+If the frontend currently uses a variable such as:
+
+VITE_API_URL
+VITE_API_BASE_URL
+VITE_BACKEND_URL
+VITE_API_BACKEND_URL
+VITE_BASE_BACKEND_URL
+VITE_SERVER_URL
+
+or anything similar, identify the EXACT variable name and explain what value it should have.
+
+If no API URL variable currently exists but the frontend requires one, identify exactly where the code needs it and whether we should add one.
+
+==================================================
+B. RENDER — EXPRESS API ENVIRONMENT VARIABLES
+==================================================
+
+List every environment variable that the Render Express API actually requires.
+
+For each variable provide:
+
+1. Exact variable name
+2. Required / Optional / Unused
+3. Exact file/code reference
+4. Purpose
+5. Whether it is secret
+6. Where we obtain its value
+7. Production/Preview/Development relevance
+
+Pay particular attention to:
+
+SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+TURNSTILE_SECRET_KEY
+RESEND_API_KEY
+APP_ORIGINS
+LOG_LEVEL
+PORT
+NODE_ENV
+
+Also identify any other server-side variables that are actually referenced by the Express API.
+
+==================================================
+C. REMOVE / DO NOT ADD
+==================================================
+
+Give me a definitive list of variables that should NOT be added to Vercel or Render because they are:
+
+- unused
+- Replit-only
+- Vite built-ins
+- runtime-managed
+- obsolete
+- duplicated
+- development-only
+- Google OAuth variables that belong in Supabase instead
+
+==================================================
+D. GOOGLE OAUTH
+==================================================
+
+Re-check the repository and confirm whether the application directly uses:
+
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+
+If it does not, confirm that Google OAuth credentials belong ONLY in:
+
+Supabase
+→ Authentication
+→ Sign In / Providers
+→ Google
+
+Also confirm the exact Google OAuth callback URL and the required Supabase redirect URLs based on the current production domain.
+
+Production frontend domains are:
+
+https://economicjusticeforum.org
+https://www.economicjusticeforum.org
+
+Production API:
+
+https://api.economicjusticeforum.org
+
+==================================================
+E. CLOUDFLARE TURNSTILE
+==================================================
+
+Confirm exactly:
+
+Frontend variable:
+VITE_TURNSTILE_SITE_KEY
+
+Server variable:
+TURNSTILE_SECRET_KEY
+
+Identify every form/component that uses Turnstile and explain whether verification happens through:
+
+1. Supabase Auth
+2. Express API
+3. Both
+
+Also confirm the production hostname(s) that must be configured in Cloudflare Turnstile.
+
+==================================================
+F. API CONNECTION
+==================================================
+
+Trace every frontend request to the Express API.
+
+Tell me:
+
+- Which frontend files call the API
+- Which endpoints they call
+- Whether they use relative /api URLs or an absolute API URL
+- Whether the current Vercel deployment can reach the Render API
+- Whether Vercel rewrites/proxies are currently configured
+- Whether we need a VITE API URL environment variable
+- What exact production value it should contain
+
+Use the current production API:
+
+https://api.economicjusticeforum.org
+
+==================================================
+G. FINAL COPY/PASTE TABLE
+==================================================
+
+At the end, give me two clean tables that I can use while configuring the dashboards.
+
+TABLE 1 — VERCEL
+
+VARIABLE | VALUE SOURCE | SECRET? | ENVIRONMENT | NOTES
+
+TABLE 2 — RENDER
+
+VARIABLE | VALUE SOURCE | SECRET? | ENVIRONMENT | NOTES
+
+Do NOT expose or print any actual secret values.
+
+Finally, identify anything that must be changed in the code or Vercel configuration before production deployment.
+
+Do not assume an environment variable is required merely because it exists in .env, .replit, or an old configuration. Trace actual code usage and distinguish active requirements from unused variables.

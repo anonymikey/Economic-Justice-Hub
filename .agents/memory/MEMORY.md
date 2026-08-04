@@ -2,3 +2,4 @@
 - [EJF philosophy framework](philosophy-framework.md) — People / Economic Systems / Human Dignity → Economic Justice, with the Doctrine, Natural Wealth Lens and iMagine Model as the defining tools.
 - [Supabase migration application](supabase-migration-application.md) — Hosted schema may need manual SQL Editor execution when no management SQL channel is available.
 - [Launch preparation boundaries](launch-preparation-boundaries.md) — Separate checked-in launch hooks from Vercel, Cloudflare, and Supabase production configuration.
+- [Frontend API routing](frontend-api-routing.md) — Production frontend API calls need an explicit Render base URL or a Vercel proxy; SPA rewrites do not proxy `/api`.
