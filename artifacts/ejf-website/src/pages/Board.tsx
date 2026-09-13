@@ -5,6 +5,9 @@ import imgAmriya from "@assets/WhatsApp_Image_2026-07-07_at_06.52.37_17834795254
 import imgIsaac from "@assets/issac_1775864978922.jpeg";
 import imgHassan from "@assets/hassan_1775864978921.jpeg";
 import imgMoses from "@assets/moses_1775864978933.jpeg";
+import imgNaphtal from "@assets/IMG-20260913-WA0017_1789330871277.jpg";
+import imgArnold from "@assets/IMG-20260913-WA0018_1789330871305.jpg";
+import imgAmina from "@assets/IMG-20260913-WA0019_1789330871306.jpg";
 
 type BoardMember = {
   name: string;
@@ -61,6 +64,33 @@ const BOARD_MEMBERS: BoardMember[] = [
     image: imgMoses,
     imagePosition: "object-top",
     accent: "#8C78B5",
+  },
+  {
+    name: "Naphtal Mwamela",
+    role: "Programmes Coordinator",
+    qualifications: ["Political Science — University of Nairobi"],
+    bio: "Coordinates programme implementation, partnerships and programme-level activities.",
+    image: imgNaphtal,
+    imagePosition: "object-[50%_25%]",
+    accent: "#C9795A",
+  },
+  {
+    name: "Arnold Egwa",
+    role: "Co-Founder & Digital Rights Director",
+    qualifications: ["Digital Rights & Technology Leadership"],
+    bio: "Advances digital justice and economic equity through work on data privacy, digital monopolies and technology that empowers communities rather than deepening disparities.",
+    image: imgArnold,
+    imagePosition: "object-[50%_28%]",
+    accent: "#5A91A5",
+  },
+  {
+    name: "Amina Lulu",
+    role: "Programmes Administrator",
+    qualifications: ["Kenya Coastal National Polytechnic"],
+    bio: "Supports programme administration, coordination and operational delivery.",
+    image: imgAmina,
+    imagePosition: "object-[50%_20%]",
+    accent: "#B47C9A",
   },
 ];
 
