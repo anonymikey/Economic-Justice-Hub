@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Our Philosophy", href: "/philosophy" },
   { label: "Research & Knowledge", href: "/research" },
   { label: "Insights", href: "/insights" },
+  { label: "Our Board", href: "/board" },
   { label: "Contact", href: "/contact" },
 ];
 
