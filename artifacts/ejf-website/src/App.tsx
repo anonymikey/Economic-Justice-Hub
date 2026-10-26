@@ -1,10 +1,12 @@
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollButton from "@/components/FloatingScrollButton";
+import LatestUpdatePopup from "@/components/LatestUpdatePopup";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieBanner from "@/components/CookieBanner";
 import WelcomeAnimation from "@/components/WelcomeAnimation";
@@ -95,6 +97,8 @@ function Router() {
 
 function AppShell() {
   const [location] = useLocation();
+  const { user, loading } = useAuth();
+  const announcementUserId = loading ? null : user?.id ?? null;
   const isAdmin = location.startsWith("/admin");
 
   if (isAdmin) {
@@ -102,6 +106,7 @@ function AppShell() {
       <>
         <ScrollToTop />
         <main><Router /></main>
+        <LatestUpdatePopup userId={announcementUserId} />
       </>
     );
   }
@@ -120,6 +125,7 @@ function AppShell() {
       <Footer />
       <FloatingScrollButton />
       <CookieBanner />
+      <LatestUpdatePopup userId={announcementUserId} />
     </>
   );
 }
