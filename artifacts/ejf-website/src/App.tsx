@@ -20,6 +20,7 @@ import Donate from "@/pages/Donate";
 import Admin from "@/pages/Admin";
 import Philosophy from "@/pages/Philosophy";
 import Insights from "@/pages/Insights";
+import YouthStateSocialContract from "@/pages/YouthStateSocialContract";
 import Board from "@/pages/Board";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/philosophy" component={Philosophy} />
       <Route path="/research" component={Research} />
+      <Route path="/insights/youth-state-social-contract-assessment" component={YouthStateSocialContract} />
       <Route path="/insights" component={Insights} />
       <Route path="/board" component={Board} />
       <Route path="/events" component={Events} />

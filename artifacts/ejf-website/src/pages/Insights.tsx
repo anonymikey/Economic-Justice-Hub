@@ -40,6 +40,7 @@ const CATEGORIES = [
     id: "news", icon: "📢", label: "News & Announcements",
     accent: "#f472b6", bg: "bg-pink-50", border: "border-pink-100",
     items: [
+      { title: "Youth–State Social Contract Assessment in Taita Taveta", date: "Two-day engagement", tag: "Youth Participation", img: "/images/mwatate-youth-session.webp", href: "/insights/youth-state-social-contract-assessment" },
       { title: "EJF Launches BlueGREEN Digital Justice Hub", date: "Jan 2026", tag: "Historical Initiative", img: imgComDia },
       { title: "EJF Partners with East African Policy Network", date: "Dec 2025", tag: "Partnership", img: imgFood },
       { title: "New Research Programme on Mineral Governance", date: "Nov 2025", tag: "Programme", img: imgHero },
@@ -120,24 +121,35 @@ function ContentCategories() {
               </div>
             </div>
             <div className={`grid grid-cols-1 ${ci % 2 === 0 ? "sm:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3"} gap-5`}>
-              {cat.items.map((item, i) => (
-                <div key={item.title}
-                  className={`group bg-white rounded-3xl overflow-hidden border ${cat.border} shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col cursor-pointer ${i === 0 && ci % 2 === 1 ? "sm:col-span-1" : ""}`}
-                  onClick={() => alert("To be updated Soon")}>
-                  <div className="aspect-[16/9] overflow-hidden">
-                    <img src={item.img} alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-1 rounded-lg" style={{ background: cat.accent + "18", color: cat.accent }}>{item.tag}</span>
-                      <span className="text-[#08152F]/35 text-xs">{item.date}</span>
+              {cat.items.map((item, i) => {
+                const cardClass = `group bg-white rounded-3xl overflow-hidden border ${cat.border} shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col cursor-pointer ${i === 0 && ci % 2 === 1 ? "sm:col-span-1" : ""}`;
+                const cardContent = (
+                  <>
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img src={item.img} alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
-                    <h3 className="font-extrabold text-[#08152F] text-sm leading-snug flex-1 group-hover:text-[#C9A24A] transition-colors">{item.title}</h3>
-                    <div className="mt-4 flex items-center gap-1 text-[#C9A24A] text-xs font-bold group-hover:gap-3 transition-all">Read more <span>→</span></div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-1 rounded-lg" style={{ background: cat.accent + "18", color: cat.accent }}>{item.tag}</span>
+                        <span className="text-[#08152F]/35 text-xs">{item.date}</span>
+                      </div>
+                      <h3 className="font-extrabold text-[#08152F] text-sm leading-snug flex-1 group-hover:text-[#C9A24A] transition-colors">{item.title}</h3>
+                      <div className="mt-4 flex items-center gap-1 text-[#C9A24A] text-xs font-bold group-hover:gap-3 transition-all">Read more <span>→</span></div>
+                    </div>
+                  </>
+                );
+
+                return item.href ? (
+                  <Link key={item.title} href={item.href} className={cardClass} aria-label={`Read ${item.title}`}>
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <div key={item.title} className={cardClass} onClick={() => alert("To be updated Soon")}>
+                    {cardContent}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}
