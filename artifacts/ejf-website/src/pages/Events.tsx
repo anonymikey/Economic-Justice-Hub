@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { Link } from "wouter";
 import { adminQueries, DBEvent } from "@/lib/adminQueries";
 
 import ttnp1 from "@assets/latest1_18.50.56_551de1ff_1775865776636.jpg";
@@ -128,6 +129,16 @@ const upcomingEvents: Event[] = [
 ];
 
 const recentHighlights = [
+  {
+    title: "Youth–State Social Contract Assessment in Taita Taveta",
+    date: "Two days",
+    dateLabel: "Duration",
+    location: "Mwatate, Taita Taveta",
+    desc: "EJF and HURIA engaged young people in a two-day assessment of governance, accountability, civic participation and trust in public institutions.",
+    emoji: "👥",
+    bg: "/images/mwatate-youth-session.webp",
+    href: "/insights/youth-state-social-contract-assessment",
+  },
   {
     title: "National Economic Justice Convention 2025",
     date: "November 2025",
@@ -716,25 +727,44 @@ function RecentHighlights() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
           <h2 className="text-2xl font-bold text-[#0e1f3d] mb-6">Recent Event Highlights</h2>
           <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {recentHighlights.map((h, i) => (
-              <div
-                key={h.title}
-                className={`group relative rounded-2xl overflow-hidden shadow cursor-pointer hover:shadow-lg transition-all duration-500 hover:-translate-y-1 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <img src={h.bg} alt={h.title} className="w-full h-36 object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 h-36 bg-gradient-to-b from-transparent to-black/60" />
-                <div className="absolute top-3 right-3 text-2xl">{h.emoji}</div>
-                <div className="border-t-4 border-[#d4a017] p-4 bg-white">
-                  <h3 className="font-bold text-[#0e1f3d] text-sm leading-snug mb-1 group-hover:text-[#d4a017] transition-colors">{h.title}</h3>
-                  <p className="text-xs text-gray-500 mb-2">
-                    <span className="font-bold">Date:</span> {h.date} &nbsp;|&nbsp;
-                    <span className="font-bold">Location:</span> {h.location}
-                  </p>
-                  <p className="text-xs text-gray-600 leading-relaxed">{h.desc}</p>
-                </div>
-              </div>
-            ))}
+            {recentHighlights.map((h, i) => {
+              const cardClass = `group relative rounded-2xl overflow-hidden shadow hover:shadow-lg transition-all duration-500 hover:-translate-y-1 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`;
+              const cardContent = (
+                <>
+                  <img src={h.bg} alt={h.title} className="w-full h-36 object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 h-36 bg-gradient-to-b from-transparent to-black/60" />
+                  <div className="absolute top-3 right-3 text-2xl" aria-hidden="true">{h.emoji}</div>
+                  <div className="border-t-4 border-[#d4a017] p-4 bg-white">
+                    <h3 className="font-bold text-[#0e1f3d] text-sm leading-snug mb-1 group-hover:text-[#d4a017] transition-colors">{h.title}</h3>
+                    <p className="text-xs text-gray-500 mb-2">
+                      <span className="font-bold">{h.dateLabel || "Date"}:</span> {h.date} &nbsp;|&nbsp;
+                      <span className="font-bold">Location:</span> {h.location}
+                    </p>
+                    <p className="text-xs text-gray-600 leading-relaxed">{h.desc}</p>
+                  </div>
+                </>
+              );
+
+              return h.href ? (
+                <Link
+                  key={h.title}
+                  href={h.href}
+                  aria-label={`Read more about ${h.title}`}
+                  className={cardClass}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {cardContent}
+                </Link>
+              ) : (
+                <article
+                  key={h.title}
+                  className={cardClass}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {cardContent}
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>
