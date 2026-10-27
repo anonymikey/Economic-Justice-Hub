@@ -227,8 +227,8 @@ function ResearchIntro() {
           </div>
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img src={imgComEv} alt="Research and community knowledge"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src="/images/mwatate-assessment/youth-men-group-dialogue.webp" alt="Young participants sit together during a group discussion in Mwatate."
+                loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="absolute -bottom-5 -left-5 bg-[#C9A24A] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[240px]">
               <p className="font-bold text-sm leading-snug">Ideas that advance Economic Justice for All</p>
@@ -244,8 +244,9 @@ function ResearchIntro() {
 function ResearchHero() {
   return (
     <section className="relative h-[68vh] min-h-[480px] flex items-center overflow-hidden">
-      <img src={imgHero} alt="Research and knowledge"
+      <img src="/images/mwatate-assessment/huria-field-team.webp" alt="Human Rights Agenda field team members stand together outdoors in Mwatate."
         className="absolute inset-0 w-full h-full object-cover"
+        loading="eager" fetchPriority="high"
         style={{ animation: "rKB 14s ease-in-out infinite alternate" }} />
       <div className="absolute inset-0 bg-gradient-to-r from-[#08152F]/97 via-[#08152F]/80 to-[#08152F]/40" />
       <div className="relative z-10 px-4 max-w-7xl mx-auto w-full" style={{ animation: "rFadeUp 0.9s ease both" }}>
@@ -302,8 +303,8 @@ function ResearchPhilosophy() {
           </div>
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img src={imgComEv} alt="Research fieldwork and community engagement"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src="/images/mwatate-assessment/facilitator-addressing-group.webp" alt="A facilitator addresses young participants during a session in Mwatate."
+                loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="absolute -top-5 -right-5 bg-[#C9A24A] text-white rounded-2xl px-6 py-4 shadow-xl">
               <p className="font-bold text-sm leading-snug">Ideas that advance Economic Justice</p>
@@ -407,12 +408,12 @@ function KnowledgePartnership() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-3xl overflow-hidden shadow-xl aspect-[3/4]">
-              <img src={imgComEv} alt="Research partnership"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={imgComEv} alt="Community members meet to discuss policy and shared priorities."
+                loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="rounded-3xl overflow-hidden shadow-xl aspect-[3/4] mt-8">
-              <img src={imgTm} alt="Knowledge partnership at work"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={imgTm} alt="EJF colleagues work together on community knowledge and partnership."
+                loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
           </div>
           <div>

@@ -42,8 +42,9 @@ const faqs = [
 function ContactHero() {
   return (
     <section className="relative h-[65vh] min-h-[460px] flex items-center justify-center overflow-hidden">
-      <img src={imgComEv} alt="Contact EJF"
+      <img src={imgComEv} alt="Community members gather during an EJF event."
         className="absolute inset-0 w-full h-full object-cover"
+        loading="eager" fetchPriority="high"
         style={{ animation: "ctKB 14s ease-in-out infinite alternate" }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#08152F]/88 via-[#08152F]/72 to-[#08152F]/92" />
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto" style={{ animation: "ctFadeUp 0.9s ease both" }}>

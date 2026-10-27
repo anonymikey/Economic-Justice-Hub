@@ -2,22 +2,21 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 
-import img1 from "@assets/tm_1775860211028.jpeg";
 import img2 from "@assets/youth_ev_1775860211030.jpeg";
-import img3 from "@assets/com_event_1775860211043.jpeg";
-import img4 from "@assets/comm_dia_1775860211044.jpeg";
 import img5 from "@assets/eme_1775860211046.jpeg";
 import img6 from "@assets/food_ev_1775860211047.jpeg";
 import img7 from "@assets/hero_1775860211048.jpeg";
 
-const HERO_SLIDES = [
-  { src: img7, caption: "Natural Wealth", sub: "Communities as rightful partners in shaping a just future" },
-  { src: img3, caption: "Community Dialogue", sub: "Grassroots conversations driving equitable governance" },
-  { src: img5, caption: "Education & Equity", sub: "Expanding opportunity through knowledge and human dignity" },
-  { src: img6, caption: "Food Security", sub: "Ensuring natural wealth sustains every family" },
-  { src: img1, caption: "Amplifying Voices", sub: "EJF advocates speaking truth to power" },
-  { src: img4, caption: "People-Centred Governance", sub: "Accountable leadership that serves people and planet" },
-  { src: img2, caption: "Youth Engagement", sub: "The next generation of Economic Justice champions" },
+type HeroSlide = { src: string; alt?: string; caption: string; sub: string };
+
+const HERO_SLIDES: HeroSlide[] = [
+  { src: "/images/mwatate-assessment/restore-session-facilitator.webp", alt: "A facilitator leads a discussion with young participants in Mwatate.", caption: "Community Dialogue", sub: "Grassroots conversations driving equitable governance" },
+  { src: img7, alt: "Communities and natural wealth in the EJF hero image.", caption: "Natural Wealth", sub: "Communities as rightful partners in shaping a just future" },
+  { src: img5, alt: "EJF engagement focused on education and equitable opportunity.", caption: "Education & Equity", sub: "Expanding opportunity through knowledge and human dignity" },
+  { src: img6, alt: "Community food security event.", caption: "Food Security", sub: "Ensuring natural wealth sustains every family" },
+  { src: "/images/mwatate-assessment/youth-woman-speaking.webp", alt: "A young woman shares her perspective during the Mwatate assessment.", caption: "Amplifying Voices", sub: "EJF advocates speaking truth to power" },
+  { src: "/images/mwatate-assessment/women-youth-session.webp", alt: "Young women listen and contribute during a community assessment session.", caption: "People-Centred Governance", sub: "Accountable leadership that serves people and planet" },
+  { src: img2, alt: "Young people take part in a youth engagement activity.", caption: "Youth Engagement", sub: "The next generation of Economic Justice champions" },
 ];
 
 const SLIDE_DURATION = 5500;
@@ -61,13 +60,11 @@ function HeroSection() {
               ? "heroFadeIn 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
               : "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards",
           }}>
-            <div className="absolute inset-0" style={{
-              backgroundImage: `url(${s.src})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              animation: isActive ? "heroKenBurns 7s ease-out forwards" : "none",
-              willChange: "transform",
-            }} />
+            <img src={s.src} alt={s.alt ?? s.caption}
+              loading={isActive && current === 0 ? "eager" : "lazy"}
+              fetchPriority={isActive && current === 0 ? "high" : "auto"}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "center", animation: isActive ? "heroKenBurns 7s ease-out forwards" : "none", willChange: "transform" }} />
           </div>
         );
       })}
@@ -213,8 +210,8 @@ function PromiseSection() {
 
           <div className="relative" style={{ animation: "fadeInRight 0.8s ease both" }}>
             <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img src={img4} alt="Community dialogue on natural wealth governance"
-                className="w-full h-full object-cover" />
+              <img src="/images/mwatate-assessment/women-community-listening.webp" alt="Community participants listen to one another during the Mwatate youth assessment."
+                loading="lazy" className="w-full h-full object-cover object-center" />
             </div>
             <div className="absolute -bottom-5 -left-5 bg-[#C9A24A] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[240px]">
               <p className="font-bold text-sm leading-snug">Communities as rightful partners in shaping the future</p>
@@ -247,8 +244,8 @@ function EJFIdeaSection() {
     <section className="bg-[#F4F6F9] py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[480px]">
-          <img src={img5} alt="EJF community engagement"
-            className="absolute inset-0 w-full h-full object-cover" />
+          <img src="/images/mwatate-assessment/participant-reflection.webp" alt="A participant reflects on the discussion during the Mwatate assessment."
+            loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#08152F]/95 via-[#08152F]/80 to-transparent" />
 
           <div className="relative z-10 p-10 md:p-16 max-w-2xl">

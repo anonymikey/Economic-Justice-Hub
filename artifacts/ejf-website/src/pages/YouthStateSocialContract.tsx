@@ -7,23 +7,38 @@ const articleDescription =
 const articleUrl =
   "https://economicjusticeforum.org/insights/youth-state-social-contract-assessment";
 const articleImage =
-  "https://economicjusticeforum.org/images/mwatate-youth-session.webp";
+  "https://economicjusticeforum.org/images/mwatate-assessment/indoor-youth-dialogue.webp";
 
 const photos = [
   {
-    src: "/images/mwatate-youth-discussion.webp",
-    alt: "Young participants seated together during the Mwatate assessment.",
-    caption: "Participants follow the discussion during the assessment.",
+    src: "/images/mwatate-assessment/facilitator-addressing-group.webp",
+    alt: "A facilitator stands before young participants during an indoor Mwatate session.",
+    caption: "A facilitator addresses participants during the assessment.",
   },
   {
-    src: "/images/mwatate-session-speaker.webp",
-    alt: "A speaker addresses participants during the engagement.",
-    caption: "A speaker shares reflections with the group.",
+    src: "/images/mwatate-assessment/youth-men-group-dialogue.webp",
+    alt: "Young men sit together as they take part in the Mwatate youth dialogue.",
+    caption: "Participants reflect together during a group discussion.",
   },
   {
-    src: "/images/mwatate-huria-youth-group.webp",
-    alt: "Young people gathered for the engagement at ACK St. James Social Hall.",
-    caption: "Young people gather for the engagement in Mwatate.",
+    src: "/images/mwatate-assessment/youth-participant-listening.webp",
+    alt: "A young participant listens during an outdoor assessment discussion.",
+    caption: "A participant follows the conversation outdoors.",
+  },
+  {
+    src: "/images/mwatate-assessment/outdoor-facilitator-discussion.webp",
+    alt: "A facilitator gestures while addressing young participants outdoors.",
+    caption: "The assessment includes outdoor group dialogue.",
+  },
+  {
+    src: "/images/mwatate-assessment/participant-reflection.webp",
+    alt: "A participant holds her phone while listening during an outdoor session.",
+    caption: "Participants bring their experiences to the discussion.",
+  },
+  {
+    src: "/images/mwatate-assessment/women-youth-session.webp",
+    alt: "Young women sit together during an indoor assessment session.",
+    caption: "Young women take part in the assessment.",
   },
 ];
 
@@ -140,16 +155,15 @@ export default function YouthStateSocialContract() {
       <article className="bg-white text-[#08152F]">
         <figure className="mx-auto max-w-6xl px-4 pt-10 sm:pt-14">
           <img
-            src="/images/mwatate-youth-session.webp"
-            alt="Young people gathered for the Youth–State Social Contract Assessment in Mwatate."
-            width={1800}
-            height={1200}
+            src="/images/mwatate-assessment/indoor-youth-dialogue.webp"
+            alt="A facilitator leads a discussion as young participants listen during the Mwatate assessment."
+            width={1024}
+            height={683}
             fetchPriority="high"
             className="max-h-[620px] w-full rounded-2xl object-cover shadow-xl"
           />
           <figcaption className="mt-3 text-sm text-[#08152F]/55">
-            Young people take part in the assessment at ACK St. James Social
-            Hall in Mwatate.
+            A facilitator guides a youth dialogue during the assessment in Mwatate.
           </figcaption>
         </figure>
 
@@ -238,8 +252,6 @@ export default function YouthStateSocialContract() {
                   <img
                     src={photo.src}
                     alt={photo.alt}
-                    width={1800}
-                    height={1200}
                     loading="lazy"
                     className="aspect-[4/3] w-full object-cover"
                   />

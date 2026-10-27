@@ -136,7 +136,8 @@ const recentHighlights = [
     location: "Mwatate, Taita Taveta",
     desc: "EJF and HURIA engaged young people in a two-day assessment of governance, accountability, civic participation and trust in public institutions.",
     emoji: "👥",
-    bg: "/images/mwatate-youth-session.webp",
+    bg: "/images/mwatate-assessment/outdoor-youth-dialogue.webp",
+    bgAlt: "A young man and woman take part in an outdoor discussion during the Mwatate assessment.",
     href: "/insights/youth-state-social-contract-assessment",
   },
   {
@@ -731,7 +732,7 @@ function RecentHighlights() {
               const cardClass = `group relative rounded-2xl overflow-hidden shadow hover:shadow-lg transition-all duration-500 hover:-translate-y-1 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`;
               const cardContent = (
                 <>
-                  <img src={h.bg} alt={h.title} className="w-full h-36 object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={h.bg} alt={"bgAlt" in h ? h.bgAlt : h.title} loading="lazy" className="w-full h-36 object-cover object-center transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 h-36 bg-gradient-to-b from-transparent to-black/60" />
                   <div className="absolute top-3 right-3 text-2xl" aria-hidden="true">{h.emoji}</div>
                   <div className="border-t-4 border-[#d4a017] p-4 bg-white">

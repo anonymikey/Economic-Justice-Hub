@@ -10,8 +10,9 @@ import imgFood   from "@assets/food_ev_1775860211047.jpeg";
 function HeroSection() {
   return (
     <section className="relative h-[72vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-      <img src={imgHero} alt="Economic Justice philosophy"
+      <img src="/images/mwatate-assessment/youth-group-discussion.webp" alt="Young participants discuss and record reflections during the Mwatate assessment."
         className="absolute inset-0 w-full h-full object-cover"
+        loading="eager" fetchPriority="high"
         style={{ animation: "philKB 14s ease-in-out infinite alternate" }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#08152F]/85 via-[#08152F]/70 to-[#08152F]/92" />
 
@@ -55,8 +56,8 @@ function IntroSection() {
 
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img src={imgComDia} alt="Community dialogue"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src="/images/mwatate-assessment/youth-participant-listening.webp" alt="A young participant listens during an outdoor community dialogue."
+                loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="absolute -bottom-5 -right-5 bg-[#08152F] text-white rounded-2xl px-6 py-4 shadow-xl max-w-[220px]">
               <p className="text-[#C9A24A] text-[10px] font-bold tracking-widest uppercase mb-1">Our Foundation</p>

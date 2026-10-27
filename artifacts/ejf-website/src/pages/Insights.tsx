@@ -40,7 +40,7 @@ const CATEGORIES = [
     id: "news", icon: "📢", label: "News & Announcements",
     accent: "#f472b6", bg: "bg-pink-50", border: "border-pink-100",
     items: [
-      { title: "Youth–State Social Contract Assessment in Taita Taveta", date: "Two-day engagement", tag: "Youth Participation", img: "/images/mwatate-youth-session.webp", href: "/insights/youth-state-social-contract-assessment" },
+      { title: "Youth–State Social Contract Assessment in Taita Taveta", date: "Two-day engagement", tag: "Youth Participation", img: "/images/mwatate-assessment/youth-participant-listening-two.webp", href: "/insights/youth-state-social-contract-assessment" },
       { title: "EJF Launches BlueGREEN Digital Justice Hub", date: "Jan 2026", tag: "Historical Initiative", img: imgComDia },
       { title: "EJF Partners with East African Policy Network", date: "Dec 2025", tag: "Partnership", img: imgFood },
       { title: "New Research Programme on Mineral Governance", date: "Nov 2025", tag: "Programme", img: imgHero },
@@ -80,8 +80,9 @@ const QUOTES = [
 function InsightsHero() {
   return (
     <section className="relative h-[65vh] min-h-[460px] flex items-center justify-center overflow-hidden">
-      <img src={imgHero} alt="Insights hero"
+      <img src="/images/mwatate-assessment/indoor-facilitator-session.webp" alt="A facilitator leads an indoor discussion with young participants in Mwatate."
         className="absolute inset-0 w-full h-full object-cover"
+        loading="eager" fetchPriority="high"
         style={{ animation: "insKB 14s ease-in-out infinite alternate" }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#08152F]/85 via-[#08152F]/70 to-[#08152F]/92" />
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto" style={{ animation: "insFadeUp 0.9s ease both" }}>
@@ -126,8 +127,8 @@ function ContentCategories() {
                 const cardContent = (
                   <>
                     <div className="aspect-[16/9] overflow-hidden">
-                      <img src={item.img} alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      <img src={item.img} alt={item.href ? "A young woman listens during an outdoor session of the Mwatate youth assessment." : item.title}
+                        loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <div className="p-5 flex-1 flex flex-col">
                       <div className="flex items-center gap-2 mb-3">
